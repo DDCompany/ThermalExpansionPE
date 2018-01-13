@@ -1,0 +1,1 @@
+DynamoHelper.registerDynamo("dynamoNumismatic", "Numismatic dynamo", "dynamo_numismatic", {});

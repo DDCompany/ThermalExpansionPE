@@ -1,0 +1,1 @@
+DynamoHelper.registerDynamo("dynamoCompression", "Compression dynamo", "dynamo_compression", {});
