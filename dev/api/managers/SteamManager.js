@@ -1,4 +1,4 @@
-var SteamManager = {
+const SteamManager = {
     fuels: {},
 
     addFuel: function (id, data, energy) {
@@ -6,9 +6,10 @@ var SteamManager = {
     },
 
     getEnergy: function (id, data) {
-        return this.fuels[id + ":" + data];
+        return this.fuels[id + ":" + data] || Recipes.getFuelBurnDuration(id, data) * 10;
     }
 
 };
 
 SteamManager.addFuel(263, 0, 32000);
+SteamManager.addFuel(263, 1, 24000);

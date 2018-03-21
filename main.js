@@ -1587,7 +1587,7 @@ DynamoHelper.registerDynamo("dynamoSteam", "Steam dynamo", "dynamo_steam", {
 
 
 
-// file: blocks/machines/pulverizer.js
+// file: blocks/machines/block.js
 
 IDRegistry.genBlockID("pulverizer");
 Block.createBlockWithRotation("pulverizer", [
