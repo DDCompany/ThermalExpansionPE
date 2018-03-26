@@ -1,10 +1,29 @@
 ToolType.sickle = {
-    blockTypes: ["plant"]
+    blockTypes: ["plant"],
+
+    destroyBlock: function (coords, side, item, block) {
+        alert("destroy");
+
+        for (let xx = -1; xx <= 1; xx++) {
+            for (let yy = -1; yy <= 1; yy++) {
+                for (let zz = -1; zz <= 1; zz++) {
+                    let blockId = World.getBlockID(coords.x + xx, coords.y + yy, coords.z + zz);
+                    let material = ToolAPI.getBlockMaterial(blockId);
+
+                    if (material && material.name === "plant") {
+                        World.destroyBlock(coords.x + xx, coords.y + yy, coords.z + zz, true);
+
+                        if(xx != 0 && yy != 0 && zz != 0 && (--item.data) + 1 <= 0){
+                            return;
+                        }
+                    }
+                }
+            }
+        }
+    }
 };
 
 var MaterialRegistry = {
-    sickles: [],
-
     defineMaterial: function (vanilla, tools, name, armor, durabilityModifier) {
 
         IDRegistry.genItemID("dust" + name);
@@ -16,23 +35,23 @@ var MaterialRegistry = {
         IDRegistry.genItemID("gear" + name);
         Item.createItem("gear" + name, name + " gear", {name: "gear_" + name.toLowerCase(), meta: 0}, {});
 
-        if(name !== "Gold"){
+        if (name !== "Gold") {
             IDRegistry.genItemID("nugget" + name);
             Item.createItem("nugget" + name, name + " nugget", {name: "nugget_" + name.toLowerCase(), meta: 0}, {});
         }
 
-        if(!vanilla){
+        if (!vanilla) {
             IDRegistry.genItemID("ingot" + name);
             Item.createItem("ingot" + name, name + " ingot", {name: "ingot_" + name.toLowerCase(), meta: 0}, {});
 
-            if(Config.glassEnabled) {
+            if (Config.glassEnabled) {
                 IDRegistry.genBlockID("hardenedGlass" + name);
                 Block.createBlock("hardenedGlass" + name, [
                     {name: name + " hardened glass", texture: [["glass_" + name.toLowerCase(), 0]], inCreative: true}
                 ]);
             }
 
-            if(Config.blockEnabled) {
+            if (Config.blockEnabled) {
                 IDRegistry.genBlockID("block" + name);
                 Block.createBlock("block" + name, [
                     {name: name + " block", texture: [["block_" + name.toLowerCase(), 0]], inCreative: true}
@@ -40,80 +59,80 @@ var MaterialRegistry = {
             }
         }
 
-        if(tools) {
+        if (tools) {
             IDRegistry.genItemID("axe" + name);
             Item.createItem("axe" + name, name + " axe", {name: "axe_" + name.toLowerCase(), meta: 0}, {stack: 1});
 
             IDRegistry.genItemID("hoe" + name);
             Item.createItem("hoe" + name, name + " hoe", {name: "hoe_" + name.toLowerCase(), meta: 0}, {stack: 1});
 
-                IDRegistry.genItemID("pickaxe" + name);
-                Item.createItem("pickaxe" + name, name + " pickaxe", {
-                    name: "pickaxe_" + name.toLowerCase(),
-                    meta: 0
-                }, {stack: 1});
+            IDRegistry.genItemID("pickaxe" + name);
+            Item.createItem("pickaxe" + name, name + " pickaxe", {
+                name: "pickaxe_" + name.toLowerCase(),
+                meta: 0
+            }, {stack: 1});
 
-                IDRegistry.genItemID("shovel" + name);
-                Item.createItem("shovel" + name, name + " shovel", {
-                    name: "shovel_" + name.toLowerCase(),
-                    meta: 0
-                }, {stack: 1});
+            IDRegistry.genItemID("shovel" + name);
+            Item.createItem("shovel" + name, name + " shovel", {
+                name: "shovel_" + name.toLowerCase(),
+                meta: 0
+            }, {stack: 1});
 
-                IDRegistry.genItemID("sword" + name);
-                Item.createItem("sword" + name, name + " sword", {
-                    name: "sword_" + name.toLowerCase(),
-                    meta: 0
-                }, {stack: 1});
+            IDRegistry.genItemID("sword" + name);
+            Item.createItem("sword" + name, name + " sword", {
+                name: "sword_" + name.toLowerCase(),
+                meta: 0
+            }, {stack: 1});
 
-                IDRegistry.genItemID("sickle" + name);
-                Item.createItem("sickle" + name, name + " sickle", {
-                    name: "sickle_" + name.toLowerCase(),
-                    meta: 0
-                }, {stack: 1});
+            IDRegistry.genItemID("sickle" + name);
+            Item.createItem("sickle" + name, name + " sickle", {
+                name: "sickle_" + name.toLowerCase(),
+                meta: 0
+            }, {stack: 1});
 
-                IDRegistry.genItemID("helmet" + name);
-                Item.createArmorItem("helmet" + name, name + " helmet", {name: "helmet_" + name.toLowerCase()}, {
-                    type: "helmet",
-                    armor: armor[0],
-                    durability: durabilityModifier * 11,
-                    texture: "armor/" + name.toLowerCase() + "_1.png"
-                });
+            IDRegistry.genItemID("helmet" + name);
+            Item.createArmorItem("helmet" + name, name + " helmet", {name: "helmet_" + name.toLowerCase()}, {
+                type: "helmet",
+                armor: armor[0],
+                durability: durabilityModifier * 11,
+                texture: "armor/" + name.toLowerCase() + "_1.png"
+            });
 
-                IDRegistry.genItemID("chestplate" + name);
-                Item.createArmorItem("chestplate" + name, name + " chestplate", {name: "chestplate_" + name.toLowerCase()}, {
-                    type: "chestplate",
-                    armor: armor[1],
-                    durability: durabilityModifier * 16,
-                    texture: "armor/" + name.toLowerCase() + "_1.png"
-                });
+            IDRegistry.genItemID("chestplate" + name);
+            Item.createArmorItem("chestplate" + name, name + " chestplate", {name: "chestplate_" + name.toLowerCase()}, {
+                type: "chestplate",
+                armor: armor[1],
+                durability: durabilityModifier * 16,
+                texture: "armor/" + name.toLowerCase() + "_1.png"
+            });
 
-                IDRegistry.genItemID("leggings" + name);
-                Item.createArmorItem("leggings" + name, name + " leggings", {name: "leggings_" + name.toLowerCase()}, {
-                    type: "leggings",
-                    armor: armor[2],
-                    durability: durabilityModifier * 15,
-                    texture: "armor/" + name.toLowerCase() + "_2.png"
-                });
+            IDRegistry.genItemID("leggings" + name);
+            Item.createArmorItem("leggings" + name, name + " leggings", {name: "leggings_" + name.toLowerCase()}, {
+                type: "leggings",
+                armor: armor[2],
+                durability: durabilityModifier * 15,
+                texture: "armor/" + name.toLowerCase() + "_2.png"
+            });
 
-                IDRegistry.genItemID("boots" + name);
-                Item.createArmorItem("boots" + name, name + " boots", {name: "boots_" + name.toLowerCase()}, {
-                    type: "boots",
-                    armor: armor[3],
-                    durability: durabilityModifier * 13,
-                    texture: "armor/" + name.toLowerCase() + "_1.png"
-                });
+            IDRegistry.genItemID("boots" + name);
+            Item.createArmorItem("boots" + name, name + " boots", {name: "boots_" + name.toLowerCase()}, {
+                type: "boots",
+                armor: armor[3],
+                durability: durabilityModifier * 13,
+                texture: "armor/" + name.toLowerCase() + "_1.png"
+            });
 
-                ToolAPI.setTool(ItemID["axe" + name], name.toLowerCase(), ToolType.axe);
-                ToolAPI.setTool(ItemID["hoe" + name], name.toLowerCase(), ToolType.hoe);
-                ToolAPI.setTool(ItemID["pickaxe" + name], name.toLowerCase(), ToolType.pickaxe);
-                ToolAPI.setTool(ItemID["shovel" + name], name.toLowerCase(), ToolType.shovel);
-                ToolAPI.setTool(ItemID["sword" + name], name.toLowerCase(), ToolType.sword);
-                ToolAPI.setTool(ItemID["sickle" + name], name.toLowerCase(), ToolType.sickle);
-            }
+            ToolAPI.setTool(ItemID["axe" + name], name.toLowerCase(), ToolType.axe);
+            ToolAPI.setTool(ItemID["hoe" + name], name.toLowerCase(), ToolType.hoe);
+            ToolAPI.setTool(ItemID["pickaxe" + name], name.toLowerCase(), ToolType.pickaxe);
+            ToolAPI.setTool(ItemID["shovel" + name], name.toLowerCase(), ToolType.shovel);
+            ToolAPI.setTool(ItemID["sword" + name], name.toLowerCase(), ToolType.sword);
+            ToolAPI.setTool(ItemID["sickle" + name], name.toLowerCase(), ToolType.sickle);
+        }
 
         Callback.addCallback("PostLoaded", function () {
 
-            if(ItemID["ingot" + name]){
+            if (ItemID["ingot" + name]) {
 
                 PulverizerRecipes.add({
                     input: {id: ItemID["ingot" + name], data: 0},
@@ -131,7 +150,7 @@ var MaterialRegistry = {
                     "aaa"
                 ], ['a', ItemID["nugget" + name], 0]);
 
-                if(Config.blockEnabled) {
+                if (Config.blockEnabled) {
                     Recipes.addShaped({id: BlockID["block" + name], count: 1, data: 0}, [
                         "aaa",
                         "aaa",
@@ -139,7 +158,7 @@ var MaterialRegistry = {
                     ], ['a', ItemID["ingot" + name], 0]);
                 }
 
-                if(tools) {
+                if (tools) {
                     Recipes.addShaped({id: ItemID["sword" + name], count: 1, data: 0}, [
                         " a ",
                         " a ",
