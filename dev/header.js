@@ -13,6 +13,7 @@
 importLib("ToolType", "*");
 importLib("energylib", "*");
 importLib("flags", "*");
+IMPORT("BackpackAPI");
 
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
 

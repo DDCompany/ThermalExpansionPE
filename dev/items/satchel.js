@@ -1,37 +1,43 @@
-SatchelRegistry.register({
-    texture: ["satchel", 0],
-    codeName: "satchelBasic",
-    name: "Basic Satchel",
-    slots: 9
+IDRegistry.genItemID("satchelBasic");
+Item.createItem("satchelBasic", "Basic Satchel", {name: "satchel", meta: 0}, {stack: 1});
+
+BackpackRegistry.register(ItemID.satchelBasic, {
+    slots: 9,
+    inRow: 9
 });
 
-SatchelRegistry.register({
-    texture: ["satchel", 1],
-    codeName: "satchelHardened",
-    name: "Hardened Satchel",
-    slots: 18
+IDRegistry.genItemID("satchelHardened");
+Item.createItem("satchelHardened", "Hardened Satchel", {name: "satchel", meta: 1}, {stack: 1});
+
+BackpackRegistry.register(ItemID.satchelHardened, {
+    slots: 18,
+    inRow: 9
 });
 
-SatchelRegistry.register({
-    texture: ["satchel", 2],
-    codeName: "satchelReinforced",
-    name: "Reinforced Satchel",
-    slots: 27
+IDRegistry.genItemID("satchelReinforced");
+Item.createItem("satchelReinforced", "Reinforced Satchel", {name: "satchel", meta: 2}, {stack: 1});
+
+BackpackRegistry.register(ItemID.satchelReinforced, {
+    slots: 27,
+    inRow: 9
 });
 
-SatchelRegistry.register({
-    texture: ["satchel", 3],
-    codeName: "satchelSignalum",
-    name: "Signalum Satchel",
-    slots: 36
+IDRegistry.genItemID("satchelSignalum");
+Item.createItem("satchelSignalum", "Signalum Satchel", {name: "satchel", meta: 3}, {stack: 1});
+
+BackpackRegistry.register(ItemID.satchelSignalum, {
+    slots: 36,
+    inRow: 9
 });
 
-SatchelRegistry.register({
-    texture: ["satchel", 4],
-    codeName: "satchelResonant",
-    name: "Resonant Satchel",
-    slots: 45
+IDRegistry.genItemID("satchelResonant");
+Item.createItem("satchelResonant", "Resonant Satchel", {name: "satchel", meta: 4}, {stack: 1});
+
+BackpackRegistry.register(ItemID.satchelResonant, {
+    slots: 45,
+    inRow: 9
 });
+
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.satchelBasic, count: 1, data: 0}, [
