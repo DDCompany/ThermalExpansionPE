@@ -71,71 +71,57 @@ Callback.addCallback("PostLoaded", function () {
 
 });
 
-const OreGenerator = {
-    random: function (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-    },
-
-    generate: function (x, y, z, maxCount) {
-        if (World.getBlock(x, y, z).id === 1) {
-            GenerationUtils.setLockedBlock(x, y, z);
-            for (let i = 1; i < this.random(1, maxCount); i++) {
-                GenerationUtils.setLockedBlock(x + this.random(-1, 1), y + this.random(-1, 1), z + this.random(-1, 1));
-            }
-        }
+function generateOre(blockId, veins, minY, maxY, amount, chunkX, chunkZ) {
+    for (; veins > 0; veins--) {
+        let coords = GenerationUtils.randomCoords(chunkX, chunkZ, minY, maxY);
+        GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, amount);
     }
-};
+}
 
-Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+if (Config.genCopper) {
+    Flags.addUniqueAction("oreGenCopper", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.oreCopper, 10, 40, 75, 8, chunkX, chunkZ);
+        });
+    });
+}
 
-        if (Config.genCopper) {
-            GenerationUtils.lockInBlock(BlockID.oreCopper, 0);
-            for (let i = 0; i < 10; i++) {
-                let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 40, 75);
-                OreGenerator.generate(coords.x, coords.y, coords.z, 8);
-            }
-        }
+if (Config.genTin) {
+    Flags.addUniqueAction("oreGenTin", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.oreTin, 8, 20, 55, 8, chunkX, chunkZ);
+        });
+    });
+}
 
-        if (Config.genTin) {
-            GenerationUtils.lockInBlock(BlockID.oreTin, 0);
-            for (let i = 0; i < 8; i++) {
-                let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 20, 55);
-                OreGenerator.generate(coords.x, coords.y, coords.z, 8);
-            }
-        }
+if (Config.genLead) {
+    Flags.addUniqueAction("oreGenLead", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.oreLead, 8, 10, 35, 8, chunkX, chunkZ);
+        });
+    });
+}
 
-        if (Config.genLead) {
-            GenerationUtils.lockInBlock(BlockID.oreLead, 0);
-            for (let i = 0; i < 8; i++) {
-                let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 10, 35);
-                OreGenerator.generate(coords.x, coords.y, coords.z, 8);
-            }
-        }
-    
+if (Config.genSilver) {
+    Flags.addUniqueAction("oreGenSilver", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.oreSilver, 6, 5, 30, 8, chunkX, chunkZ);
+        });
+    });
+}
 
-    if (Config.genSilver) {
-        GenerationUtils.lockInBlock(BlockID.oreSilver, 0);
-        for (let i = 0; i < 6; i++) {
-            let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 5, 30);
-            OreGenerator.generate(coords.x, coords.y, coords.z, 8);
-        }
-    }
+if (Config.genNickel) {
+    Flags.addUniqueAction("oreGenNickel", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.oreNickel, 3, 5, 30, 20, chunkX, chunkZ);
+        });
+    });
+}
 
-    if (Config.genNickel) {
-        GenerationUtils.lockInBlock(BlockID.oreNickel, 0);
-        for (let i = 0; i < 3; i++) {
-            let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 5, 20);
-            OreGenerator.generate(coords.x, coords.y, coords.z, 4);
-        }
-    }
-
-    if (Config.genPlatinum) {
-        GenerationUtils.lockInBlock(BlockID.orePlatinum, 0);
-        for (let i = 0; i < 8; i++) {
-            let coords = GenerationUtils.randomCoords(chunkX, chunkZ, 5, 30);
-            OreGenerator.generate(coords.x, coords.y, coords.z, 1);
-        }
-    }
-
-
-});
+if (Config.genPlatinum) {
+    Flags.addUniqueAction("oreGenPlatinum", function () {
+        Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
+            generateOre(BlockID.orePlatinum, 8, 5, 30, 1, chunkX, chunkZ);
+        });
+    });
+}
