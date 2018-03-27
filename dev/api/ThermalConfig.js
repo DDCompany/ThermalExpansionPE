@@ -1,4 +1,4 @@
-var Config = {
+let ThermalConfig = {
 
     /* ----- ORE GEN ----- */
     genCopper: __config__.getBool("gen.copper"),

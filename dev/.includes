@@ -13,7 +13,7 @@ api/ContainerHelper.js
 api/DynamoHelper.js
 api/MachineRegistry.js
 api/MaterialRegistry.js
-api/Config.js
+api/ThermalConfig.js
 
 core/fluid.js
 core/materials.js

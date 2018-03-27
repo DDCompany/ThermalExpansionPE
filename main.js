@@ -727,7 +727,7 @@ function addRecipeWithCraftingTool(result, data, tool) {
 
 
 
-// file: api/Config.js
+// file: api/ThermalConfig.js
 
 var Config = {
 
