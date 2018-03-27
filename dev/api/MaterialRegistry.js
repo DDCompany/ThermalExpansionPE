@@ -2,7 +2,6 @@ ToolType.sickle = {
     blockTypes: ["plant"],
 
     destroyBlock: function (coords, side, item, block) {
-        alert("destroy");
 
         for (let xx = -1; xx <= 1; xx++) {
             for (let yy = -1; yy <= 1; yy++) {
@@ -13,7 +12,7 @@ ToolType.sickle = {
                     if (material && material.name === "plant") {
                         World.destroyBlock(coords.x + xx, coords.y + yy, coords.z + zz, true);
 
-                        if(xx != 0 && yy != 0 && zz != 0 && (--item.data) + 1 <= 0){
+                        if(xx !== 0 && yy !== 0 && zz !== 0 && (--item.data) + 1 <= 0){
                             return;
                         }
                     }
@@ -44,14 +43,14 @@ var MaterialRegistry = {
             IDRegistry.genItemID("ingot" + name);
             Item.createItem("ingot" + name, name + " ingot", {name: "ingot_" + name.toLowerCase(), meta: 0}, {});
 
-            if (Config.glassEnabled) {
+            if (ThermalConfig.glassEnabled) {
                 IDRegistry.genBlockID("hardenedGlass" + name);
                 Block.createBlock("hardenedGlass" + name, [
                     {name: name + " hardened glass", texture: [["glass_" + name.toLowerCase(), 0]], inCreative: true}
                 ]);
             }
 
-            if (Config.blockEnabled) {
+            if (ThermalConfig.blockEnabled) {
                 IDRegistry.genBlockID("block" + name);
                 Block.createBlock("block" + name, [
                     {name: name + " block", texture: [["block_" + name.toLowerCase(), 0]], inCreative: true}
@@ -150,7 +149,7 @@ var MaterialRegistry = {
                     "aaa"
                 ], ['a', ItemID["nugget" + name], 0]);
 
-                if (Config.blockEnabled) {
+                if (ThermalConfig.blockEnabled) {
                     Recipes.addShaped({id: BlockID["block" + name], count: 1, data: 0}, [
                         "aaa",
                         "aaa",

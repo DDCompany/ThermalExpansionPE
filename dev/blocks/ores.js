@@ -78,7 +78,7 @@ function generateOre(blockId, veins, minY, maxY, amount, chunkX, chunkZ) {
     }
 }
 
-if (Config.genCopper) {
+if (ThermalConfig.genCopper) {
     Flags.addUniqueAction("oreGenCopper", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.oreCopper, 10, 40, 75, 8, chunkX, chunkZ);
@@ -86,7 +86,7 @@ if (Config.genCopper) {
     });
 }
 
-if (Config.genTin) {
+if (ThermalConfig.genTin) {
     Flags.addUniqueAction("oreGenTin", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.oreTin, 8, 20, 55, 8, chunkX, chunkZ);
@@ -94,7 +94,7 @@ if (Config.genTin) {
     });
 }
 
-if (Config.genLead) {
+if (ThermalConfig.genLead) {
     Flags.addUniqueAction("oreGenLead", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.oreLead, 8, 10, 35, 8, chunkX, chunkZ);
@@ -102,7 +102,7 @@ if (Config.genLead) {
     });
 }
 
-if (Config.genSilver) {
+if (ThermalConfig.genSilver) {
     Flags.addUniqueAction("oreGenSilver", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.oreSilver, 6, 5, 30, 8, chunkX, chunkZ);
@@ -110,7 +110,7 @@ if (Config.genSilver) {
     });
 }
 
-if (Config.genNickel) {
+if (ThermalConfig.genNickel) {
     Flags.addUniqueAction("oreGenNickel", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.oreNickel, 3, 5, 30, 20, chunkX, chunkZ);
@@ -118,7 +118,7 @@ if (Config.genNickel) {
     });
 }
 
-if (Config.genPlatinum) {
+if (ThermalConfig.genPlatinum) {
     Flags.addUniqueAction("oreGenPlatinum", function () {
         Callback.addCallback("GenerateChunkUnderground", function (chunkX, chunkZ) {
             generateOre(BlockID.orePlatinum, 8, 5, 30, 1, chunkX, chunkZ);

@@ -7,7 +7,7 @@ DynamoHelper.registerDynamo("dynamoMagmatic", "Magmatic Dynamo", "dynamo_magmati
     },
 
     init: function () {
-        this.liquidStorage.setLimit("lava", 4);
+        this.liquidStorage.setLimit(null, 4);
     },
 
     isGenerator: function() {
@@ -22,7 +22,7 @@ DynamoHelper.registerDynamo("dynamoMagmatic", "Magmatic Dynamo", "dynamo_magmati
         }
 
         if(World.getThreadTime() % 20 === 0){
-            ContainerHelper.fluidContainerEmpty(["lava"], this, {full: "slot1", empty: "slot2"});
+            ContainerHelper.fluidContainerEmpty(null, this, {full: "slot1", empty: "slot2"});
         }
 
         if(this.data.isActive){
@@ -44,14 +44,15 @@ DynamoHelper.registerDynamo("dynamoMagmatic", "Magmatic Dynamo", "dynamo_magmati
             DynamoHelper.mapAtCoords(this.x, this.y, this.z, BlockID["dynamoMagmatic"], "magmatic", this.data.isActive, this.data.rotate);
         }
 
-        this.liquidStorage.updateUiScale("lavaScale", "lava");
+        this.liquidStorage.updateUiScale("fuelScale", this.liquidStorage.getLiquidStored());
         this.container.setScale("rfScale", this.data.energy / this.getEnergyStorage());
 
         this.container.validateAll();
     },
 
     canStart: function () {
-        return this.liquidStorage.getAmount("lava") >= 0.1;
+        let stored = this.liquidStorage.getLiquidStored();
+        return MagmaticManager.getEnergyFor100mb(stored) && this.liquidStorage.getAmount(stored) >= 0.1;
     },
 
     processStart: function () {
