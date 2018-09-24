@@ -1,55 +1,12 @@
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 0,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
+const MagmaCrucibleRecipes = {
+    recipes: {},
 
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 1,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
+    add: function(recipe){
+        this.recipes[recipe.id+":"+recipe.data] = recipe;
+    },
 
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 2,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
+    get: function(id, data){
+        return this.recipes[id+":"+data] || this.recipes[id+":-1"]
+    }
 
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 3,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
-
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 4,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
-
-MagmaCrucibleRecipes.add({
-	id: 1, 
-	data: 5,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
-
-MagmaCrucibleRecipes.add({
-	id: 3, 
-	data: 0,
-	fluid: "lava",
-	fluidAmount: 1,
-	time: 20
-});
+};

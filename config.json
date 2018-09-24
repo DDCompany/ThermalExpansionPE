@@ -1,5 +1,7 @@
 {
   "enabled":true,
+  "glassEnabled":false,
+  "blockEnabled":false,
   "gen":{
     "nickel":true,
     "lead":true,
