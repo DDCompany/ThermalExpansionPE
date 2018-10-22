@@ -1,60 +1,57 @@
+## HEADER
 header.js
+guideAPI.js
+
+## API
+api/ThermalConfig.js
+api/MaterialManager.js
+api/RecipeHelper.js
+api/MachineRegistry.js
+api/ModelHelper.js
+api/ContainerHelper.js
+api/TextureBakery.js
 
 api/recipes/PulverizerRecipes.js
-api/recipes/SawmillRecipes.js
 api/recipes/MagmaCrucibleRecipes.js
-api/recipes/guide.js
 
-api/managers/SteamManager.js
-api/managers/MagmaticManager.js
+## FOUNDATION
+# BLOCKS
+foundation/blocks/ores.js
+foundation/blocks/fluid_ores.js
 
-api/MaterialRegistry.js
-api/ContainerHelper.js
-api/DynamoHelper.js
-api/MachineRegistry.js
-api/MaterialRegistry.js
-api/Config.js
-api/SatchelRegistry.js
+# ITEMS
+foundation/items/crystals.js
+foundation/items/dusts.js
+foundation/items/ingots.js
+foundation/items/nuggets.js
+foundation/items/plates.js
+foundation/items/gears.js
+foundation/items/coins.js
+foundation/items/tools.js
+foundation/items/armors.js
+foundation/items/parts.js
+foundation/items/upgrades.js
+foundation/items/satchel.js
 
-core/fluid.js
-core/materials.js
+## EXPANSION
+# BLOCKS
+expansion/blocks/parts.js
 
-blocks/frames.js
-blocks/ores.js
-blocks/duct/flux.js
+# MACHINES
+expansion/blocks/machines/pulverizer/pulverizer.js
+expansion/blocks/machines/pulverizer/tile.js
+expansion/blocks/machines/pulverizer/gui.js
+expansion/blocks/machines/pulverizer/recipes.js
 
-blocks/dynamo/magmatic/common.js
-blocks/dynamo/magmatic/gui.js
+expansion/blocks/machines/crucible/crucible.js
+expansion/blocks/machines/crucible/tile.js
+expansion/blocks/machines/crucible/gui.js
+expansion/blocks/machines/crucible/recipes.js
 
-blocks/dynamo/steam/common.js
-blocks/dynamo/steam/gui.js
+expansion/blocks/machines/furnace/furnace.js
+expansion/blocks/machines/furnace/tile.js
+expansion/blocks/machines/furnace/gui.js
 
-blocks/machines/pulverizer/block.js
-blocks/machines/pulverizer/tile.js
-blocks/machines/pulverizer/gui.js
-blocks/machines/pulverizer/recipes.js
-
-blocks/machines/red_furnace/block.js
-blocks/machines/red_furnace/tile.js
-blocks/machines/red_furnace/gui.js
-
-blocks/machines/magma_crucible/block.js
-blocks/machines/magma_crucible/tile.js
-blocks/machines/magma_crucible/gui.js
-blocks/machines/magma_crucible/recipes.js
-
-blocks/machines/sawmill/block.js
-blocks/machines/sawmill/tile.js
-blocks/machines/sawmill/gui.js
-blocks/machines/sawmill/recipes.js
-
-items/coils.js
-items/satchel.js
-items/others.js
-items/tools.js
-items/others/slag.js
-
-integration/ic.js
-
-localize.js
-shared.js
+expansion/blocks/machines/energyCell/energyCell.js
+expansion/blocks/machines/energyCell/tile.js
+expansion/blocks/machines/energyCell/gui.js

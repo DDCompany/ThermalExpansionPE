@@ -8,63 +8,62 @@
     |_|  |_| |_|\___|_|  |_| |_| |_|\__,_|_|______/_/\_\ .__/ \__,_|_| |_|___/_|\___/|_| |_|_|    |______|
                                                        | |
                                                        |_|
-     by Dmitriy Medvedev(https://vk.com/id331953744), Abdulla Nagmetdulla (http://vk.com/abdulla000n), Artyom Kaktysh(https://vk.com/artyom_kaktysh) and Denis Dzhugalik(https://vk.com/id235887284)
+     by Dmitriy Medvedev(https://vk.com/id331953744)
  */
 importLib("ToolType", "*");
 importLib("energylib", "*");
+IMPORT("BackpackAPI");
 
-const RF = EnergyTypeRegistry.assureEnergyType("RF", 1/4);
+const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
+const Color = android.graphics.Color;
+const POWER_SCALING = [100, 150, 200, 250, 300];
+const nativeDropFunc = ModAPI.requireGlobal("Level.dropItem");
+const getYaw = ModAPI.requireGlobal("Entity.getYaw");
+const Canvas = android.graphics.Canvas;
+const BufferedOutputStream = java.io.BufferedOutputStream;
+const FileOutputStream = java.io.FileOutputStream;
+const Bitmap = android.graphics.Bitmap;
+const File = java.io.File;
+const Paint = android.graphics.Paint;
 
-//TODO CRAFTING_TOOL_ITEM_MAX_DAMAGE
-var CRAFTING_TOOL_ITEM_MAX_DAMAGE = 105;
+let GuideAPI;
+let GuideHelper;
+let PageControllers;
 
-let GuideAPI = null;
-let GuideHelper = null;
-let PageControllers = null;
+function randomInt(min, max) {
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
-function addRecipeWithCraftingTool(result, data, tool) {
-    data.push({id: tool, data: -1});
-    Recipes.addShapeless(result, data, function (api, field, result) {
-        for (var i in field) {
-            if (field[i].id == tool) {
-                field[i].data++;
-                if (field[i].data >= CRAFTING_TOOL_ITEM_MAX_DAMAGE) {
-                    field[i].id = field[i].count = field[i].data = 0;
-                }
-            }
-            else {
-                api.decreaseFieldSlot(i);
-            }
-        }
-    });
+function randomBool() {
+    return Math.random() > 0.5;
+}
+
+function generateOre(blockId, chunkX, chunkZ, inChunk, size, minY, maxY) {
+    for (let i = 0; i < inChunk; i++) {
+        let coords = GenerationUtils.randomCoords(chunkX, chunkZ, minY, maxY);
+        GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, size);
+    }
+}
+
+function generateSandOre(blockId, chunkX, chunkZ, size) {
+    switch (World.getBiome(chunkX, chunkZ)) {
+        case 2:
+        case 17:
+        case 130:
+            break;
+        default:
+            return;
+    }
+    let coords = GenerationUtils.randomXZ(chunkX, chunkZ);
+    coords = GenerationUtils.findHighSurface(coords.x, coords.z);
+
+    GenerationUtils.generateOre(coords.x, coords.y, coords.z, blockId, 0, size, true);
 }
 
 ModAPI.addAPICallback("GuideAPI", function (api) {
     GuideAPI = api.GuideAPI;
     GuideHelper = api.GuideHelper;
     PageControllers = api.PageControllers;
-
-    PageControllers["MAGMA_CRUCIBLE_RECIPE_PAGE"] = function (params, elements, container, section) {
-        let yp = 80;
-        let xp = section === "left" ? 50 : 550;
-        elements["magma_crucible_title_" + section] = {type: "text", x: xp, y: 40, text: params.title || "", font: {color: android.graphics.Color.BLACK, size: 20}};
-
-        if(params.recipes){
-            for(let key in params.recipes) {
-                let recipe = params.recipes[key];
-                elements["slotInputCrucible_" + key + "_" + section] = {type: "slot", x: xp, y: yp, size: 70, visual: true};
-                let slot_input = container.getSlot("slotInputCrucible_" + key + "_" + section);
-
-                slot_input.id = recipe.id;
-                slot_input.data = recipe.data || 0;
-                slot_input.count = 1;
-
-                elements["magma_crucible_bar_" + key + "_" + section] = {type: "image", x: xp + 70, y: yp + 10, bitmap: params.bar_texture || "te_bar_0", scale: 3.2};
-                elements["magma_crucible_text_" + key + "_" + section] = {type: "text", text: recipe.fluid + "(" + (recipe.fluidAmount * 1000) + "mb)", x: xp + 150, y: yp + 20, font: {color: android.graphics.Color.BLACK}};
-                yp+=80;
-            }
-        }
-    };
 
     PageControllers["TE_TO_RECIPE_PAGE"] = function (params, elements, container, section) {
         let yp = 120;

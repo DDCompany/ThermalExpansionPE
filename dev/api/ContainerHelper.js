@@ -1,31 +1,21 @@
-var ContainerHelper = {
-    /*
-        Добавить жидкость в tile из slots.full и добавить пустой контейнер в slots.empty.
-        ContainerHelper.fluidContainerEmpty(["water", "water"], tile, {full: "full", empty: "empty"});
-     */
-    fluidContainerEmpty: function (liquid, tile, slots) {
-        let slotContainerFull = tile.container.getSlot(slots.full);
-        let slotContainer = tile.container.getSlot(slots.empty);
+const ContainerHelper = {
+    canPutInSlot: function (item, slot) {
+        if (!slot.id)
+            return true;
 
-        if (slotContainerFull && slotContainer && slotContainerFull.id) {
-            let empty = LiquidRegistry.getEmptyItem(slotContainerFull.id, slotContainerFull.data);
+        item.count = item.count || 1;
 
-            if (empty && (liquid === null || liquid.indexOf(empty.liquid)) > -1 && tile.liquidStorage.getAmount(empty.liquid) + 1 <= tile.liquidStorage.getLimit(empty.liquid)) {
-                if (slotContainer.id === 0) {
-                    tile.container.setSlot(slots.empty, empty.id, 1, empty.data);
-                    tile.liquidStorage.addLiquid(empty.liquid, 1);
-                    slotContainerFull.count--;
-                    return true;
-                } else if (slotContainer.id === empty.id && slotContainer.data === empty.data && slotContainer.count < Item.getMaxStack(slotContainer.id)) {
-                    slotContainer.count++;
-                    slotContainerFull.count--;
-                    tile.liquidStorage.addLiquid(empty.liquid, 1);
-                    return true;
-                }
-            }
-        }
+        if (slot.id === item.id && slot.data === item.data && Item.getMaxStack(slot.is) - slot.count >= item.count)
+            return true;
+    },
 
-        return false;
+    putInSlot: function (item, slot) {
+        if (!this.canPutInSlot(item, slot))
+            return false;
+
+        slot.id = item.id;
+        slot.data = item.data || 0;
+        slot.count += item.count || 1;
+        return true;
     }
-
 };
