@@ -12,7 +12,7 @@ function initializeRecipeGuideFor(object, name, unique) {
         let dop = recipe.dop || {};
         let page = pages[currentPage];
 
-        if(!page[currentSection]) {
+        if (!page[currentSection]) {
             page[currentSection] = {
                 controller: PageControllers.TE_TO_RECIPE_PAGE,
                 title: name + " Recipes(Page " + (count / 3) + ")",
@@ -43,8 +43,8 @@ function initializeRecipeGuideFor(object, name, unique) {
 
         count++;
 
-        if(count % 3 === 0){
-            if(currentSection === "left"){
+        if (count % 3 === 0) {
+            if (currentSection === "left") {
                 currentSection = "right";
                 continue;
             }
@@ -68,11 +68,58 @@ function initializeRecipeGuideFor(object, name, unique) {
 
 }
 
+function initializeMagmaCrucibleRecipesGuide() {
+    let pages = {"default": {}};
+    let currentPage = "default";
+    let currentSection = "left";
+    let count = 0;
+
+    for (let i in MagmaCrucibleRecipes.recipes) {
+        let recipe = MagmaCrucibleRecipes.recipes[i];
+        let page = pages[currentPage];
+
+        if (!page[currentSection]) {
+            page[currentSection] = {
+                controller: PageControllers.MAGMA_CRUCIBLE_RECIPE_PAGE,
+                title: "Magma Crucible Recipes(Page " + (count / 6) + ")",
+                recipes: []
+            };
+        }
+
+        page[currentSection].recipes.push(recipe);
+
+        count++;
+
+        if (count % 6 === 0) {
+            if (currentSection === "left") {
+                currentSection = "right";
+                continue;
+            }
+
+            let newPage = "page" + count;
+            let oldPage = currentPage;
+
+            page.nextLink = newPage;
+            currentSection = "left";
+            currentPage = newPage;
+
+            pages[newPage] = {
+                preLink: oldPage
+            };
+        }
+    }
+
+    GuideAPI.registerGuide("guideMagmaCrucibleRecipes", {
+        pages: pages
+    });
+}
+
 Callback.addCallback("PreLoaded", function () {
     Callback.addCallback("PostLoaded", function () {
-        if(GuideAPI) {
+        if (GuideAPI) {
 
             initializeRecipeGuideFor(PulverizerRecipes, "Pulverizer", "guidePulverizerRecipes");
+            initializeMagmaCrucibleRecipesGuide();
             // initializeRecipeGuideFor(SawmillRecipes, "Sawmill", "guideSawmillRecipes");
         }
     });
