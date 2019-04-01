@@ -40,6 +40,8 @@ const energyCellUI = MachineRegistry.MachineUI({
             }
         }},
         "textRight": {type: "text", text: "25000", x: 472 + 20 + 14 * 5, y: 100 + 42 * 5 - 16 * 4 - 40, font: {size: 30, color: Color.WHITE}},
+
+        "textEnergy": {type: "text", text: "0/0 RF", x: 0, y: 320, font: {size: 30, color: Color.WHITE}},
         // @formatter:on
     }
 });
