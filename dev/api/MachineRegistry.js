@@ -28,24 +28,120 @@ const MachineRegistry = {
             }
         }, obj);
 
-        // @formatter:off
-        if (obj.recipesOnClick)
-            ui.setFakeTab(1, {icon: {type: "button", x: -30, y: -30, scale: 4, bitmap: "buttons.recipes", clicker: {onClick: obj.recipesOnClick}}});
+        let recipesShower = obj.recipesShower;
+        if (recipesShower) {
+            ui.setTab(1, {
+                icon: {
+                    type: "image",
+                    x: -30,
+                    y: -30,
+                    width: 60,
+                    height: 60,
+                    bitmap: "icons.recipes"
+                }
+            }, {
+                drawing: [
+                    {type: "background", color: Color.rgb(149, 134, 129)}
+                ],
+                elements: {
+                    "__frame": {
+                        type: "frame",
+                        x: 80,
+                        y: 0, //
+                        width: 835,
+                        height: 55,
+                        bitmap: "default_frame_bg_dark",
+                        scale: 2
+                    },
+                    "__offsetIndex": {
+                        type: "text",
+                        text: "",
+                        x: 70,
+                        y: 0, //
+                        font: FONT_WHITE_30
+                    },
+                    "__btnPrevious": {
+                        type: "button",
+                        x: 0,
+                        y: 0, //
+                        scale: 65 / 26,
+                        bitmap: "buttons.previous_page",
+                        clicker: {
+                            onClick: function () {
+                                RecipesManager.offset =
+                                    RecipesManager.showers[recipesShower].previousOffset(RecipesManager.offset);
+                                RecipesManager.drawOn(recipesShower, ui.getWindowForTab(1));
+                            }
+                        }
+                    },
+                    "__btnNext": {
+                        type: "button",
+                        x: 930,
+                        y: 0, //
+                        scale: 65 / 26,
+                        bitmap: "buttons.next_page",
+                        clicker: {
+                            onClick: function () {
+                                RecipesManager.offset =
+                                    RecipesManager.showers[recipesShower].nextOffset(RecipesManager.offset);
+                                RecipesManager.drawOn(recipesShower, ui.getWindowForTab(1));
+                            }
+                        }
+                    }
+                }
+            });
+
+            ui.setTabEventListener(1, {
+                onOpen: function (window) {
+                    RecipesManager.drawOn(recipesShower, window);
+                },
+
+                onClose: function () {
+                    RecipesManager.offset = 0;
+                }
+            });
+        }
 
         if (!obj.augmentsDisabled) {
-            ui.setTab(tabIndex, {icon: {type: "image", x: -30, y: -30, width: 60, height: 60, bitmap: "icons.augments"}}, {});
+            ui.setTab(tabIndex, {
+                icon: {
+                    type: "image",
+                    x: -30,
+                    y: -30,
+                    width: 60,
+                    height: 60,
+                    bitmap: "icons.augments"
+                }
+            }, {});
             tabIndex++;
         }
 
         if (!obj.configDisabled) {
-            ui.setTab(tabIndex, {icon: {type: "image", x: -30, y: -30, width: 60, height: 60, bitmap: "icons.config"}}, {});
+            ui.setTab(tabIndex, {
+                icon: {
+                    type: "image",
+                    x: -30,
+                    y: -30,
+                    width: 60,
+                    height: 60,
+                    bitmap: "icons.config"
+                }
+            }, {});
             tabIndex++;
         }
 
         if (!obj.redstoneDisabled) {
-            ui.setTab(tabIndex, {icon: {type: "image", x: -30, y: -30, width: 60, height: 60, bitmap: "icons.redstone"}}, {});
+            ui.setTab(tabIndex, {
+                icon: {
+                    type: "image",
+                    x: -30,
+                    y: -30,
+                    width: 60,
+                    height: 60,
+                    bitmap: "icons.redstone"
+                }
+            }, {});
         }
-        // @formatter:on
 
         if (!obj.inventoryDisabled) {
             let inventory = new UI.Window({

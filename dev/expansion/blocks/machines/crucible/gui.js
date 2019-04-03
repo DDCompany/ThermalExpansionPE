@@ -1,8 +1,6 @@
 const crucibleUI = MachineRegistry.MachineUI({
     tabIcon: "icons.machines.crucible",
-    recipesOnClick: function () {
-        GuideAPI.openGuide("guideMagmaCrucibleRecipes");
-    },
+    recipesShower: "te:magma_crucible",
 
     drawing: [
         {type: "background", color: Color.rgb(149, 134, 129)},

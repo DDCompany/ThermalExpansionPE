@@ -1,6 +1,5 @@
 const energyCellUI = MachineRegistry.MachineUI({
     tabIcon: "icons.machines.energy_cell",
-    recipesDisabled: true,
     inventoryDisabled: true,
     configDisabled: true,
 
@@ -26,7 +25,7 @@ const energyCellUI = MachineRegistry.MachineUI({
                 tileEntity.data.transferIn = Math.max(tileEntity.data.transferIn - 100, 0);
             }
         }},
-        "textLeft": {type: "text", text: "25000", x: 472 - 130, y: 100 + 42 * 5 - 16 * 4 - 40, font: {size: 30, color: Color.WHITE}},
+        "textLeft": {type: "text", text: "25000", x: 472 - 130, y: 100 + 42 * 5 - 16 * 4 - 40, font: FONT_WHITE_30},
 
         "btnPlusRight": {type: "button", x: 490 + 16 * 4, y: 100 + (42 * 5 - 16 * 4), scale: 4, bitmap: "buttons.plus", clicker: {
             onClick: function(position, container, tileEntity){
@@ -39,9 +38,9 @@ const energyCellUI = MachineRegistry.MachineUI({
                 tileEntity.data.transferOut = Math.max(tileEntity.data.transferOut - 100, 0);
             }
         }},
-        "textRight": {type: "text", text: "25000", x: 472 + 20 + 14 * 5, y: 100 + 42 * 5 - 16 * 4 - 40, font: {size: 30, color: Color.WHITE}},
+        "textRight": {type: "text", text: "25000", x: 472 + 20 + 14 * 5, y: 100 + 42 * 5 - 16 * 4 - 40, font: FONT_WHITE_30},
 
-        "textEnergy": {type: "text", text: "0/0 RF", x: 0, y: 320, font: {size: 30, color: Color.WHITE}},
+        "textEnergy": {type: "text", text: "0/0 RF", x: 0, y: 320, font: FONT_WHITE_30},
         // @formatter:on
     }
 });

@@ -1,6 +1,5 @@
 ## HEADER
 header.js
-guideAPI.js
 
 ## API
 api/ThermalConfig.js
@@ -12,6 +11,7 @@ api/ContainerHelper.js
 api/TextureBakery.js
 api/UIHelper.js
 
+api/recipes/RecipesManager.js
 api/recipes/PulverizerRecipes.js
 api/recipes/MagmaCrucibleRecipes.js
 
