@@ -48,7 +48,8 @@ PulverizerRecipes.add({
 PulverizerRecipes.add({
     input: {id: 24, data: -1},
     result: {id: 12, data: 0, count: 2},
-    dop: {id: ItemID.dustNiter, data: 0, count: 1, chance: 0.4}
+    dop: {id: ItemID.dustNiter, data: 0, count: 1, chance: 0.4},
+    energy: 3000
 });
 
 PulverizerRecipes.add({
@@ -243,7 +244,8 @@ PulverizerRecipes.add({
 
 PulverizerRecipes.add({
     input: {id: 37, data: 0},
-    result: {id: 351, data: 11, count: 4}
+    result: {id: 351, data: 11, count: 4},
+    energy: 2000
 });
 
 PulverizerRecipes.add({
