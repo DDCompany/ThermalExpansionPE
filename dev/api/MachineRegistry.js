@@ -9,11 +9,12 @@ const MachineRegistry = {
     },
     MachineUI: function (obj) {
         let ui = UI.TabbedWindow({
-            location: {
+            location: obj.location || {
                 x: 0,
                 y: 0
             }
         });
+
 
         let tabIndex = 7;
 
@@ -192,26 +193,31 @@ const MachineRegistry = {
 
         return ui;
     },
-    TileEntity: function (obj) {
+    TileEntity: function (obj, isNoPowerMachine) {
         if (!obj.defaultValues)
             obj.defaultValues = {};
 
         obj.defaultValues.tier = 0;
-        obj.defaultValues.energy = 0;
 
         if (!obj.installUpgrade) {
-            obj.installUpgrade = this.installUpgradeFunc;
-        }
-
-        if (!obj.energyTick) {
-            obj.energyTick = function (type, src) {
-                this.data.energy += src.get(Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy));
+            obj.installUpgrade = function (tier) {
+                MachineRegistry.installUpgradeFunc(tier, this);
             };
         }
 
-        if (!obj.getEnergyStorage) {
-            obj.getEnergyStorage = function () {
-                return this.data.basePower * 1000;
+        if (!isNoPowerMachine) {
+            obj.defaultValues.energy = 0;
+
+            if (!obj.energyTick) {
+                obj.energyTick = function (type, src) {
+                    this.data.energy += src.get(Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy));
+                };
+            }
+
+            if (!obj.getEnergyStorage) {
+                obj.getEnergyStorage = function () {
+                    return this.data.basePower * 1000;
+                }
             }
         }
 
@@ -265,12 +271,12 @@ const MachineRegistry = {
         return energy / (maxPowerLevel / basePower);
     },
 
-    installUpgradeFunc: function (tier) {
+    installUpgradeFunc: function (tier, tile) {
         if (tier < 1 || tier > 5)
             return false;
 
-        this.data.tier = tier;
-        this.refreshModel();
+        tile.data.tier = tier;
+        tile.refreshModel();
         return true;
     },
 

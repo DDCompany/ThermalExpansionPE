@@ -16,7 +16,9 @@ IMPORT("BackpackAPI");
 
 const nativeDropFunc = ModAPI.requireGlobal("Level.dropItem");
 const getYaw = ModAPI.requireGlobal("Entity.getYaw");
+const UIUtils = java.lang.Class.forName("zhekasmirnov.launcher.utils.UIUtils", true, UI.getContext().getClass().getClassLoader()).newInstance();
 
+const MinecraftColor = Native.Color;
 const Color = android.graphics.Color;
 const Canvas = android.graphics.Canvas;
 const BufferedOutputStream = java.io.BufferedOutputStream;
@@ -27,6 +29,7 @@ const Paint = android.graphics.Paint;
 
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
 const POWER_SCALING = [100, 150, 200, 250, 300];
+const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
 const FONT_WHITE_30 = {size: 30, color: Color.WHITE};
 
 function randomInt(min, max) {

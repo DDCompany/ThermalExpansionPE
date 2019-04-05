@@ -1,8 +1,13 @@
+const isValidItemForSatchel = function (id) {
+    return !BackpackRegistry.isBackpack(id) && id !== BlockID.thermalStrongbox
+};
+
 IDRegistry.genItemID("satchelBasic");
 Item.createItem("satchelBasic", "Basic Satchel", {name: "satchel", meta: 0}, {stack: 1});
 
 BackpackRegistry.register(ItemID.satchelBasic, {
-    slots: 9
+    slots: 9,
+    isValidItem: isValidItemForSatchel
 });
 
 IDRegistry.genItemID("satchelHardened");
@@ -10,7 +15,8 @@ Item.createItem("satchelHardened", "Hardened Satchel", {name: "satchel", meta: 1
 
 BackpackRegistry.register(ItemID.satchelHardened, {
     slots: 18,
-    inRow: 9
+    inRow: 9,
+    isValidItem: isValidItemForSatchel
 });
 
 IDRegistry.genItemID("satchelReinforced");
@@ -18,7 +24,8 @@ Item.createItem("satchelReinforced", "Reinforced Satchel", {name: "satchel", met
 
 BackpackRegistry.register(ItemID.satchelReinforced, {
     slots: 27,
-    inRow: 9
+    inRow: 9,
+    isValidItem: isValidItemForSatchel
 });
 
 IDRegistry.genItemID("satchelSignalum");
@@ -26,7 +33,8 @@ Item.createItem("satchelSignalum", "Signalum Satchel", {name: "satchel", meta: 3
 
 BackpackRegistry.register(ItemID.satchelSignalum, {
     slots: 36,
-    inRow: 9
+    inRow: 9,
+    isValidItem: isValidItemForSatchel
 });
 
 IDRegistry.genItemID("satchelResonant");
@@ -34,7 +42,8 @@ Item.createItem("satchelResonant", "Resonant Satchel", {name: "satchel", meta: 4
 
 BackpackRegistry.register(ItemID.satchelResonant, {
     slots: 45,
-    inRow: 9
+    inRow: 9,
+    isValidItem: isValidItemForSatchel
 });
 
 Callback.addCallback("PostLoaded", function () {

@@ -38,6 +38,10 @@ foundation/items/satchel.js
 # BLOCKS
 expansion/blocks/parts.js
 
+expansion/blocks/strongbox/strongbox.js
+expansion/blocks/strongbox/gui.js
+expansion/blocks/strongbox/tile.js
+
 # MACHINES
 expansion/blocks/machines/pulverizer/pulverizer.js
 expansion/blocks/machines/pulverizer/tile.js
