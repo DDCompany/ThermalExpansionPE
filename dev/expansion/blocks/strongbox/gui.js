@@ -41,6 +41,7 @@ const StrongBoxUI = [];
                 y: 185,
                 clicker: {
                     onClick: function (container) {
+                        soundClick.play();
                         container.getParent().data.item = {
                             id: 0,
                             data: 0
