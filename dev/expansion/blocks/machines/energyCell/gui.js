@@ -14,7 +14,11 @@ const energyCellUI = MachineRegistry.MachineUI({
         "energyScale": {type: "scale", x: 472, y: 100, direction: 1, bitmap: "bars.rf_full", scale: 5},
 
         "btnPlusLeft": {
-            type: "button", x: 460 - 16 * 4, y: 100 + (42 * 5 - 16 * 4), scale: 4, bitmap: "buttons.plus", clicker: {
+            type: "button", x: 460 - 16 * 4, y: 100 + (42 * 5 - 16 * 4),
+            scale: 4,
+            bitmap: "buttons.plus",
+            bitmap2: "buttons.plus_pressed",
+            clicker: {
                 onClick: function (position, container, tileEntity) {
                     soundClick.play();
                     tileEntity.data.transferIn = Math.min(tileEntity.data.transferIn + 100,
@@ -28,6 +32,7 @@ const energyCellUI = MachineRegistry.MachineUI({
             y: 100 + (42 * 5 - 16 * 4),
             scale: 4,
             bitmap: "buttons.minus",
+            bitmap2: "buttons.minus_pressed",
             clicker: {
                 onClick: function (position, container, tileEntity) {
                     soundClick.play();
@@ -38,7 +43,13 @@ const energyCellUI = MachineRegistry.MachineUI({
         "textLeft": {type: "text", text: "25000", x: 472 - 130, y: 100 + 42 * 5 - 16 * 4 - 40, font: FONT_WHITE_30},
 
         "btnPlusRight": {
-            type: "button", x: 490 + 16 * 4, y: 100 + (42 * 5 - 16 * 4), scale: 4, bitmap: "buttons.plus", clicker: {
+            type: "button",
+            x: 490 + 16 * 4,
+            y: 100 + (42 * 5 - 16 * 4),
+            scale: 4,
+            bitmap: "buttons.plus",
+            bitmap2: "buttons.plus_pressed",
+            clicker: {
                 onClick: function (position, container, tileEntity) {
                     soundClick.play();
                     tileEntity.data.transferOut = Math.min(tileEntity.data.transferOut + 100,
@@ -52,6 +63,7 @@ const energyCellUI = MachineRegistry.MachineUI({
             y: 100 + (42 * 5 - 16 * 4),
             scale: 4,
             bitmap: "buttons.minus",
+            bitmap2: "buttons.minus_pressed",
             clicker: {
                 onClick: function (position, container, tileEntity) {
                     soundClick.play();

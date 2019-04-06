@@ -67,8 +67,10 @@ const MachineRegistry = {
                         y: 0, //
                         scale: 65 / 26,
                         bitmap: "buttons.previous_page",
+                        bitmap2: "buttons.previous_page_pressed",
                         clicker: {
                             onClick: function () {
+                                soundClick.play();
                                 RecipesManager.offset =
                                     RecipesManager.showers[recipesShower].previousOffset(RecipesManager.offset);
                                 RecipesManager.drawOn(recipesShower, ui.getWindowForTab(1));
@@ -81,8 +83,10 @@ const MachineRegistry = {
                         y: 0, //
                         scale: 65 / 26,
                         bitmap: "buttons.next_page",
+                        bitmap2: "buttons.next_page_pressed",
                         clicker: {
                             onClick: function () {
+                                soundClick.play();
                                 RecipesManager.offset =
                                     RecipesManager.showers[recipesShower].nextOffset(RecipesManager.offset);
                                 RecipesManager.drawOn(recipesShower, ui.getWindowForTab(1));
