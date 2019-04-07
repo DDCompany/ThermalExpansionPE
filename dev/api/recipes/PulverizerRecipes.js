@@ -19,8 +19,9 @@ const PulverizerRecipes = {
             return null;
 
         for (let i in this.recipes) {
-            let recipe = this.recipes[i].input;
-            if (recipe.id === id && (recipe.data === -1 || recipe.data === data))
+            let recipe = this.recipes[i];
+            let input = recipe.input;
+            if (input.id === id && (input.data === -1 || input.data === data))
                 return recipe;
         }
         return null;

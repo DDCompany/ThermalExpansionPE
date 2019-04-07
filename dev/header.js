@@ -29,7 +29,7 @@ const File = java.io.File;
 const Paint = android.graphics.Paint;
 
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
-const POWER_SCALING = [100, 150, 200, 250, 300];
+const POWER_SCALING = [100, 150, 200, 250, 300, 300];
 const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
 const FONT_WHITE_30 = {size: 30, color: Color.WHITE};
 

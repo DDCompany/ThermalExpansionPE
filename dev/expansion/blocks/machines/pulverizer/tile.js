@@ -5,8 +5,13 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
         basePower: 20
     },
 
+    click: function () {
+        this.data._refreshUI = true;
+    },
+
     tick: function () {
         let slotSource = this.container.getSlot("slotSource");
+        let isCreative = this.data.tier === 5;
         let power = 0;
 
         if (this.data.progressMax) {
@@ -19,6 +24,9 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
             if (this.data.progress >= this.data.progressMax) {
                 let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
                 let slotResultDop = this.container.getSlot("slotResultDop");
+                alert(recipe);
+                alert(recipe.dop);
+                alert(recipe.result);
                 if (ContainerHelper.canPutInSlot(recipe.dop, slotResultDop) &&
                     ContainerHelper.putInSlot(recipe.result, this.container.getSlot("slotResult"))) {
 
@@ -36,33 +44,28 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
                     this.refreshModel();
                 }
             } else {
-                power = MachineRegistry.calcEnergy(this.data.basePower, this.data.energy);
+                if (isCreative) {
+                    power += this.data.basePower;
+                } else {
+                    power = MachineRegistry.calcEnergy(this.data.basePower, this.data.energy);
+                    this.data.energy -= power;
+                }
+
                 this.data.progress += power;
-                this.data.energy -= power;
             }
         } else if (slotSource.id) {
             let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
 
-            if(recipe) {
+            if (recipe) {
                 this.data.progress = 1;
                 this.data.progressMax = recipe.energy || 2000;
                 this.refreshModel();
             }
         }
 
+        MachineRegistry.updateEnergyBar(this, isCreative);
         this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
-        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
         this.container.setScale("speedScale", power / this.data.basePower);
-    },
-
-    installUpgrade: function (tier) {
-        if (tier < 1 || tier > 4)
-            return false;
-
-        this.data.tier = tier;
-        this.data.basePower = 20 * POWER_SCALING[tier] / 100;
-        this.refreshModel();
-        return false;
     },
 
     refreshModel: function () {

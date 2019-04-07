@@ -204,9 +204,15 @@ const MachineRegistry = {
         obj.defaultValues.tier = 0;
 
         if (!obj.installUpgrade) {
-            obj.installUpgrade = function (tier) {
-                MachineRegistry.installUpgradeFunc(tier, this);
-            };
+            if (isNoPowerMachine) {
+                obj.installUpgrade = function (tier) {
+                    return MachineRegistry.installUpgradeFunc(tier, this);
+                };
+            } else {
+                obj.installUpgrade = function (tier) {
+                    return MachineRegistry.installUpgradeForPoweredFunc(tier, this);
+                };
+            }
         }
 
         if (!isNoPowerMachine) {
@@ -214,7 +220,8 @@ const MachineRegistry = {
 
             if (!obj.energyTick) {
                 obj.energyTick = function (type, src) {
-                    this.data.energy += src.get(Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy));
+                    if (this.data.tier < 5)
+                        this.data.energy += src.get(Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy));
                 };
             }
 
@@ -263,6 +270,18 @@ const MachineRegistry = {
         return obj;
     },
 
+    updateEnergyBar: function (tile, isCreative) {
+        if (tile.data._refreshUI) {
+            let content = tile.container.getGuiScreen();
+            if (content && (content = content.getWindowForTab(6).getContent())) {
+                content.elements["energyScale"].bitmap = isCreative ? "bars.rf_creative" : "bars.rf_full";
+                tile.data._refreshUI = false;
+            }
+        }
+
+        tile.container.setScale("energyScale", isCreative ? 1 : tile.data.energy / tile.getEnergyStorage());
+    },
+
     calcEnergy: function (basePower, energy) {
         let maxPowerLevel = 9 * basePower * 100;
 
@@ -282,6 +301,15 @@ const MachineRegistry = {
         tile.data.tier = tier;
         tile.refreshModel();
         return true;
+    },
+
+    installUpgradeForPoweredFunc: function (tier, tile) {
+        if (MachineRegistry.installUpgradeFunc(tier, tile)) {
+            tile.data.basePower = 20 * POWER_SCALING[tier] / 100;
+            return true;
+        }
+
+        return false;
     },
 
     placeFunc: function (rotatable) {
