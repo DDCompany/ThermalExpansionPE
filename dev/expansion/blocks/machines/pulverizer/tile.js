@@ -24,9 +24,6 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
             if (this.data.progress >= this.data.progressMax) {
                 let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
                 let slotResultDop = this.container.getSlot("slotResultDop");
-                alert(recipe);
-                alert(recipe.dop);
-                alert(recipe.result);
                 if (ContainerHelper.canPutInSlot(recipe.dop, slotResultDop) &&
                     ContainerHelper.putInSlot(recipe.result, this.container.getSlot("slotResult"))) {
 

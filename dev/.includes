@@ -6,6 +6,8 @@ api/ThermalConfig.js
 api/MaterialManager.js
 api/RecipeHelper.js
 api/MachineRegistry.js
+api/MachineUI.js
+api/MachineTileEntity.js
 api/ModelHelper.js
 api/ContainerHelper.js
 api/TextureBakery.js
