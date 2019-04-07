@@ -5,7 +5,7 @@ const ContainerHelper = {
 
         item.count = item.count || 1;
 
-        if (slot.id === item.id && slot.data === item.data && Item.getMaxStack(slot.is) - slot.count >= item.count)
+        if (slot.id === item.id && slot.data === item.data && Item.getMaxStack(slot.id) - slot.count >= item.count)
             return true;
     },
 
