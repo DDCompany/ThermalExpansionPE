@@ -17,48 +17,45 @@ api/recipes/RecipesManager.js
 api/recipes/PulverizerRecipes.js
 api/recipes/MagmaCrucibleRecipes.js
 
-## FOUNDATION
-# BLOCKS
-foundation/blocks/ores.js
-foundation/blocks/fluid_ores.js
-
-# ITEMS
-foundation/items/crystals.js
-foundation/items/dusts.js
-foundation/items/ingots.js
-foundation/items/nuggets.js
-foundation/items/plates.js
-foundation/items/gears.js
-foundation/items/coins.js
-foundation/items/tools.js
-foundation/items/armors.js
-foundation/items/parts.js
-foundation/items/upgrades.js
-foundation/items/satchel.js
-
-## EXPANSION
-# BLOCKS
-expansion/blocks/parts.js
-
-expansion/blocks/strongbox/strongbox.js
-expansion/blocks/strongbox/gui.js
-expansion/blocks/strongbox/tile.js
-
+## BLOCKS
 # MACHINES
-expansion/blocks/machines/pulverizer/pulverizer.js
-expansion/blocks/machines/pulverizer/tile.js
-expansion/blocks/machines/pulverizer/gui.js
-expansion/blocks/machines/pulverizer/recipes.js
+blocks/machines/pulverizer/pulverizer.js
+blocks/machines/pulverizer/tile.js
+blocks/machines/pulverizer/gui.js
+blocks/machines/pulverizer/recipes.js
 
-expansion/blocks/machines/crucible/crucible.js
-expansion/blocks/machines/crucible/tile.js
-expansion/blocks/machines/crucible/gui.js
-expansion/blocks/machines/crucible/recipes.js
+blocks/machines/crucible/crucible.js
+blocks/machines/crucible/tile.js
+blocks/machines/crucible/gui.js
+blocks/machines/crucible/recipes.js
 
-expansion/blocks/machines/furnace/furnace.js
-expansion/blocks/machines/furnace/tile.js
-expansion/blocks/machines/furnace/gui.js
+blocks/machines/furnace/furnace.js
+blocks/machines/furnace/tile.js
+blocks/machines/furnace/gui.js
 
-expansion/blocks/machines/energyCell/energyCell.js
-expansion/blocks/machines/energyCell/tile.js
-expansion/blocks/machines/energyCell/gui.js
+blocks/machines/energyCell/energyCell.js
+blocks/machines/energyCell/tile.js
+blocks/machines/energyCell/gui.js
+
+# SIMPLE
+blocks/ores.js
+blocks/fluid_ores.js
+blocks/parts.js
+
+blocks/strongbox/strongbox.js
+blocks/strongbox/gui.js
+blocks/strongbox/tile.js
+
+## ITEMS
+items/crystals.js
+items/dusts.js
+items/ingots.js
+items/nuggets.js
+items/plates.js
+items/gears.js
+items/coins.js
+items/tools.js
+items/armors.js
+items/parts.js
+items/upgrades.js
+items/satchel.js
