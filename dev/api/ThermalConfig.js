@@ -1,62 +1,84 @@
 const ThermalConfig = {
     //GENERATION
-    copper: __config__.getBool("gen.copper"),
-    copperMinY: __config__.getNumber("gen.copperMinY"),
-    copperMaxY: __config__.getNumber("gen.copperMaxY"),
-    copperVeinSize: __config__.getNumber("gen.copperVeinSize"),
-    copperVeins: __config__.getNumber("gen.copperVeins"),
+    gen: {
+        copper: {
+            enabled: __config__.getBool("gen.copper.enabled"),
+            size: __config__.getNumber("gen.copper.size"),
+            inChunk: __config__.getNumber("gen.copper.inChunk"),
+            minY: __config__.getNumber("gen.copper.minY"),
+            maxY: __config__.getNumber("gen.copper.maxY")
+        },
 
-    tin: __config__.getBool("gen.tin"),
-    tinMinY: __config__.getNumber("gen.tinMinY"),
-    tinMaxY: __config__.getNumber("gen.tinMaxY"),
-    tinVeinSize: __config__.getNumber("gen.tinVeinSize"),
-    tinVeins: __config__.getNumber("gen.tinVeins"),
+        tin: {
+            enabled: __config__.getBool("gen.tin.enabled"),
+            size: __config__.getNumber("gen.tin.size"),
+            inChunk: __config__.getNumber("gen.tin.inChunk"),
+            minY: __config__.getNumber("gen.tin.minY"),
+            maxY: __config__.getNumber("gen.tin.maxY")
+        },
 
-    silver: __config__.getBool("gen.silver"),
-    silverMinY: __config__.getNumber("gen.silverMinY"),
-    silverMaxY: __config__.getNumber("gen.silverMaxY"),
-    silverVeinSize: __config__.getNumber("gen.silverVeinSize"),
-    silverVeins: __config__.getNumber("gen.silverVeins"),
+        silver: {
+            enabled: __config__.getBool("gen.silver.enabled"),
+            size: __config__.getNumber("gen.silver.size"),
+            inChunk: __config__.getNumber("gen.silver.inChunk"),
+            minY: __config__.getNumber("gen.silver.minY"),
+            maxY: __config__.getNumber("gen.silver.maxY")
+        },
 
-    lead: __config__.getBool("gen.lead"),
-    leadMinY: __config__.getNumber("gen.leadMinY"),
-    leadMaxY: __config__.getNumber("gen.leadMaxY"),
-    leadVeinSize: __config__.getNumber("gen.leadVeinSize"),
-    leadVeins: __config__.getNumber("gen.leadVeins"),
+        lead: {
+            enabled: __config__.getBool("gen.lead.enabled"),
+            size: __config__.getNumber("gen.lead.size"),
+            inChunk: __config__.getNumber("gen.lead.inChunk"),
+            minY: __config__.getNumber("gen.lead.minY"),
+            maxY: __config__.getNumber("gen.lead.maxY")
+        },
 
-    aluminum: __config__.getBool("gen.aluminum"),
-    aluminumMinY: __config__.getNumber("gen.aluminumMinY"),
-    aluminumMaxY: __config__.getNumber("gen.aluminumMaxY"),
-    aluminumVeinSize: __config__.getNumber("gen.aluminumVeinSize"),
-    aluminumVeins: __config__.getNumber("gen.aluminumVeins"),
+        aluminum: {
+            enabled: __config__.getBool("gen.aluminum.enabled"),
+            size: __config__.getNumber("gen.aluminum.size"),
+            inChunk: __config__.getNumber("gen.aluminum.inChunk"),
+            minY: __config__.getNumber("gen.aluminum.minY"),
+            maxY: __config__.getNumber("gen.aluminum.maxY")
+        },
 
-    nickel: __config__.getBool("gen.nickel"),
-    nickelMinY: __config__.getNumber("gen.nickelMinY"),
-    nickelMaxY: __config__.getNumber("gen.nickelMaxY"),
-    nickelVeinSize: __config__.getNumber("gen.nickelVeinSize"),
-    nickelVeins: __config__.getNumber("gen.nickelVeins"),
+        nickel: {
+            enabled: __config__.getBool("gen.nickel.enabled"),
+            size: __config__.getNumber("gen.nickel.size"),
+            inChunk: __config__.getNumber("gen.nickel.inChunk"),
+            minY: __config__.getNumber("gen.nickel.minY"),
+            maxY: __config__.getNumber("gen.nickel.maxY")
+        },
 
-    platinum: __config__.getBool("gen.platinum"),
-    platinumMinY: __config__.getNumber("gen.platinumMinY"),
-    platinumMaxY: __config__.getNumber("gen.platinumMaxY"),
-    platinumVeinSize: __config__.getNumber("gen.platinumVeinSize"),
-    platinumVeins: __config__.getNumber("gen.platinumVeins"),
+        platinum: {
+            enabled: __config__.getBool("gen.platinum.enabled"),
+            size: __config__.getNumber("gen.platinum.size"),
+            inChunk: __config__.getNumber("gen.platinum.inChunk"),
+            minY: __config__.getNumber("gen.platinum.minY"),
+            maxY: __config__.getNumber("gen.platinum.maxY")
+        },
 
-    oilSand: __config__.getBool("gen.oilSand"),
-    oilSandChance: __config__.getNumber("gen.oilSandChance"),
-    oilSandVeinSize: __config__.getNumber("gen.oilSandVeinSize"),
+        oilSand: {
+            enabled: __config__.getBool("gen.oilSand.enabled"),
+            chance: __config__.getNumber("gen.oilSand.chance"),
+            size: __config__.getNumber("gen.oilSand.size")
+        },
 
-    ender: __config__.getBool("gen.ender"),
-    enderMinY: __config__.getNumber("gen.enderMinY"),
-    enderMaxY: __config__.getNumber("gen.enderMaxY"),
-    enderVeinSize: __config__.getNumber("gen.enderVeinSize"),
-    enderVeins: __config__.getNumber("gen.enderVeins"),
-    enderChance: __config__.getNumber("gen.enderChance"),
+        resonantEnd: {
+            enabled: __config__.getBool("gen.resonantEnd.enabled"),
+            chance: __config__.getNumber("gen.resonantEnd.chance"),
+            size: __config__.getNumber("gen.resonantEnd.size"),
+            inChunk: __config__.getNumber("gen.resonantEnd.inChunk"),
+            minY: __config__.getNumber("gen.resonantEnd.minY"),
+            maxY: __config__.getNumber("gen.resonantEnd.maxY")
+        },
 
-    redstone: __config__.getBool("gen.redstone"),
-    redstoneMinY: __config__.getNumber("gen.redstoneMinY"),
-    redstoneMaxY: __config__.getNumber("gen.redstoneMaxY"),
-    redstoneVeinSize: __config__.getNumber("gen.redstoneVeinSize"),
-    redstoneVeins: __config__.getNumber("gen.redstoneVeins"),
-    redstoneChance: __config__.getNumber("gen.redstoneChance")
+        destabilizedRedstone: {
+            enabled: __config__.getBool("gen.destabilizedRedstone.enabled"),
+            chance: __config__.getNumber("gen.destabilizedRedstone.chance"),
+            size: __config__.getNumber("gen.destabilizedRedstone.size"),
+            inChunk: __config__.getNumber("gen.destabilizedRedstone.inChunk"),
+            minY: __config__.getNumber("gen.destabilizedRedstone.minY"),
+            maxY: __config__.getNumber("gen.destabilizedRedstone.maxY")
+        }
+    },
 };

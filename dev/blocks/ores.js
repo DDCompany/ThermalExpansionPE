@@ -73,13 +73,20 @@ Block.setDestroyLevel("oreMithril", 3);
 Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
     //Mithril и Iridium не генерируются в мире
     let ores = ["copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum"];
+    let config = ThermalConfig.gen;
 
     for (let i in ores) {
         let ore = ores[i];
+        let gen = config[ore];
 
-        if (ThermalConfig[ore]) {
-            generateOre(BlockID["ore" + ore.charAt(0).toUpperCase() + ore.substr(1)], chunkX, chunkZ, ThermalConfig[ore + "Veins"],
-                ThermalConfig[ore + "VeinSize"], ThermalConfig[ore + "MinY"], ThermalConfig[ore + "MaxY"]);
+        if (gen.enabled) {
+            generateOre(BlockID["ore" + ore.charAt(0).toUpperCase() + ore.substr(1)],
+                chunkX,
+                chunkZ,
+                gen.inChunk,
+                gen.size,
+                gen.minY,
+                gen.maxY);
         }
     }
 });

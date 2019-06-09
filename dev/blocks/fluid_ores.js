@@ -62,22 +62,41 @@ Block.registerDropFunction("oreEndStoneResonant", function (coords, id, data, le
     return [];
 });
 
-Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
-    if (ThermalConfig.oilSand && Math.random() <= ThermalConfig.oilSandChance) {
-        generateSandOre(BlockID.sandOil, chunkX, chunkZ, ThermalConfig.oilSandVeinSize);
-    }
+if (ThermalConfig.gen.oilSand.enabled) {
+    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+        if (Math.random() <= ThermalConfig.gen.oilSand.chance) {
+            generateSandOre(BlockID.sandOil, chunkX, chunkZ, ThermalConfig.gen.oilSand.size);
+        }
+    });
+}
 
-    if (ThermalConfig.oreDestabilizedRedstone && Math.random() <= ThermalConfig.redstoneChance) {
-        generateOre(BlockID.sandOil, chunkX, chunkZ, ThermalConfig.redstoneVeins, ThermalConfig.redstoneVeinSize,
-            ThermalConfig.redstoneMinY, ThermalConfig.redstoneMaxY);
-    }
-});
+if (ThermalConfig.gen.destabilizedRedstone.enabled) {
+    Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
+        if (Math.random() <= ThermalConfig.gen.destabilizedRedstone.chance) {
+            let config = ThermalConfig.gen.destabilizedRedstone;
 
-if (ThermalConfig.ender) {
+            generateOre(BlockID.oreDestabilizedRedstone,
+                chunkX,
+                chunkZ,
+                config.inChunk,
+                config.size,
+                config.minY,
+                config.maxY);
+        }
+    });
+}
+
+if (ThermalConfig.gen.resonantEnd.enabled) {
     Callback.addCallback("GenerateEndChunk", function (chunkX, chunkZ) {
-        if (Math.random() <= ThermalConfig.enderChance) {
-            generateOre(BlockID.oreEndStoneResonant, chunkX, chunkZ, ThermalConfig.enderVeins, ThermalConfig.enderVeinSize,
-                ThermalConfig.enderMinY, ThermalConfig.enderMaxY);
+        if (Math.random() <= ThermalConfig.gen.resonantEnd.chance) {
+            let config = ThermalConfig.gen.resonantEnd;
+
+            generateOre(BlockID.oreEndStoneResonant,
+                chunkX, chunkZ,
+                config.inChunk,
+                config.size,
+                config.minY,
+                config.maxY);
         }
     });
 }
