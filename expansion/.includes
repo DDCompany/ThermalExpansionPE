@@ -2,9 +2,6 @@
 header.js
 
 ## API
-api/ThermalConfig.js
-api/MaterialManager.js
-api/RecipeHelper.js
 api/MachineRegistry.js
 api/MachineUI.js
 api/MachineTileEntity.js
@@ -38,8 +35,6 @@ blocks/machines/energyCell/tile.js
 blocks/machines/energyCell/gui.js
 
 # SIMPLE
-blocks/ores.js
-blocks/fluid_ores.js
 blocks/parts.js
 
 blocks/strongbox/strongbox.js
@@ -47,15 +42,4 @@ blocks/strongbox/gui.js
 blocks/strongbox/tile.js
 
 ## ITEMS
-items/crystals.js
-items/dusts.js
-items/ingots.js
-items/nuggets.js
-items/plates.js
-items/gears.js
-items/coins.js
-items/tools.js
-items/armors.js
-items/parts.js
-items/upgrades.js
 items/satchel.js

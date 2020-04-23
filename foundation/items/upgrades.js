@@ -13,7 +13,7 @@ Item.createItem("upgradeKitResonant", "Resonant Upgrade Kit", {name: "upgrade_ki
 IDRegistry.genItemID("upgradeKitCreative");
 Item.createItem("upgradeKitCreative", "Creative Upgrade Kit", {name: "upgrade_kit", meta: 4}, {});
 
-let tierByItem = {};
+const tierByItem = {};
 tierByItem[ItemID.upgradeKitHardened] = 1;
 tierByItem[ItemID.upgradeKitReinforced] = 2;
 tierByItem[ItemID.upgradeKitSignalum] = 3;
