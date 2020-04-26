@@ -2,7 +2,7 @@ IDRegistry.genBlockID("thermalEnergyCell");
 Block.createBlock("thermalEnergyCell", [
     {
         name: "Energy Cell",
-        texture: [["energy_cell", 0], ["energy_cell", 0], ["energy_cell", 0], ["energy_cell", 0], ["energy_cell", 0]],
+        texture: [["energy_cell", 6]],
         inCreative: true
     }
 ]);
