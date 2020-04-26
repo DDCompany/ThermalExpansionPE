@@ -1,4 +1,5 @@
 /// <reference path="../../core-engine.d.ts" />
+/// <reference path="./BackpackAPI.d.ts" />
 
 declare const ToolType: { [key: string]: any };
 
