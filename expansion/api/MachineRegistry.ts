@@ -1,14 +1,14 @@
-const MachineRegistry = {
-    invContainer: new UI.Container(),
+class MachineRegistry {
+    static invContainer: UI.Container = new UI.Container();
 
-    define: function (id, tile) {
+    static define(id: number, tile: any) {
         RF_WIRE_GROUP.add(id, -1);
         ToolAPI.registerBlockMaterial(id, "stone");
         TileEntity.registerPrototype(id, tile);
         EnergyTileRegistry.addEnergyTypeForId(id, RF)
-    },
+    }
 
-    updateEnergyBar: function (tile, isCreative) {
+    static updateEnergyBar(tile: any, isCreative: boolean) {
         if (tile.data._refreshUI) {
             let content = tile.container.getGuiScreen();
             if (content && (content = content.getWindowForTab(6).getContent())) {
@@ -18,9 +18,9 @@ const MachineRegistry = {
         }
 
         tile.container.setScale("energyScale", isCreative ? 1 : tile.data.energy / tile.getEnergyStorage());
-    },
+    }
 
-    calcEnergy: function (basePower, energy) {
+    static calcEnergy(basePower: number, energy: number) {
         let maxPowerLevel = 9 * basePower * 100;
 
         if (energy >= maxPowerLevel)
@@ -30,27 +30,27 @@ const MachineRegistry = {
             return Math.min(basePower / 10, energy);
 
         return energy / (maxPowerLevel / basePower);
-    },
+    }
 
-    installUpgradeFunc: function (tier, tile) {
-        if (tier < 1 || tier > 5)
+    static installUpgradeFunc(tier: Tier, tile: any): boolean {
+        if (tier < Tier.BASIC || tier > Tier.CREATIVE)
             return false;
 
         tile.data.tier = tier;
         tile.refreshModel();
         return true;
-    },
+    }
 
-    installUpgradeForPoweredFunc: function (tier, tile) {
+    static installUpgradeForPoweredFunc(tier: Tier, tile: any): boolean {
         if (MachineRegistry.installUpgradeFunc(tier, tile)) {
             tile.data.basePower = 20 * POWER_SCALING[tier] / 100;
             return true;
         }
 
         return false;
-    },
+    }
 
-    placeFunc: function (rotatable) {
+    static placeFunc(rotatable: boolean): (coords: Callback.ItemUseCoordinates, item: ItemInstance) => void {
         return function (coords, item) {
             Game.prevent();
             let x = coords.relative.x;
@@ -72,20 +72,20 @@ const MachineRegistry = {
                         2: 3,
                         3: 1
                     }[c];
-                    data = 4 * parseInt(item.data / 4) + c;
+                    data = 4 * Math.floor(item.data / 4) + c;
                 }
 
                 World.setBlock(x, y, z, item.id, data);
-                let tile = World.addTileEntity(x, y, z);
+                let tile = World.addTileEntity(x, y, z) as any;
                 if (item.extra) {
-                    tile.data = JSON.parse(item.extra.getString("data"));
-                    tile.container.slots = JSON.parse(item.extra.getString("slots"));
+                    tile.data = JSON.parse((item.extra as ItemExtra).getString("data"));
+                    tile.container.slots = JSON.parse((item.extra as ItemExtra).getString("slots"));
                 }
             }
         };
-    },
+    }
 
-    nameOverrideFunc: function (item, name) {
+    static nameOverrideFunc(item: ItemInstance, name: string): string {
         let extra = Player.getCarriedItem().extra;
 
         if (extra) {
@@ -93,4 +93,4 @@ const MachineRegistry = {
         }
         return name;
     }
-};
+}

@@ -25,10 +25,10 @@ Callback.addCallback("DestroyBlock", function (coords, block, player) {
     ToolAPI.breakCarriedTool(uses);
 });
 
-const MaterialRegistry = {
-    sickles: [],
+class MaterialRegistry {
+    static sickles: number[] = [];
 
-    addArmorSet: function (name, armor, durabilityModifier, ingotName) {
+    static addArmorSet(name: string, armor: number[], durabilityModifier?: number, ingotName?: string) {
         let nameUp = name.charAt(0).toUpperCase() + name.substr(1);
 
         IDRegistry.genItemID("helmet" + nameUp);
@@ -86,8 +86,9 @@ const MaterialRegistry = {
                 "f f",
             ], ['f', ItemID[ingotName], -1]);
         }
-    },
-    addToolSet: function (name, material, ingotId, isVanilla) {
+    }
+
+    static addToolSet(name: string, material: string, ingotId: number, isVanilla?: boolean) {
         let nameUp = name.charAt(0).toUpperCase() + name.substr(1);
 
         if (!isVanilla) {
@@ -156,9 +157,9 @@ const MaterialRegistry = {
                 "sf ",
             ], ['f', ingotId, -1, 's', 280, -1]);
         });
-    },
+    }
 
-    isSickle: function (id) {
+    static isSickle(id: number) {
         return this.sickles.indexOf(id) > -1;
     }
-};
+}

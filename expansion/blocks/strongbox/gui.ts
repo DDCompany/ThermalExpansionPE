@@ -1,4 +1,4 @@
-const StrongBoxUI = [];
+const StrongboxUI = [];
 
 {
     const SLOTS_AMOUNT = [
@@ -58,13 +58,14 @@ const StrongBoxUI = [];
                     x: 370 + j % slotsInRow * slotSize,
                     y: 100 + Math.floor(j / slotsInRow) * slotSize,
                     isValid: function (id) {
+                        // @ts-ignore
                         return !BackpackRegistry.isBackpack(id) && id !== BlockID.thermalStrongbox
                     }
                 };
             }
         }
 
-        StrongBoxUI[i] = MachineRegistry.MachineUI({
+        StrongboxUI[i] = MachineUI({
             tabIcon: "icons.storage.strongbox_" + i,
             augmentsDisabled: true,
             configDisabled: true,
@@ -79,7 +80,7 @@ const StrongBoxUI = [];
         });
 
         if (i < 5) {
-            let window = StrongBoxUI[i].getWindowForTab(6);
+            let window = StrongboxUI[i].getWindowForTab(6);
             window.getLocation().scrollY = (100 + Math.floor(slotsAmount / slotsInRow) * slotSize) * (window.getLocation().width / 1000);
         }
     }

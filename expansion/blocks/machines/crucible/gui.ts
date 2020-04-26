@@ -1,4 +1,4 @@
-const crucibleUI = MachineRegistry.MachineUI({
+const crucibleUI = MachineUI({
     tabIcon: "icons.machines.crucible",
     recipesShower: "te:magma_crucible",
 

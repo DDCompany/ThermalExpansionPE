@@ -1,32 +1,38 @@
-const PulverizerRecipes = {
-    recipes: [],
+interface IPulverizerRecipe {
+    input: IItem,
+    result: IItem,
+    dop?: IChanceItem,
+    energy?: number
+}
 
-    add: function (obj) {
-        if (!obj)
+class PulverizerRecipes {
+    static recipes: IPulverizerRecipe[] = [];
+
+    static add(recipe) {
+        if (!recipe)
             return;
 
-        let input = obj.input;
+        let input = recipe.input;
         if (!input || !input.id)
             return;
 
         input.data = input.data || 0;
 
-        this.recipes.push(obj);
-    },
+        this.recipes.push(recipe);
+    }
 
-    getResult: function (id, data) {
+    static getResult(id: number, data: number): IPulverizerRecipe | null {
         if (!id)
             return null;
 
-        for (let i in this.recipes) {
-            let recipe = this.recipes[i];
+        for (let recipe of this.recipes) {
             let input = recipe.input;
             if (input.id === id && (input.data === -1 || input.data === data))
                 return recipe;
         }
         return null;
     }
-};
+}
 
 RecipesManager.addShower("te:pulverizer", RecipesManager.basicShower({
     drawResult: function (window, elements, container, recipe, recipeId, xPos, yPos) {

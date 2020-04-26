@@ -1,4 +1,4 @@
-MachineRegistry.define(BlockID.thermalStrongbox, MachineRegistry.TileEntity({
+MachineRegistry.define(BlockID.thermalStrongbox, MachineTileEntity({
     defaultValues: {
         item: {
             id: 0,
@@ -20,7 +20,7 @@ MachineRegistry.define(BlockID.thermalStrongbox, MachineRegistry.TileEntity({
                 this.container.clearSlot(i);
         }
 
-        MachineRegistry.installUpgradeFunc(tier, this);
+        return MachineRegistry.installUpgradeFunc(tier, this);
     },
 
     refreshModel: function () {
@@ -29,7 +29,7 @@ MachineRegistry.define(BlockID.thermalStrongbox, MachineRegistry.TileEntity({
     },
 
     getGuiScreen: function () {
-        return StrongBoxUI[this.data.tier];
+        return StrongboxUI[this.data.tier];
     }
 }, true));
 
@@ -38,7 +38,7 @@ Block.registerDropFunction(BlockID.thermalStrongbox, function () {
     return [];
 });
 Item.registerNameOverrideFunction(BlockID.thermalStrongbox, function (item, name) {
-    let extra = Player.getCarriedItem().extra;
+    let extra = Player.getCarriedItem().extra as ItemExtra;
 
     if (extra) {
         let tier = JSON.parse(extra.getString("data")).tier;

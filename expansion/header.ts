@@ -10,8 +10,8 @@
                                                        |_|
      by Dmitriy Medvedev(https://vk.com/id331953744)
  */
-importLib("energylib", "*");
-importLib("SoundAPI", "*");
+IMPORT("energylib");
+IMPORT("SoundAPI");
 IMPORT("BackpackAPI");
 
 const nativeDropFunc = ModAPI.requireGlobal("Level.dropItem");
@@ -27,13 +27,18 @@ const Bitmap = android.graphics.Bitmap;
 const File = java.io.File;
 const Paint = android.graphics.Paint;
 
+// @ts-ignore
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
 const POWER_SCALING = [100, 150, 200, 250, 300, 300];
 const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
 const FONT_WHITE_30 = {size: 30, color: Color.WHITE};
+// @ts-ignore
 const RF_WIRE_GROUP = ICRender.getGroup("rf-wire");
 
+// @ts-ignore
 const soundClick = new Sound("click.ogg");
 soundClick.setInPlayer();
 
-// const foundationAPI = ModAPI.requireAPI("ThermalFoundationAPI");
+const foundationAPI = ModAPI.requireAPI("ThermalFoundationAPI") as IThermalFoundationShared;
+// @ts-ignore
+const Tier = foundationAPI.Tier;

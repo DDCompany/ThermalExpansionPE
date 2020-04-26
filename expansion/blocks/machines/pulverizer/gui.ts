@@ -1,4 +1,4 @@
-const pulverizerUI = MachineRegistry.MachineUI({
+const pulverizerUI = MachineUI({
     tabIcon: "icons.machines.pulverizer",
     recipesShower: "te:pulverizer",
 

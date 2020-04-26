@@ -1,0 +1,56 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "skipLibCheck": true,
+    "outFile": "../expansion.js"
+  },
+  "include": [
+    // DECLARATIONS
+    "../declarations/global.d.ts",
+    "../foundation.d.ts",
+    //
+    // HEADER
+    "header.ts",
+    //
+    // API
+    "api/MachineRegistry.ts",
+    "api/MachineUI.ts",
+    "api/MachineTileEntity.ts",
+    "api/ModelHelper.js",
+    "api/ContainerHelper.ts",
+    "api/TextureBakery.ts",
+    "api/UIHelper.ts",
+    // #RECIPES
+    "api/recipes/RecipesManager.js",
+    "api/recipes/PulverizerRecipes.ts",
+    "api/recipes/MagmaCrucibleRecipes.ts",
+    //
+    // ITEMS
+    "items/satchel.js",
+    //
+    // BLOCKS
+    "blocks/parts.ts",
+    "blocks/strongbox/strongbox.ts",
+    "blocks/strongbox/gui.ts",
+    "blocks/strongbox/tile.ts",
+    // #MACHINES
+    // ##PULVERIZER
+    "blocks/machines/pulverizer/pulverizer.ts",
+    "blocks/machines/pulverizer/gui.ts",
+    "blocks/machines/pulverizer/tile.ts",
+    "blocks/machines/pulverizer/recipes.ts",
+    // ##FURNACE
+    "blocks/machines/furnace/furnace.ts",
+    "blocks/machines/furnace/gui.ts",
+    "blocks/machines/furnace/tile.ts",
+    // ##ENERGY CELL
+    "blocks/machines/energyCell/energyCell.ts",
+    "blocks/machines/energyCell/gui.ts",
+    "blocks/machines/energyCell/tile.ts",
+    // ##CRUCIBLE
+    "blocks/machines/crucible/crucible.ts",
+    "blocks/machines/crucible/gui.ts",
+    "blocks/machines/crucible/tile.ts",
+    "blocks/machines/crucible/recipes.ts"
+  ]
+}

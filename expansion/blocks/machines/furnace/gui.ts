@@ -1,4 +1,4 @@
-const furnaceUI = MachineRegistry.MachineUI({
+const furnaceUI = MachineUI({
     tabIcon: "icons.machines.furnace",
 
     drawing: [
@@ -7,7 +7,7 @@ const furnaceUI = MachineRegistry.MachineUI({
         {type: "bitmap", x: 550, y: 172, bitmap: "bars.machine.def_empty", scale: 4},
         {type: "bitmap", x: 466, y: 205, bitmap: "bars.machine.furnace.speed_empty", scale: 4.5},
         {type: "bitmap", x: 370, y: 100, bitmap: "bars.rf_empty", scale: 5}
-],
+    ],
 
     elements: {
         "progressScale": {type: "scale", x: 550, y: 172, direction: 0, bitmap: "bars.machine.def_full", scale: 4},

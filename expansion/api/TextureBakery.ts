@@ -1,16 +1,15 @@
-const TextureBakery = {
-    RES_CRUCIBLE: "/res/terrain-atlas/expansion/machines/crucible/thermal_machine_crucible_",
-    OVERLAY_CRUCIBLE: FileTools.ReadImage(__dir__ + "/overlays/crucible.png"),
+class TextureBakery {
+    static RES_CRUCIBLE: string = "/res/terrain-atlas/expansion/machines/crucible/thermal_machine_crucible_";
+    static OVERLAY_CRUCIBLE: android.graphics.Bitmap = FileTools.ReadImage(__dir__ + "/overlays/crucible.png");
 
-    bake: function () {
+    static bakeAll() {
         let crucibleRecipes = MagmaCrucibleRecipes.recipes;
-        for (let i in crucibleRecipes) {
-            let recipe = crucibleRecipes[i];
+        for (let recipe of crucibleRecipes) {
             this.bakeForMagmaCrucible(recipe.fluid);
         }
-    },
+    }
 
-    bakeForMagmaCrucible: function (liquid) {
+    static bakeForMagmaCrucible(liquid) {
         let file = new File(__dir__ + this.RES_CRUCIBLE + liquid + "_0.png");
 
         if (!file.exists()) {
@@ -25,8 +24,8 @@ const TextureBakery = {
             os.close();
         }
     }
-};
+}
 
 Callback.addCallback("PostLoaded", function () {
-    TextureBakery.bake();
+    TextureBakery.bakeAll();
 });

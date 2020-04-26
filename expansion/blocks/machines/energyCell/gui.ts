@@ -1,4 +1,4 @@
-const energyCellUI = MachineRegistry.MachineUI({
+const energyCellUI = MachineUI({
     tabIcon: "icons.machines.energy_cell",
     inventoryDisabled: true,
     configDisabled: true,

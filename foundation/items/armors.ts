@@ -1,0 +1,12 @@
+MaterialRegistry.addArmorSet("copper", [1, 3, 3, 1], 10, "ingotCopper");
+MaterialRegistry.addArmorSet("tin", [1, 3, 4, 1], 8, "ingotTin");
+MaterialRegistry.addArmorSet("silver", [2, 4, 4, 1], 8, "ingotSilver");
+MaterialRegistry.addArmorSet("lead", [2, 4, 5, 3], 12, "ingotLead");
+MaterialRegistry.addArmorSet("aluminum", [1, 3, 4, 2], 12, "ingotAluminum");
+MaterialRegistry.addArmorSet("nickel", [2, 5, 5, 2], 15, "ingotNickel");
+MaterialRegistry.addArmorSet("platinum", [3, 6, 8, 3], 35, "ingotPlatinum");
+MaterialRegistry.addArmorSet("steel", [2, 5, 7, 2], 22, "ingotSteel");
+MaterialRegistry.addArmorSet("electrum", [2, 4, 4, 2], 8, "ingotElectrum");
+MaterialRegistry.addArmorSet("invar", [2, 5, 7, 2], 21, "ingotInvar");
+MaterialRegistry.addArmorSet("bronze", [2, 6, 6, 2], 18, "ingotBronze");
+MaterialRegistry.addArmorSet("constantan", [2, 4, 4, 2], 13, "ingotConstantan");

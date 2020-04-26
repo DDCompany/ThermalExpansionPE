@@ -1,0 +1,15 @@
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "declaration": true,
+    "outFile": "../foundation.js"
+  },
+  "include": [
+    "../declarations/global.d.ts",
+    "header.ts",
+    "api/**/*",
+    "items/**/*",
+    "blocks/**/*",
+    "shared.ts"
+  ]
+}

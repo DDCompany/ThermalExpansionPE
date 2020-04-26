@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "module": "None",
+    "target": "ES5",
+    "sourceMap": false,
+    "allowJs": true,
+    "lib": [
+      "ES5"
+    ]
+  }
+}

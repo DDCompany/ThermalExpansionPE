@@ -1,4 +1,10 @@
-MachineRegistry.define(BlockID.thermalEnergyCell, MachineRegistry.TileEntity({
+interface ICellTile extends IMachineTile {
+    transferIn: number,
+    transferOut: number,
+    heartIndex: number
+}
+
+MachineRegistry.define(BlockID.thermalEnergyCell, MachineTileEntity<ICellTile>({
     defaultValues: {
         transferIn: 1000,
         transferOut: 1000,
@@ -16,7 +22,7 @@ MachineRegistry.define(BlockID.thermalEnergyCell, MachineRegistry.TileEntity({
             let content = window.getContent();
             content.elements["textLeft"].text = this.data.transferIn + "";
             content.elements["textRight"].text = this.data.transferOut + "";
-            content.elements["textEnergy"].text = parseInt(this.data.energy) + "/" + this.getEnergyStorage() + "RF (" + parseInt(this.data.energy / this.getEnergyStorage() * 100) + "%)";
+            content.elements["textEnergy"].text = parseInt(this.data.energy) + "/" + this.getEnergyStorage() + "RF (" + Math.floor(this.data.energy / this.getEnergyStorage() * 100) + "%)";
             content.elements["textEnergy"].x = (1000 - UIHelper.getFontWidth(this.container.getElement("textEnergy"))) / 2;
 
             if (this.data.transferIn >= 10000)

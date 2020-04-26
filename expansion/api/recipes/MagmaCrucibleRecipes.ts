@@ -1,22 +1,32 @@
-const MagmaCrucibleRecipes = {
-    recipes: [],
+interface IMagmaCrucibleRecipe {
+    id: number,
+    data: number,
+    fluid: string,
+    fluidAmount: number,
+    /**
+     * @default 1000
+     */
+    energy?: number
+}
 
-    add: function (recipe) {
+class MagmaCrucibleRecipes {
+    static recipes: IMagmaCrucibleRecipe[] = [];
+
+    static add(recipe: IMagmaCrucibleRecipe) {
         this.recipes.push(recipe);
-    },
+    }
 
-    get: function (id, data) {
+    static get(id: number, data: number): IMagmaCrucibleRecipe | null {
         if (!id)
             return null;
 
-        for (let i in this.recipes) {
-            let recipe = this.recipes[i];
+        for (let recipe of this.recipes) {
             if (recipe.id === id && (recipe.data === -1 || recipe.data === data))
                 return recipe;
         }
         return null;
     }
-};
+}
 
 RecipesManager.addShower("te:magma_crucible", RecipesManager.basicShower({
     drawResult: function (window, elements, container, recipe, recipeId, xPos, yPos) {

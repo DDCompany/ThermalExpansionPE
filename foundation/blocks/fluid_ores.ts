@@ -31,13 +31,13 @@ Block.setDestroyTime(BlockID.oreEndStoneResonant, 5);
 Block.setDestroyLevel("oreEndStoneResonant", 1);
 
 Block.registerDropFunction("sandOil", function () {
-    let extra = Player.getCarriedItem().extra;
+    let extra = Player.getCarriedItem().extra as ItemExtra;
     return [[ItemID.crystalCrudeOil, 1 + randomInt(0, (extra ? extra.getEnchantLevel(18) : 0) + 1), 0]];
 });
 
 Block.registerDropFunction("oreDestabilizedRedstone", function (coords, id, data, level) {
     if (level > 0) {
-        let extra = Player.getCarriedItem().extra;
+        let extra = Player.getCarriedItem().extra as ItemExtra;
         return [[ItemID.crystalRedstone, 1 + randomInt(0, (extra ? extra.getEnchantLevel(18) : 0) + 1), 0]];
     }
 
@@ -46,7 +46,7 @@ Block.registerDropFunction("oreDestabilizedRedstone", function (coords, id, data
 
 Block.registerDropFunction("oreNetherrackEnergized", function (coords, id, data, level) {
     if (level > 0) {
-        let extra = Player.getCarriedItem().extra;
+        let extra = Player.getCarriedItem().extra as ItemExtra;
         return [[ItemID.crystalGlowstone, 1 + randomInt(0, (extra ? extra.getEnchantLevel(18) : 0) + 1), 0]];
     }
 
@@ -55,7 +55,7 @@ Block.registerDropFunction("oreNetherrackEnergized", function (coords, id, data,
 
 Block.registerDropFunction("oreEndStoneResonant", function (coords, id, data, level) {
     if (level > 0) {
-        let extra = Player.getCarriedItem().extra;
+        let extra = Player.getCarriedItem().extra as ItemExtra;
         return [[ItemID.crystalEnder, 1 + randomInt(0, (extra ? extra.getEnchantLevel(18) : 0) + 1), 0]];
     }
 

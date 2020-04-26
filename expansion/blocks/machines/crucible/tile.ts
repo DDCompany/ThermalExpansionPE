@@ -1,4 +1,4 @@
-MachineRegistry.define(BlockID.thermalMachineCrucible, MachineRegistry.TileEntity({
+MachineRegistry.define(BlockID.thermalMachineCrucible, MachineTileEntity<IMachineBaseTile>({
     defaultValues: {
         progress: 0,
         progressMax: 0,

@@ -1,4 +1,4 @@
-MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEntity({
+MachineRegistry.define(BlockID.thermalMachineFurnace, MachineTileEntity<IMachineBaseTile>({
     defaultValues: {
         progress: 0,
         progressMax: 0,
@@ -22,18 +22,8 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
             }
 
             if (this.data.progress >= this.data.progressMax) {
-                let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
-                let slotResultDop = this.container.getSlot("slotResultDop");
-                if (ContainerHelper.canPutInSlot(recipe.dop, slotResultDop) &&
-                    ContainerHelper.putInSlot(recipe.result, this.container.getSlot("slotResult"))) {
-
-                    let dop = recipe.dop;
-                    if (dop && (!dop.chance || Math.random() < dop.chance)) {
-                        slotResultDop.id = dop.id;
-                        slotResultDop.data = dop.data || 0;
-                        slotResultDop.count += dop.count || 1;
-                    }
-
+                let result = Recipes.getFurnaceRecipeResult(slotSource.id, 0, "iron");
+                if (ContainerHelper.putInSlot(result, this.container.getSlot("slotResult"))) {
                     slotSource.count -= 1;
                     this.data.progress = 0;
                     this.data.progressMax = 0;
@@ -50,14 +40,10 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
 
                 this.data.progress += power;
             }
-        } else if (slotSource.id) {
-            let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
-
-            if (recipe) {
-                this.data.progress = 1;
-                this.data.progressMax = recipe.energy || 2000;
-                this.refreshModel();
-            }
+        } else if (slotSource.id && Recipes.getFurnaceRecipeResult(slotSource.id, 0, "iron")) {
+            this.data.progress = 1;
+            this.data.progressMax = 2000;
+            this.refreshModel();
         }
 
         MachineRegistry.updateEnergyBar(this, isCreative);
@@ -68,16 +54,16 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineRegistry.TileEnt
     refreshModel: function () {
         let block = World.getBlock(this.x, this.y, this.z);
         ModelHelper.mapMachine(this.x, this.y, this.z, block.id, block.data, this.data.tier,
-            [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_pulverizer" + (this.data.progressMax > 0 ? "_active" : ""), 0], ["thermal_machine", 2], ["thermal_machine", 2]]);
+            [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_furnace" + (this.data.progressMax > 0 ? "_active" : ""), 0], ["thermal_machine", 2], ["thermal_machine", 2]]);
     },
 
     getGuiScreen: function () {
-        return pulverizerUI;
+        return furnaceUI;
     }
 }));
 
-Block.registerPlaceFunction(BlockID.thermalMachinePulverizer, MachineRegistry.placeFunc(true));
-Block.registerDropFunction(BlockID.thermalMachinePulverizer, function () {
+Block.registerPlaceFunction(BlockID.thermalMachineFurnace, MachineRegistry.placeFunc(true));
+Block.registerDropFunction(BlockID.thermalMachineFurnace, function () {
     return [];
 });
-Item.registerNameOverrideFunction(BlockID.thermalMachinePulverizer, MachineRegistry.nameOverrideFunc);
+Item.registerNameOverrideFunction(BlockID.thermalMachineFurnace, MachineRegistry.nameOverrideFunc);

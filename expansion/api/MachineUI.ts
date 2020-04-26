@@ -1,11 +1,24 @@
-MachineRegistry.MachineUI = function (obj) {
-    let ui = UI.TabbedWindow({
-        location: obj.location || {
+import WindowLocationParams = UI.WindowLocationParams;
+
+interface IMachineUI {
+    tabIcon?: string
+    augmentsDisabled?: boolean
+    configDisabled?: boolean
+    redstoneDisabled?: boolean
+    inventoryDisabled?: boolean
+    recipesShower?: any
+    location?: WindowLocationParams
+
+    [key: string]: any;
+}
+
+function MachineUI(description: IMachineUI): UI.TabbedWindow {
+    let ui = new UI.TabbedWindow({
+        location: description.location || {
             x: 0,
             y: 0
         }
     });
-
 
     let tabIndex = 7;
 
@@ -16,11 +29,11 @@ MachineRegistry.MachineUI = function (obj) {
             y: -30,
             width: 60,
             height: 60,
-            bitmap: obj.tabIcon || "icons.nope"
+            bitmap: description.tabIcon || "icons.nope"
         }
-    }, obj);
+    }, description);
 
-    let recipesShower = obj.recipesShower;
+    let recipesShower = description.recipesShower;
     if (recipesShower) {
         ui.setTab(1, {
             icon: {
@@ -98,7 +111,7 @@ MachineRegistry.MachineUI = function (obj) {
         });
     }
 
-    if (!obj.augmentsDisabled) {
+    if (!description.augmentsDisabled) {
         ui.setTab(tabIndex, {
             icon: {
                 type: "image",
@@ -112,7 +125,7 @@ MachineRegistry.MachineUI = function (obj) {
         tabIndex++;
     }
 
-    if (!obj.configDisabled) {
+    if (!description.configDisabled) {
         ui.setTab(tabIndex, {
             icon: {
                 type: "image",
@@ -126,7 +139,7 @@ MachineRegistry.MachineUI = function (obj) {
         tabIndex++;
     }
 
-    if (!obj.redstoneDisabled) {
+    if (!description.redstoneDisabled) {
         ui.setTab(tabIndex, {
             icon: {
                 type: "image",
@@ -139,7 +152,7 @@ MachineRegistry.MachineUI = function (obj) {
         }, {});
     }
 
-    if (!obj.inventoryDisabled) {
+    if (!description.inventoryDisabled) {
         let inventory = new UI.Window({
             location: {
                 x: 120,
@@ -187,4 +200,4 @@ MachineRegistry.MachineUI = function (obj) {
     }
 
     return ui;
-};
+}
