@@ -10,7 +10,7 @@
                                                        |_|
      by Dmitriy Medvedev(https://vk.com/id331953744)
  */
-IMPORT("energylib");
+IMPORT("EnergyNet");
 IMPORT("SoundAPI");
 IMPORT("BackpackAPI");
 

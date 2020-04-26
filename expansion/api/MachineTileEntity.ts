@@ -46,10 +46,15 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
     if (!isNoPowerMachine) {
         prototype.defaultValues.energy = 0;
 
-        if (!prototype.energyTick) {
-            prototype.energyTick = function (type, src) {
-                if (this.data.tier < 5)
-                    this.data.energy += src.get(Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy));
+        if (!prototype.energyReceive) {
+            prototype.energyReceive = function (type, amount) {
+                if (this.data.tier < 5) {
+                    const add = Math.min(this.data.basePower * 4, this.getEnergyStorage() - this.data.energy, amount);
+                    this.data.energy += add;
+                    return add;
+                }
+
+                return 0;
             };
         }
 
