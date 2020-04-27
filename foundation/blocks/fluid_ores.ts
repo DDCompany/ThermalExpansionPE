@@ -10,24 +10,24 @@ IDRegistry.genBlockID("oreDestabilizedRedstone");
 Block.createBlock("oreDestabilizedRedstone", [
     {name: "Destabilized Redstone Ore", texture: [["ore_fluid_redstone", 0]], inCreative: true}
 ], "opaque");
-ToolAPI.registerBlockMaterial(BlockID.oreDestabilizedRedstone, "stone", 1);
-Block.setDestroyTime(BlockID.oreDestabilizedRedstone, 5);
+ToolAPI.registerBlockMaterial(BlockID.oreDestabilizedRedstone, "stone", 1, true);
+Block.setDestroyTime(BlockID.oreDestabilizedRedstone, 2.5);
 Block.setDestroyLevel("oreDestabilizedRedstone", 1);
 
 IDRegistry.genBlockID("oreNetherrackEnergized");
 Block.createBlock("oreNetherrackEnergized", [
     {name: "Energized Netherrack", texture: [["ore_fluid_glowstone", 0]], inCreative: true}
 ], "opaque");
-ToolAPI.registerBlockMaterial(BlockID.oreNetherrackEnergized, "stone", 1);
-Block.setDestroyTime(BlockID.oreNetherrackEnergized, 5);
+ToolAPI.registerBlockMaterial(BlockID.oreNetherrackEnergized, "stone", 1, true);
+Block.setDestroyTime(BlockID.oreNetherrackEnergized, 2.5);
 Block.setDestroyLevel("oreNetherrackEnergized", 1);
 
 IDRegistry.genBlockID("oreEndStoneResonant");
 Block.createBlock("oreEndStoneResonant", [
     {name: "Resonant End Stone", texture: [["ore_fluid_ender", 0]], inCreative: true}
 ], "opaque");
-ToolAPI.registerBlockMaterial(BlockID.oreEndStoneResonant, "stone", 1);
-Block.setDestroyTime(BlockID.oreEndStoneResonant, 5);
+ToolAPI.registerBlockMaterial(BlockID.oreEndStoneResonant, "stone", 1, true);
+Block.setDestroyTime(BlockID.oreEndStoneResonant, 2.5);
 Block.setDestroyLevel("oreEndStoneResonant", 1);
 
 Block.registerDropFunction("sandOil", function () {
