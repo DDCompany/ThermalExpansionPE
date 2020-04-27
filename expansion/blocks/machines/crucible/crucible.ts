@@ -2,7 +2,7 @@ IDRegistry.genBlockID("thermalMachineCrucible");
 Block.createBlockWithRotation("thermalMachineCrucible", [
     {
         name: "Magma Crucible",
-        texture: [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_crucible", 0], ["thermal_machine", 2]],
+        texture: [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_crucible", 0], ["thermal_machine", 2], ["thermal_machine", 2]],
         inCreative: true
     }
 ]);
