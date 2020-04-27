@@ -8,7 +8,9 @@
     |_|  |_| |_|\___|_|  |_| |_| |_|\__,_|_|______/_/\_\ .__/ \__,_|_| |_|___/_|\___/|_| |_|_|    |______|
                                                        | |
                                                        |_|
-     by Dmitriy Medvedev(https://vk.com/id331953744)
+
+     All ideas and textures belong to the original author - https://teamcofh.com/
+     Port by DDCompany (https://vk.com/id331953744)
  */
 IMPORT("EnergyNet");
 IMPORT("SoundAPI");
