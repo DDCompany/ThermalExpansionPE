@@ -2,7 +2,7 @@ IDRegistry.genBlockID("thermalStrongbox");
 Block.createBlockWithRotation("thermalStrongbox", [
     {
         name: "Strongbox",
-        texture: [["strongbox_top", 0], ["strongbox_top", 0], ["strongbox_side", 0], ["strongbox_side", 0], ["strongbox_side", 0], ["strongbox_side", 0]],
+        texture: [["strongbox_top", 0], ["strongbox_top", 0], ["strongbox_side", 0], ["strongbox_side", 6], ["strongbox_side", 0], ["strongbox_side", 0]],
         inCreative: true
     }
 ]);
