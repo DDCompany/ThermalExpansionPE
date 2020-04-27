@@ -2,7 +2,7 @@ IDRegistry.genBlockID("thermalMachinePulverizer");
 Block.createBlockWithRotation("thermalMachinePulverizer", [
     {
         name: "Pulverizer",
-        texture: [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_pulverizer", 0], ["thermal_machine", 2]],
+        texture: [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_pulverizer", 0], ["thermal_machine", 2], ["thermal_machine", 2]],
         inCreative: true
     }
 ]);
