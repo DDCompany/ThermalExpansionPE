@@ -7,7 +7,11 @@ Block.createBlockWithRotation("thermalStrongbox", [
     }
 ]);
 
-Block.setBlockShape(BlockID.thermalStrongbox, {x: 1 / 16, y: 0, z: 1 / 16}, {x: 15 / 16, y: 15 / 16, z: 15 / 16});
+Block.setBlockShape(BlockID.thermalStrongbox, {x: 1 / 16 + .0001, y: 0, z: 1 / 16 + .0001}, {
+    x: 15 / 16 - .001,
+    y: 15 / 16 - .0001,
+    z: 15 / 16 - .0001
+});
 
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: BlockID.thermalStrongbox, count: 1, data: 0}, [
