@@ -8,8 +8,7 @@ MachineRegistry.define(BlockID.thermalEnergyCell, MachineTileEntity<ICellTile>({
     defaultValues: {
         transferIn: 1000,
         transferOut: 1000,
-        heartIndex: 0,
-        // refreshUIFlag: false
+        heartIndex: 0
     },
     energyByTier: [2000000, 8000000, 18000000, 32000000, 50000000, 100],
     transferByTier: [1000, 4000, 9000, 16000, 25000, 25000],
@@ -40,7 +39,7 @@ MachineRegistry.define(BlockID.thermalEnergyCell, MachineTileEntity<ICellTile>({
                 content.elements["textRight"].x = 572;
         }
 
-        let index = isCreative ? 9 : this.data.energy / this.getEnergyStorage() * 8;
+        let index = isCreative ? 9 : Math.round(this.data.energy / this.getEnergyStorage() * 8);
         if (this.data.heartIndex !== index) {
             this.data.heartIndex = index;
             this.refreshModel();
@@ -54,12 +53,28 @@ MachineRegistry.define(BlockID.thermalEnergyCell, MachineTileEntity<ICellTile>({
 
     energyTick: function (type, src) {
         let tier = this.data.tier;
-        let transfer = this.transferByTier[tier];
+        let transfer = this.data.transferOut;
 
         if (tier < 5) {
-            this.data.energy += src.storage(Math.min(transfer, this.getEnergyStorage() - this.data.energy),
-                Math.min(transfer, this.data.energy));
-        } else this.data.energy += src.storage(transfer, transfer);
+            let out = Math.min(transfer, this.data.energy);
+            if (out > 0) {
+                this.data.energy += src.add(out) - out;
+            }
+        } else src.add(transfer);
+    },
+
+    energyReceive: function (type, amount) {
+        const add = Math.min(this.data.transferIn, this.getEnergyStorage() - this.data.energy, amount);
+        this.data.energy += add;
+        return add;
+    },
+
+    canReceiveEnergy: function () {
+        return true;
+    },
+
+    isEnergySource: function () {
+        return true;
     },
 
     installUpgrade: function (tier) {
