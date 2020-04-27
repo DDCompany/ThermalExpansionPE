@@ -61,3 +61,22 @@ interface IChanceItem extends IItem {
      */
     chance?: number
 }
+
+function installUpgradeFunc(id: number): boolean {
+    let tier = tierByItem[id];
+
+    if (tier > 0) {
+        if (!this.installUpgrade
+            || tier == Tier.CREATIVE && this.data.tier == Tier.CREATIVE
+            || tier < Tier.CREATIVE && this.data.tier !== tier - 1) {
+            return false;
+        }
+
+        if (this.installUpgrade(tier)) {
+            Player.decreaseCarriedItem(1);
+            return true;
+        }
+    }
+
+    return false;
+}

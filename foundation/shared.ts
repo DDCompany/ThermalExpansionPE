@@ -5,7 +5,8 @@ interface IThermalFoundationShared {
     ThermalConfig: typeof ThermalConfig;
     randomInt: typeof randomInt;
     generateSandOre: typeof generateSandOre;
-    requireGlobal: (command: string) => any
+    installUpgradeFunc: typeof installUpgradeFunc;
+    requireGlobal: (command: string) => any;
 }
 
 ModAPI.registerAPI("ThermalFoundationAPI", {
@@ -16,6 +17,7 @@ ModAPI.registerAPI("ThermalFoundationAPI", {
     randomInt: randomInt,
     generateOre: generateOre,
     generateSandOre: generateSandOre,
+    installUpgradeFunc: installUpgradeFunc,
 
     requireGlobal: function (command) {
         return eval(command);

@@ -19,16 +19,3 @@ tierByItem[ItemID.upgradeKitReinforced] = Tier.REINFORCED;
 tierByItem[ItemID.upgradeKitSignalum] = Tier.SIGNALUM;
 tierByItem[ItemID.upgradeKitResonant] = Tier.RESONANT;
 tierByItem[ItemID.upgradeKitCreative] = Tier.CREATIVE;
-
-Callback.addCallback("ItemUse", function (coords, item) {
-    let tier = tierByItem[item.id];
-
-    if (tier > 0) {
-        let tile = World.getTileEntity(coords.x, coords.y, coords.z) as any;
-        if (!tile || !tile.installUpgrade || (tier < 5 && tile.data.tier !== tier - 1))
-            return;
-
-        if (tile.installUpgrade(tier))
-            Player.decreaseCarriedItem(1);
-    }
-});

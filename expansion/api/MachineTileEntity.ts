@@ -31,6 +31,10 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
     prototype.defaultValues = prototype.defaultValues ?? {};
     prototype.defaultValues.tier = 0;
 
+    if (!prototype.click) {
+        prototype.click = foundationAPI.installUpgradeFunc;
+    }
+
     if (!prototype.installUpgrade) {
         if (isNoPowerMachine) {
             prototype.installUpgrade = function (tier) {
