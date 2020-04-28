@@ -48,7 +48,7 @@ enum Tier {
 
 interface IItem {
     id: number,
-    count: number,
+    count?: number,
     /**
      * @default 0
      */

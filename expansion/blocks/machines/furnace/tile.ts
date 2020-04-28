@@ -5,13 +5,8 @@ MachineRegistry.define(BlockID.thermalMachineFurnace, MachineTileEntity<IMachine
         basePower: 20
     },
 
-    click: function () {
-        this.data._refreshUI = true;
-    },
-
     tick: function () {
         let slotSource = this.container.getSlot("slotSource");
-        let isCreative = this.data.tier === 5;
         let power = 0;
 
         if (this.data.progressMax) {
@@ -31,13 +26,8 @@ MachineRegistry.define(BlockID.thermalMachineFurnace, MachineTileEntity<IMachine
                     this.refreshModel();
                 }
             } else {
-                if (isCreative) {
-                    power += this.data.basePower;
-                } else {
-                    power = MachineRegistry.calcEnergy(this.data.basePower, this.data.energy);
-                    this.data.energy -= power;
-                }
-
+                power = MachineRegistry.calcEnergy(this.data.basePower, this.data.energy);
+                this.data.energy -= power;
                 this.data.progress += power;
             }
         } else if (slotSource.id && Recipes.getFurnaceRecipeResult(slotSource.id, 0, "iron")) {
@@ -46,7 +36,7 @@ MachineRegistry.define(BlockID.thermalMachineFurnace, MachineTileEntity<IMachine
             this.refreshModel();
         }
 
-        MachineRegistry.updateEnergyBar(this, isCreative);
+        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
         this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
         this.container.setScale("speedScale", power / this.data.basePower);
     },

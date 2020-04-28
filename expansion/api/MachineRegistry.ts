@@ -8,18 +8,6 @@ class MachineRegistry {
         EnergyTileRegistry.addEnergyTypeForId(id, RF)
     }
 
-    static updateEnergyBar(tile: any, isCreative: boolean) {
-        if (tile.data._refreshUI) {
-            let content = tile.container.getGuiScreen();
-            if (content && (content = content.getWindowForTab(6).getContent())) {
-                content.elements["energyScale"].bitmap = isCreative ? "bars.rf_creative" : "bars.rf_full";
-                tile.data._refreshUI = false;
-            }
-        }
-
-        tile.container.setScale("energyScale", isCreative ? 1 : tile.data.energy / tile.getEnergyStorage());
-    }
-
     static calcEnergy(basePower: number, energy: number) {
         let maxPowerLevel = 9 * basePower * 100;
 
@@ -42,7 +30,7 @@ class MachineRegistry {
     }
 
     static installUpgradeForPoweredFunc(tier: Tier, tile: any): boolean {
-        if (MachineRegistry.installUpgradeFunc(tier, tile)) {
+        if (tier < Tier.CREATIVE && MachineRegistry.installUpgradeFunc(tier, tile)) {
             tile.data.basePower = 20 * POWER_SCALING[tier] / 100;
             return true;
         }
