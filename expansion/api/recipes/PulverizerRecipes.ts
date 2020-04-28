@@ -60,17 +60,17 @@ RecipesManager.addShower("te:pulverizer", RecipesManager.basicShower({
             visual: true
         };
 
-        let special = recipe.dop || {id: 0, data: 0, count: 1, chance: 0};
-        if (special.chance) {
+        let second = recipe.second || {id: 0, data: 0, count: 1, chance: 0};
+        if (second.chance) {
             elements["textChance" + recipeId] = {
                 type: "text",
-                text: special.chance * 100 + "%",
+                text: second.chance * 100 + "%",
                 x: xPos + 354,
                 y: yPos + 60,
                 font: FONT_WHITE_30
             };
 
-            container.setSlot("_slotSpecial" + recipeId, special.id, special.count || 1, special.data || 0);
+            container.setSlot("_slotSpecial" + recipeId, second.id, second.count || 1, second.data || 0);
         }
 
         container.setSlot("_slotIn" + recipeId, recipe.input.id, recipe.input.count || 1, recipe.input.data || 0);
