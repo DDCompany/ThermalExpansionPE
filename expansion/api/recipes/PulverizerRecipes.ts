@@ -1,14 +1,14 @@
 interface IPulverizerRecipe {
     input: IItem,
     result: IItem,
-    dop?: IChanceItem,
+    second?: IChanceItem,
     energy?: number
 }
 
 class PulverizerRecipes {
     static recipes: IPulverizerRecipe[] = [];
 
-    static add(recipe) {
+    static add(recipe: IPulverizerRecipe) {
         if (!recipe)
             return;
 

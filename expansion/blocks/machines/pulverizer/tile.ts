@@ -23,15 +23,15 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineTileEntity<IMach
 
             if (this.data.progress >= this.data.progressMax) {
                 let recipe = PulverizerRecipes.getResult(slotSource.id, slotSource.data);
-                let slotResultDop = this.container.getSlot("slotResultDop");
-                if (ContainerHelper.canPutInSlot(recipe.dop, slotResultDop) &&
+                let slotSecond = this.container.getSlot("slotSecond");
+                if (ContainerHelper.canPutInSlot(recipe.second, slotSecond) &&
                     ContainerHelper.putInSlot(recipe.result, this.container.getSlot("slotResult"))) {
 
-                    let dop = recipe.dop;
-                    if (dop && (!dop.chance || Math.random() < dop.chance)) {
-                        slotResultDop.id = dop.id;
-                        slotResultDop.data = dop.data || 0;
-                        slotResultDop.count += dop.count || 1;
+                    let second = recipe.second;
+                    if (second && (!second.chance || Math.random() < second.chance)) {
+                        slotSecond.id = second.id;
+                        slotSecond.data = second.data || 0;
+                        slotSecond.count += second.count || 1;
                     }
 
                     slotSource.count -= 1;
