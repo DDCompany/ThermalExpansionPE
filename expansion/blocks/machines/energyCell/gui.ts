@@ -40,7 +40,7 @@ const energyCellUI = MachineUI({
                 }
             }
         },
-        "textLeft": {type: "text", text: "25000", x: 472 - 130, y: 100 + 42 * 5 - 16 * 4 - 40, font: FONT_WHITE_30},
+        "textLeft": {type: "text", text: "0", x: 396, y: 193, font: FONT_WHITE_30_CENTERED},
 
         "btnPlusRight": {
             type: "button",
@@ -71,14 +71,8 @@ const energyCellUI = MachineUI({
                 }
             }
         },
-        "textRight": {
-            type: "text",
-            text: "25000",
-            x: 472 + 20 + 14 * 5,
-            y: 100 + 42 * 5 - 16 * 4 - 40,
-            font: FONT_WHITE_30
-        },
+        "textRight": {type: "text", text: "0", x: 616, y: 193, font: FONT_WHITE_30_CENTERED},
 
-        "textEnergy": {type: "text", text: "0/0 RF", x: 0, y: 320, font: FONT_WHITE_30}
+        "textEnergy": {type: "text", text: "0/0 RF (0%)", x: 500, y: 320, font: FONT_WHITE_30_CENTERED}
     }
 });

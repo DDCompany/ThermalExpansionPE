@@ -14,29 +14,14 @@ MachineRegistry.define(BlockID.thermalEnergyCell, MachineTileEntity<ICellTile>({
     transferByTier: [1000, 4000, 9000, 16000, 25000, 25000],
 
     tick: function () {
-        let window = energyCellUI.getWindowForTab(6);
         let isCreative = this.data.tier >= 5;
 
         if (this.container.isOpened()) {
+            let window = energyCellUI.getWindowForTab(6);
             let content = window.getContent();
             content.elements["textLeft"].text = this.data.transferIn + "";
             content.elements["textRight"].text = this.data.transferOut + "";
-            content.elements["textEnergy"].text = parseInt(this.data.energy) + "/" + this.getEnergyStorage() + "RF (" + Math.floor(this.data.energy / this.getEnergyStorage() * 100) + "%)";
-            content.elements["textEnergy"].x = (1000 - UIHelper.getFontWidth(this.container.getElement("textEnergy"))) / 2;
-
-            if (this.data.transferIn >= 10000)
-                content.elements["textLeft"].x = 342;
-            else if (this.data.transferIn < 1000)
-                content.elements["textLeft"].x = 367;
-            else
-                content.elements["textLeft"].x = 352;
-
-            if (this.data.transferOut >= 10000)
-                content.elements["textRight"].x = 562;
-            else if (this.data.transferOut < 1000)
-                content.elements["textRight"].x = 587;
-            else
-                content.elements["textRight"].x = 572;
+            content.elements["textEnergy"].text = `${parseInt(this.data.energy)}/${this.getEnergyStorage()}RF (${Math.floor(this.data.energy / this.getEnergyStorage() * 100)}%)`;
         }
 
         let index = isCreative ? 9 : Math.round(this.data.energy / this.getEnergyStorage() * 8);

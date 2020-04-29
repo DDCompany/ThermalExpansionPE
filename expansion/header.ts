@@ -30,6 +30,7 @@ const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
 const POWER_SCALING = [100, 150, 200, 250, 300, 300];
 const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
 const FONT_WHITE_30 = {size: 30, color: Color.WHITE};
+const FONT_WHITE_30_CENTERED = {size: 30, color: Color.WHITE, align: 1};
 // @ts-ignore
 const RF_WIRE_GROUP = ICRender.getGroup("rf-wire");
 
