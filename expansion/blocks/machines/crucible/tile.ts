@@ -67,7 +67,6 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, MachineTileEntity<IMachin
     }
 }));
 
-Block.registerPlaceFunction(BlockID.thermalMachineCrucible, MachineRegistry.placeFunc(true));
 Block.registerDropFunction(BlockID.thermalMachineCrucible, function () {
     return [];
 });

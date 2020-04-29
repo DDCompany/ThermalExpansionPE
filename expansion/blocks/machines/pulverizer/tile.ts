@@ -66,7 +66,6 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, MachineTileEntity<IMach
     }
 }));
 
-Block.registerPlaceFunction(BlockID.thermalMachinePulverizer, MachineRegistry.placeFunc(true));
 Block.registerDropFunction(BlockID.thermalMachinePulverizer, function () {
     return [];
 });

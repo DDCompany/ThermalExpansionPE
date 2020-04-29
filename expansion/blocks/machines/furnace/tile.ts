@@ -52,7 +52,6 @@ MachineRegistry.define(BlockID.thermalMachineFurnace, MachineTileEntity<IMachine
     }
 }));
 
-Block.registerPlaceFunction(BlockID.thermalMachineFurnace, MachineRegistry.placeFunc(true));
 Block.registerDropFunction(BlockID.thermalMachineFurnace, function () {
     return [];
 });

@@ -69,6 +69,16 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
         }
     }
 
+    if (!prototype.onMachinePlaced) {
+        prototype.onMachinePlaced = function (item: ItemInstance) {
+            let extra = item.extra as ItemExtra;
+            if (extra) {
+                this.data = JSON.parse(extra.getString("data"));
+                this.container.slots = JSON.parse(extra.getString("slots"));
+            }
+        }
+    }
+
     if (!prototype.refreshModel) {
         prototype.refreshModel = function () {
         };

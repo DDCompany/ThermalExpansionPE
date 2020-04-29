@@ -33,7 +33,6 @@ MachineRegistry.define(BlockID.thermalStrongbox, MachineTileEntity({
     }
 }, true));
 
-Block.registerPlaceFunction(BlockID.thermalStrongbox, MachineRegistry.placeFunc(true));
 Block.registerDropFunction(BlockID.thermalStrongbox, function () {
     return [];
 });

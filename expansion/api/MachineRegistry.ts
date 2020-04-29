@@ -1,11 +1,13 @@
 class MachineRegistry {
+    static machines: { [key: number]: boolean } = {};
     static invContainer: UI.Container = new UI.Container();
 
     static define(id: number, tile: any) {
         RF_WIRE_GROUP.add(id, -1);
         ToolAPI.registerBlockMaterial(id, "stone");
         TileEntity.registerPrototype(id, tile);
-        EnergyTileRegistry.addEnergyTypeForId(id, RF)
+        EnergyTileRegistry.addEnergyTypeForId(id, RF);
+        this.machines[id] = true;
     }
 
     static calcEnergy(basePower: number, energy: number) {
@@ -38,39 +40,8 @@ class MachineRegistry {
         return false;
     }
 
-    static placeFunc(rotatable: boolean): (coords: Callback.ItemUseCoordinates, item: ItemInstance) => void {
-        return function (coords, item) {
-            Game.prevent();
-            let x = coords.relative.x;
-            let y = coords.relative.y;
-            let z = coords.relative.z;
-            if (GenerationUtils.isTransparentBlock(World.getBlockID(x, y, z))) {
-                let data = item.data;
-
-                if (rotatable) {
-                    //Скопировано из CoreEngine
-                    let c;
-                    for (c = Math.floor((getYaw(Player.get()) - 45) / 90); 0 > c;)
-                        c += 4;
-                    for (; 3 < c;)
-                        c -= 4;
-                    c = {
-                        0: 2,
-                        1: 0,
-                        2: 3,
-                        3: 1
-                    }[c];
-                    data = 4 * Math.floor(item.data / 4) + c;
-                }
-
-                World.setBlock(x, y, z, item.id, data);
-                let tile = World.addTileEntity(x, y, z) as any;
-                if (item.extra) {
-                    tile.data = JSON.parse((item.extra as ItemExtra).getString("data"));
-                    tile.container.slots = JSON.parse((item.extra as ItemExtra).getString("slots"));
-                }
-            }
-        };
+    static isMachine(id: number): boolean {
+        return this.machines[id] === true;
     }
 
     static nameOverrideFunc(item: ItemInstance, name: string): string {
@@ -82,3 +53,10 @@ class MachineRegistry {
         return name;
     }
 }
+
+Callback.addCallback("ItemUse", function (coords, item) {
+    let tile = World.getTileEntity(coords.relative.x, coords.relative.y, coords.relative.z) as any;
+    if (tile && MachineRegistry.isMachine(tile.blockID) && tile.onMachinePlaced) {
+        tile.onMachinePlaced(item);
+    }
+});
