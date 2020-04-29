@@ -16,7 +16,6 @@ IMPORT("EnergyNet");
 IMPORT("SoundAPI");
 IMPORT("BackpackAPI");
 
-const nativeDropFunc = ModAPI.requireGlobal("Level.dropItem");
 const getYaw = ModAPI.requireGlobal("Entity.getYaw");
 const UIUtils = java.lang.Class.forName("zhekasmirnov.launcher.utils.UIUtils", true, UI.getContext().getClass().getClassLoader()).newInstance();
 

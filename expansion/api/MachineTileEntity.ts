@@ -94,7 +94,7 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
             for (let i in slots)
                 this.container.clearSlot(i);
 
-            nativeDropFunc(coords.x, coords.y, coords.z, 0, World.getBlockID(coords.x, coords.y, coords.z), 1, 0, extra);
+            World.drop(coords.x, coords.y, coords.z, this.blockID, 1, 0, extra);
         };
     }
 
