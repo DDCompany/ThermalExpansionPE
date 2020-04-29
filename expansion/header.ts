@@ -16,9 +16,6 @@ IMPORT("EnergyNet");
 IMPORT("SoundAPI");
 IMPORT("BackpackAPI");
 
-const getYaw = ModAPI.requireGlobal("Entity.getYaw");
-const UIUtils = java.lang.Class.forName("zhekasmirnov.launcher.utils.UIUtils", true, UI.getContext().getClass().getClassLoader()).newInstance();
-
 const MinecraftColor = Native.Color;
 const Color = android.graphics.Color;
 const Canvas = android.graphics.Canvas;
