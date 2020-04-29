@@ -41,7 +41,8 @@ Item.registerNameOverrideFunction(BlockID.thermalStrongbox, function (item, name
 
     if (extra) {
         let tier = JSON.parse(extra.getString("data")).tier;
-        let slots = JSON.parse(extra.getString("slots"));
+        let slots = extra.getSerializable("container").slots;
+
         let result = name + "\n" + MinecraftColor.YELLOW + "Tier: " + MinecraftColor.AQUA + TIERS_NAME[tier] + MinecraftColor.YELLOW;
         let amount = 5;
 

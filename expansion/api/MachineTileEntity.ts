@@ -74,7 +74,7 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
             let extra = item.extra as ItemExtra;
             if (extra) {
                 this.data = JSON.parse(extra.getString("data"));
-                this.container.slots = JSON.parse(extra.getString("slots"));
+                this.container = extra.getSerializable("container");
             }
         }
     }
@@ -88,7 +88,7 @@ function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity
         prototype.destroyBlock = function (coords) {
             let extra = new ItemExtraData();
             extra.putString("data", JSON.stringify(this.data));
-            extra.putString("slots", JSON.stringify(this.container.slots));
+            extra.putSerializable("container", this.container);
 
             let slots = this.container.slots;
             for (let i in slots)
