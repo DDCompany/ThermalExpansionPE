@@ -21,6 +21,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
     });
 
     let tabIndex = 7;
+    description.drawing = [...[{type: "background", color: COLOR_BG}], ...(description.drawing ?? [])];
 
     ui.setTab(6, {
         icon: {
@@ -46,7 +47,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
             }
         }, {
             drawing: [
-                {type: "background", color: Color.rgb(149, 134, 129)}
+                {type: "background", color: COLOR_BG}
             ],
             elements: {
                 "__frame": {
@@ -63,7 +64,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
                     text: "",
                     x: 70,
                     y: 0, //
-                    font: FONT_WHITE_30
+                    font: FONT_GREY
                 },
                 "__btnPrevious": {
                     type: "button",
@@ -153,44 +154,9 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
     }
 
     if (!description.inventoryDisabled) {
-        let inventory = new UI.Window({
-            location: {
-                x: 120,
-                y: 35,
-                width: 250,
-                height: UI.getScreenHeight() - 70,
-                scrollY: 562
-            },
-
-            drawing: [],
-            elements: {}
-        });
-        inventory.setDynamic(false);
-        inventory.setInventoryNeeded(true);
-
-        let x = 0;
-        let y = 0;
-        let slotSize = 250;
-
-        for (let i = 0; i < 36; i++) {
-            inventory.getContent().elements["__invSlot" + i] = {
-                type: "invSlot",
-                x: x,
-                y: y,
-                size: 251,
-                index: i + 9
-            };
-
-            x += slotSize;
-            if (x >= slotSize * 4) {
-                x = 0;
-                y += slotSize;
-            }
-        }
-
         ui.setTabEventListener(6, {
             onOpen: function () {
-                MachineRegistry.invContainer.openAs(inventory);
+                MachineRegistry.invContainer.openAs(MachineRegistry.invWindow);
             },
 
             onClose: function () {

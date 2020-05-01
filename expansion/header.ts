@@ -27,10 +27,12 @@ const Paint = android.graphics.Paint;
 
 // @ts-ignore
 const RF = EnergyTypeRegistry.assureEnergyType("RF", 1 / 4);
+const COLOR_BG = Color.parseColor("#c5c5c5");
+const COLOR_GREY = Color.rgb(77, 77, 77);
 const POWER_SCALING = [100, 150, 200, 250, 300, 300];
 const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
-const FONT_WHITE_30 = {size: 30, color: Color.WHITE};
-const FONT_WHITE_30_CENTERED = {size: 30, color: Color.WHITE, align: 1};
+const FONT_GREY = {size: 25, color: COLOR_GREY};
+const FONT_GREY_CENTERED = {size: 25, color: COLOR_GREY, align: 1};
 // @ts-ignore
 const RF_WIRE_GROUP = ICRender.getGroup("rf-wire");
 

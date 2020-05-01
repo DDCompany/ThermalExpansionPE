@@ -3,8 +3,7 @@ const crucibleUI = MachineUI({
     recipesShower: "te:magma_crucible",
 
     drawing: [
-        {type: "background", color: Color.rgb(149, 134, 129)},
-        {type: "text", text: "Magma Crucible", x: 370, y: 70, font: {size: 25, color: Color.WHITE, shadow: 0.6}},
+        {type: "text", text: "Magma Crucible", x: 370, y: 70, font: FONT_GREY},
         {type: "bitmap", x: 550, y: 172, bitmap: "bars.machine.fluid_empty", scale: 4},
         {type: "bitmap", x: 466, y: 205, bitmap: "bars.machine.flame_empty", scale: 4.5},
         {type: "bitmap", x: 370, y: 100, bitmap: "bars.rf_empty", scale: 5},

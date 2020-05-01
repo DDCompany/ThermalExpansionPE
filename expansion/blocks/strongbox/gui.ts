@@ -72,8 +72,7 @@ const StrongboxUI = [];
             redstoneDisabled: true,
 
             drawing: [
-                {type: "background", color: Color.rgb(149, 134, 129)},
-                {type: "text", text: "Strongbox", x: 370, y: 70, font: {size: 25, color: Color.WHITE, shadow: 0.6}}
+                {type: "text", text: "Strongbox", x: 370, y: 70, font: FONT_GREY}
             ],
 
             elements: elements

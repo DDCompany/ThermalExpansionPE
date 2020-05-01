@@ -35,7 +35,7 @@ RecipesManager.addShower("te:magma_crucible", RecipesManager.basicShower({
             text: recipe.energy + " RF",
             x: xPos + 89,
             y: yPos + 118,
-            font: FONT_WHITE_30
+            font: FONT_GREY
         };
 
         elements["textFluid" + recipeId] = {

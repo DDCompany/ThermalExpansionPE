@@ -1,6 +1,41 @@
 class MachineRegistry {
     static machines: { [key: number]: boolean } = {};
     static invContainer: UI.Container = new UI.Container();
+    static invWindow: UI.Window;
+
+    static init() {
+        const WINDOW_PADDING = 30;
+        const WINDOW_WIDTH = 250;
+        const SLOT_SIZE = 250;
+
+        const IN_ROW = Math.ceil(1000 / SLOT_SIZE);
+        const ROWS = Math.ceil(36 / IN_ROW);
+
+        this.invWindow = new UI.Window({
+            location: {
+                x: 120,
+                y: WINDOW_PADDING,
+                width: WINDOW_WIDTH,
+                height: UI.getScreenHeight() - WINDOW_PADDING * 2
+            },
+
+            drawing: [],
+            elements: {}
+        });
+        this.invWindow.getLocation().setScroll(0, this.invWindow.getLocation().windowToGlobal(ROWS * SLOT_SIZE));
+        this.invWindow.setDynamic(false);
+        this.invWindow.setInventoryNeeded(true);
+
+        for (let i = 0; i < 36; i++) {
+            this.invWindow.getContent().elements["__invSlot" + i] = {
+                type: "invSlot",
+                x: i % IN_ROW * SLOT_SIZE,
+                y: Math.floor(i / IN_ROW) * SLOT_SIZE,
+                size: SLOT_SIZE,
+                index: i + 9
+            };
+        }
+    }
 
     static define(id: number, tile: any) {
         RF_WIRE_GROUP.add(id, -1);
@@ -53,6 +88,8 @@ class MachineRegistry {
         return name;
     }
 }
+
+MachineRegistry.init();
 
 Callback.addCallback("ItemUse", function (coords, item) {
     let tile = World.getTileEntity(coords.relative.x, coords.relative.y, coords.relative.z) as any;

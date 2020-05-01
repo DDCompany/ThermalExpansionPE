@@ -4,7 +4,6 @@ const energyCellUI = MachineUI({
     configDisabled: true,
 
     drawing: [
-        {type: "background", color: Color.rgb(149, 134, 129)},
         {type: "bitmap", x: 472, y: 100, bitmap: "bars.rf_empty", scale: 5},
         {type: "bitmap", x: 472 - 25 - 20 * 5, y: 100, bitmap: "ui.energyCell.input", scale: 5},
         {type: "bitmap", x: 472 + 25 + 14 * 5, y: 100, bitmap: "ui.energyCell.output", scale: 5},
@@ -40,7 +39,7 @@ const energyCellUI = MachineUI({
                 }
             }
         },
-        "textLeft": {type: "text", text: "0", x: 396, y: 193, font: FONT_WHITE_30_CENTERED},
+        "textLeft": {type: "text", text: "0", x: 396, y: 193, font: FONT_GREY_CENTERED},
 
         "btnPlusRight": {
             type: "button",
@@ -71,8 +70,8 @@ const energyCellUI = MachineUI({
                 }
             }
         },
-        "textRight": {type: "text", text: "0", x: 616, y: 193, font: FONT_WHITE_30_CENTERED},
+        "textRight": {type: "text", text: "0", x: 616, y: 193, font: FONT_GREY_CENTERED},
 
-        "textEnergy": {type: "text", text: "0/0 RF (0%)", x: 500, y: 320, font: FONT_WHITE_30_CENTERED}
+        "textEnergy": {type: "text", text: "0/0 RF (0%)", x: 500, y: 320, font: FONT_GREY_CENTERED}
     }
 });

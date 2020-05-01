@@ -41,7 +41,7 @@ RecipesManager.addShower("te:pulverizer", RecipesManager.basicShower({
             text: recipe.energy + " RF",
             x: xPos + 89,
             y: yPos + 118,
-            font: FONT_WHITE_30
+            font: FONT_GREY
         };
 
         elements["_slotOut" + recipeId] = {
@@ -67,7 +67,7 @@ RecipesManager.addShower("te:pulverizer", RecipesManager.basicShower({
                 text: second.chance * 100 + "%",
                 x: xPos + 354,
                 y: yPos + 60,
-                font: FONT_WHITE_30
+                font: FONT_GREY
             };
 
             container.setSlot("_slotSpecial" + recipeId, second.id, second.count || 1, second.data || 0);
