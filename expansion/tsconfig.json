@@ -16,6 +16,7 @@
     "api/MachineRegistry.ts",
     "api/MachineUI.ts",
     "api/MachineTileEntity.ts",
+    "api/BaseMachineTile.ts",
     "api/ModelHelper.js",
     "api/ContainerHelper.ts",
     "api/TextureBakery.ts",

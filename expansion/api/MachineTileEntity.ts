@@ -5,14 +5,8 @@ interface IMachineTile {
     [key: string]: any
 }
 
-interface IMachineBaseTile extends IMachineTile {
-    progress: number,
-    progressMax: number,
-    basePower: number
-}
-
 interface IMachineTileEntity<T> {
-    defaultValues: T
+    defaultValues?: T
     data?: T
 
     installUpgrade?: (tier: Tier) => boolean

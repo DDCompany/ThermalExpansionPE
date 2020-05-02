@@ -1,57 +1,38 @@
-MachineRegistry.define(BlockID.thermalMachineCrucible, MachineTileEntity<IMachineBaseTile>({
-    defaultValues: {
-        progress: 0,
-        progressMax: 0,
-        basePower: 20
-    },
-
+MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
     init: function () {
         this.liquidStorage.setLimit(null, 10);
     },
 
-    tick: function () {
-        let slot = this.container.getSlot("slotSource");
-        let power = 0;
+    start(this: IMachineBase<IMachineBaseTile>): boolean {
+        let source = this.container.getSlot("slotSource");
+        if (!source.id) {
+            return false;
+        }
 
-        if (this.data.progressMax) {
-            if (!slot.id) {
-                this.data.progress = 0;
-                this.data.progressMax = 0;
-                return
-            }
-
-            if (this.data.progress >= this.data.progressMax) {
-                let recipe = MagmaCrucibleRecipes.get(slot.id, slot.data);
-                let fluid = this.liquidStorage.getLiquidStored();
-                if ((!fluid || fluid === recipe.fluid) && this.liquidStorage.getAmount(fluid) + recipe.fluidAmount <= 10) {
-                    this.liquidStorage.addLiquid(recipe.fluid, recipe.fluidAmount);
-
-                    this.data.progress = 0;
-                    this.data.progressMax = 0;
-
-                    slot.count--;
-                    this.container.validateSlot("slotSource");
-                    this.refreshModel();
-                }
-            } else {
-                power = MachineRegistry.calcEnergy(this.data.basePower, this.data.energy);
-                this.data.energy -= power;
-                this.data.progress += power;
-            }
-        } else if (slot.id) {
-            let recipe = MagmaCrucibleRecipes.get(slot.id, slot.data);
-            if (recipe) {
+        let recipe = MagmaCrucibleRecipes.get(source.id, source.data);
+        if (recipe) {
+            let fluid = this.liquidStorage.getLiquidStored();
+            if (!fluid || (fluid === recipe.fluid && this.liquidStorage.getAmount(fluid) + recipe.fluidAmount <= 10)) {
                 this.data.progress = 1;
                 this.data.progressMax = recipe.energy || 1000;
-                this.refreshModel();
+                return true;
             }
         }
 
-        this.liquidStorage.updateUiScale("fluidScale", this.liquidStorage.getLiquidStored());
+        return false;
+    },
 
-        this.container.setScale("energyScale", this.data.energy / this.getEnergyStorage());
-        this.container.setScale("progressScale", this.data.progress / this.data.progressMax);
-        this.container.setScale("speedScale", power / this.data.basePower);
+    finish(this: IMachineBase<IMachineBaseTile>) {
+        let source = this.container.getSlot("slotSource");
+        let recipe = MagmaCrucibleRecipes.get(source.id, source.data);
+
+        this.liquidStorage.addLiquid(recipe.fluid, recipe.fluidAmount);
+        source.count--;
+        this.container.validateSlot("slotSource");
+    },
+
+    postTick(this: IMachineBase<IMachineBaseTile>) {
+        this.liquidStorage.updateUiScale("fluidScale", this.liquidStorage.getLiquidStored());
     },
 
     refreshModel: function () {
@@ -59,7 +40,14 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, MachineTileEntity<IMachin
         let stored = this.liquidStorage.getLiquidStored();
 
         ModelHelper.mapMachine(this.x, this.y, this.z, block.id, block.data, this.data.tier,
-            [["thermal_machine", 0], ["thermal_machine", 1], ["thermal_machine", 2], ["thermal_machine_crucible" + (stored ? "_" + stored : ""), 0], ["thermal_machine", 2], ["thermal_machine", 2]]);
+            [
+                ["thermal_machine", 0],
+                ["thermal_machine", 1],
+                ["thermal_machine", 2],
+                ["thermal_machine_crucible" + (stored ? "_" + stored : ""), 0],
+                ["thermal_machine", 2],
+                ["thermal_machine", 2]
+            ]);
     },
 
     getGuiScreen: function () {
