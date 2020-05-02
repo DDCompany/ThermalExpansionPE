@@ -57,6 +57,15 @@ Item.createItem("gearLumium", "Lumium Gear", {name: "gear_lumium", meta: 0}, {})
 IDRegistry.genItemID("gearEnderium");
 Item.createItem("gearEnderium", "Enderium Gear", {name: "gear_enderium", meta: 0}, {});
 
+{
+    const ids = [];
+    for (let id = ItemID.gearIron; id <= ItemID.gearEnderium; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("gears", Translation.translate("Gears"), ids);
+}
+
 Callback.addCallback("PostLoaded", function () {
     RecipeHelper.addGearRecipes(265, ItemID.gearIron);
     RecipeHelper.addGearRecipes(266, ItemID.gearGold);

@@ -6,6 +6,9 @@ Block.createBlock("thermalEnergyCell", [
         inCreative: true
     }
 ]);
+Item.addCreativeGroup("thermal_expansion_machines", Translation.translate("Machines"), [
+    BlockID.thermalEnergyCell
+]);
 
 Callback.addCallback("PostLoaded", function () {
     // Recipes.addShaped({id: BlockID.thermalMachinePulverizer, count: 1, data: 0}, [

@@ -2,7 +2,7 @@ ToolType.thermalSickle = {
     blockTypes: ["fibre", "plant", "cobweb"],
 };
 
-Callback.addCallback("DestroyBlock", function (coords, block, player) {
+Callback.addCallback("DestroyBlock", function (coords) {
     if (!MaterialRegistry.isSickle(Player.getCarriedItem().id))
         return;
 
@@ -38,6 +38,7 @@ class MaterialRegistry {
             durability: durabilityModifier * 11,
             texture: "armor/" + name + "_1.png"
         });
+        Item.addCreativeGroup("helmets", Translation.translate("Helmets"), [ItemID["helmet" + nameUp]]);
 
         IDRegistry.genItemID("chestplate" + nameUp);
         Item.createArmorItem("chestplate" + nameUp, nameUp + " Chestplate", {name: "chestplate_" + name}, {
@@ -46,6 +47,7 @@ class MaterialRegistry {
             durability: durabilityModifier * 16,
             texture: "armor/" + name + "_1.png"
         });
+        Item.addCreativeGroup("chestplates", Translation.translate("Chesplates"), [ItemID["chestplate" + nameUp]]);
 
         IDRegistry.genItemID("leggings" + nameUp);
         Item.createArmorItem("leggings" + nameUp, nameUp + " Leggings", {name: "leggings_" + name}, {
@@ -54,6 +56,7 @@ class MaterialRegistry {
             durability: durabilityModifier * 15,
             texture: "armor/" + name + "_2.png"
         });
+        Item.addCreativeGroup("leggings", Translation.translate("Leggings"), [ItemID["leggings" + nameUp]]);
 
         IDRegistry.genItemID("boots" + nameUp);
         Item.createArmorItem("boots" + nameUp, nameUp + " Boots", {name: "boots_" + name}, {
@@ -62,6 +65,7 @@ class MaterialRegistry {
             durability: durabilityModifier * 13,
             texture: "armor/" + name + "_1.png"
         });
+        Item.addCreativeGroup("boots", Translation.translate("Boots"), [ItemID["boots" + nameUp]]);
 
         if (ingotName) {
             Recipes.addShaped({id: ItemID["helmet" + nameUp], count: 1, data: 0}, [
@@ -95,28 +99,34 @@ class MaterialRegistry {
             IDRegistry.genItemID(name + "Sword");
             Item.createItem(name + "Sword", nameUp + " Sword", {name: "sword_" + name, meta: 0}, {stack: 1});
             ToolAPI.setTool(ItemID[name + "Sword"], material, ToolType.sword);
+            Item.addCreativeGroup("swords", Translation.translate("Swords"), [ItemID[name + "Sword"]]);
 
             IDRegistry.genItemID(name + "Pickaxe");
             Item.createItem(name + "Pickaxe", nameUp + " Pickaxe", {name: "pickaxe_" + name, meta: 0}, {stack: 1});
             ToolAPI.setTool(ItemID[name + "Pickaxe"], material, ToolType.pickaxe);
+            Item.addCreativeGroup("pickaxes", Translation.translate("Pickaxes"), [ItemID[name + "Pickaxe"]]);
 
             IDRegistry.genItemID(name + "Shovel");
             Item.createItem(name + "Shovel", nameUp + " Shovel", {name: "shovel_" + name, meta: 0}, {stack: 1});
             ToolAPI.setTool(ItemID[name + "Shovel"], material, ToolType.shovel);
+            Item.addCreativeGroup("shovels", Translation.translate("Shovels"), [ItemID[name + "Shovel"]]);
 
             IDRegistry.genItemID(name + "Axe");
             Item.createItem(name + "Axe", nameUp + " Axe", {name: "axe_" + name, meta: 0}, {stack: 1});
             ToolAPI.setTool(ItemID[name + "Axe"], material, ToolType.axe);
+            Item.addCreativeGroup("axes", Translation.translate("Axes"), [ItemID[name + "Axe"]]);
 
             IDRegistry.genItemID(name + "Hoe");
             Item.createItem(name + "Hoe", nameUp + " Hoe", {name: "hoe_" + name, meta: 0}, {stack: 1});
             ToolAPI.setTool(ItemID[name + "Hoe"], material, ToolType.axe);
+            Item.addCreativeGroup("hoes", Translation.translate("Hoes"), [ItemID[name + "Hoe"]]);
         }
 
         IDRegistry.genItemID(name + "Sickle");
         Item.createItem(name + "Sickle", nameUp + " Sickle", {name: "sickle_" + name, meta: 0}, {stack: 1});
         ToolAPI.setTool(ItemID[name + "Sickle"], material, ToolType.thermalSickle);
         this.sickles.push(ItemID[name + "Sickle"]);
+        Item.addCreativeGroup("sickles", Translation.translate("Sickles"), [ItemID[name + "Sickle"]]);
 
         Callback.addCallback("PostLoaded", function () {
             if (!isVanilla) {

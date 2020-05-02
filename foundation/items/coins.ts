@@ -56,3 +56,12 @@ Item.createItem("coinLumium", "Lumium Coin", {name: "coin_lumium", meta: 0}, {})
 
 IDRegistry.genItemID("coinEnderium");
 Item.createItem("coinEnderium", "Enderium Coin", {name: "coin_enderium", meta: 0}, {});
+
+{
+    const coins = [];
+    for (let id = ItemID.coinIron; id <= ItemID.coinEnderium; id++) {
+        coins.push(id);
+    }
+
+    Item.addCreativeGroup("coins", Translation.translate("Coins"), coins);
+}

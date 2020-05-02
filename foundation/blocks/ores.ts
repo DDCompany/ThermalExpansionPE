@@ -70,6 +70,18 @@ ToolAPI.registerBlockMaterial(BlockID.oreMithril, "stone", 3, true);
 Block.setDestroyTime(BlockID.oreMithril, 2.5);
 Block.setDestroyLevel("oreMithril", 3);
 
+Item.addCreativeGroup("ores", Translation.translate("Ores"), [
+    BlockID.oreCopper,
+    BlockID.oreTin,
+    BlockID.oreSilver,
+    BlockID.oreLead,
+    BlockID.oreAluminum,
+    BlockID.oreNickel,
+    BlockID.orePlatinum,
+    BlockID.oreIridium,
+    BlockID.oreMithril,
+]);
+
 Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
     //Mithril и Iridium не генерируются в мире
     let ores = ["copper", "tin", "silver", "lead", "aluminum", "nickel", "platinum"];

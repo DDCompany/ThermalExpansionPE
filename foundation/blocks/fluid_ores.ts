@@ -62,6 +62,13 @@ Block.registerDropFunction("oreEndStoneResonant", function (coords, id, data, le
     return [];
 });
 
+Item.addCreativeGroup("ores", Translation.translate("Ores"), [
+    BlockID.sandOil,
+    BlockID.oreDestabilizedRedstone,
+    BlockID.oreNetherrackEnergized,
+    BlockID.oreEndStoneResonant
+]);
+
 if (ThermalConfig.gen.oilSand.enabled) {
     Callback.addCallback("GenerateChunk", function (chunkX, chunkZ) {
         if (Math.random() <= ThermalConfig.gen.oilSand.chance) {

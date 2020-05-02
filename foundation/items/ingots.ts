@@ -51,6 +51,15 @@ Item.createItem("ingotLumium", "Lumium Ingot", {name: "ingot_lumium", meta: 0}, 
 IDRegistry.genItemID("ingotEnderium");
 Item.createItem("ingotEnderium", "Enderium Ingot", {name: "ingot_enderium", meta: 0}, {});
 
+{
+    const ids = [];
+    for (let id = ItemID.ingotCopper; id <= ItemID.ingotEnderium; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("ingots", Translation.translate("Ingots"), ids);
+}
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addFurnace(ItemID.dustIron, 265, 0);
     Recipes.addFurnace(ItemID.dustGold, 266, 0);

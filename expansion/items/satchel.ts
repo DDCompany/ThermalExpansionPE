@@ -46,6 +46,15 @@ BackpackRegistry.register(ItemID.satchelResonant, {
     isValidItem: isValidItemForSatchel
 });
 
+{
+    const ids = [];
+    for (let id = ItemID.satchelBasic; id <= ItemID.satchelResonant; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("satchels", Translation.translate("Satchels"), ids);
+}
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.satchelBasic, count: 1, data: 0}, [
         "020",

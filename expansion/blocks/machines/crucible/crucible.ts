@@ -6,6 +6,9 @@ Block.createBlockWithRotation("thermalMachineCrucible", [
         inCreative: true
     }
 ]);
+Item.addCreativeGroup("thermal_expansion_machines", Translation.translate("Machines"), [
+    BlockID.thermalMachineCrucible
+]);
 
 // Callback.addCallback("PostLoaded", function () {
 //     Recipes.addShaped({id: BlockID.thermalMachineCrucible, count: 1, data: 0}, [

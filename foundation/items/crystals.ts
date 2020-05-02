@@ -12,3 +12,12 @@ Item.createItem("crystalEnder", "Resonant Clathrate", {name: "crystal_ender", me
 
 IDRegistry.genItemID("crystalCinnabar");
 Item.createItem("crystalCinnabar", "Cinnabar", {name: "crystal_cinnabar", meta: 0}, {});
+
+{
+    const ids = [];
+    for (let id = ItemID.crystalCrudeOil; id <= ItemID.crystalCinnabar; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("crystals", Translation.translate("Crystals"), ids);
+}

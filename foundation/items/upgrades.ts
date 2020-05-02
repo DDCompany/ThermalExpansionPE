@@ -13,6 +13,14 @@ Item.createItem("upgradeKitResonant", "Resonant Upgrade Kit", {name: "upgrade_ki
 IDRegistry.genItemID("upgradeKitCreative");
 Item.createItem("upgradeKitCreative", "Creative Upgrade Kit", {name: "upgrade_kit", meta: 4}, {});
 
+Item.addCreativeGroup("upgrades", Translation.translate("Upgrades"), [
+    ItemID.upgradeKitHardened,
+    ItemID.upgradeKitReinforced,
+    ItemID.upgradeKitSignalum,
+    ItemID.upgradeKitResonant,
+    ItemID.upgradeKitCreative,
+]);
+
 const tierByItem = {};
 tierByItem[ItemID.upgradeKitHardened] = Tier.HARDENED;
 tierByItem[ItemID.upgradeKitReinforced] = Tier.REINFORCED;

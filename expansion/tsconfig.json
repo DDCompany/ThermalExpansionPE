@@ -11,6 +11,7 @@
     //
     // HEADER
     "header.ts",
+    "translation.ts",
     //
     // API
     "api/MachineRegistry.ts",

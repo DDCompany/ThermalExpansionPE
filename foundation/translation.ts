@@ -1,0 +1,21 @@
+//Creative Groups
+Translation.addTranslation("Ores", {ru: "Руды"});
+Translation.addTranslation("Helmets", {ru: "Шлемы"});
+Translation.addTranslation("Chesplates", {ru: "Кирасы"});
+Translation.addTranslation("Leggings", {ru: "Поножи"});
+Translation.addTranslation("Boots", {ru: "Ботинки"});
+Translation.addTranslation("Coins", {ru: "Монеты"});
+Translation.addTranslation("Crystals", {ru: "Кристаллы"});
+Translation.addTranslation("Dusts", {ru: "Пыли"});
+Translation.addTranslation("Gears", {ru: "Шестерёнки"});
+Translation.addTranslation("Ingots", {ru: "Слитки"});
+Translation.addTranslation("Nuggets", {ru: "Самородки"});
+Translation.addTranslation("Coils", {ru: "Катушки"});
+Translation.addTranslation("Plates", {ru: "Плиты"});
+Translation.addTranslation("Swords", {ru: "Мечи"});
+Translation.addTranslation("Pickaxes", {ru: "Кирки"});
+Translation.addTranslation("Shovels", {ru: "Лопаты"});
+Translation.addTranslation("Axes", {ru: "Топоры"});
+Translation.addTranslation("Hoes", {ru: "Мотыги"});
+Translation.addTranslation("Sickles", {ru: "Серпы"});
+Translation.addTranslation("Upgrades", {ru: "Улучшения"});

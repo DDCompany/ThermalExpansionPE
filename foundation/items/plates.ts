@@ -56,3 +56,12 @@ Item.createItem("plateLumium", "Lumium Plate", {name: "plate_lumium", meta: 0}, 
 
 IDRegistry.genItemID("plateEnderium");
 Item.createItem("plateEnderium", "Enderium Plate", {name: "plate_enderium", meta: 0}, {});
+
+{
+    const ids = [];
+    for (let id = ItemID.plateIron; id <= ItemID.plateEnderium; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("plates", Translation.translate("Plates"), ids);
+}

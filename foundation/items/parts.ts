@@ -10,6 +10,12 @@ Item.createItem("coilTransmission", "Transmission Coil", {name: "coil_transmissi
 IDRegistry.genItemID("coilConductance");
 Item.createItem("coilConductance", "Conductance Coil", {name: "coil_conductance", meta: 0}, {});
 
+Item.addCreativeGroup("coils", Translation.translate("Coils"), [
+    ItemID.coilReception,
+    ItemID.coilTransmission,
+    ItemID.coilConductance,
+]);
+
 Callback.addCallback("PostLoaded", function () {
     Recipes.addShaped({id: ItemID.servoRedstone, count: 1, data: 0}, [
         "f",

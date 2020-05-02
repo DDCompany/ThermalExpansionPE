@@ -57,6 +57,15 @@ Item.createItem("nuggetLumium", "Lumium Nugget", {name: "nugget_lumium", meta: 0
 IDRegistry.genItemID("nuggetEnderium");
 Item.createItem("nuggetEnderium", "Enderium Nugget", {name: "nugget_enderium", meta: 0}, {});
 
+{
+    const ids = [];
+    for (let id = ItemID.nuggetDiamond; id <= ItemID.nuggetEnderium; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("nuggets", Translation.translate("Nuggets"), ids);
+}
+
 Callback.addCallback("PostLoaded", function () {
     RecipeHelper.addIngotRecipes(264, ItemID.nuggetDiamond);
     RecipeHelper.addIngotRecipes(388, ItemID.nuggetEmerald);

@@ -75,9 +75,30 @@ Item.createItem("dustObsidian", "Pulverized Obsidian", {name: "dust_obsidian", m
 IDRegistry.genItemID("dustSaw");
 Item.createItem("dustSaw", "Saw", {name: "dust_wood", meta: 0}, {});
 
+{
+    const ids = [];
+    for (let id = ItemID.dustIron; id <= ItemID.dustSaw; id++) {
+        ids.push(id);
+    }
+
+    Item.addCreativeGroup("dusts", Translation.translate("Dusts"), ids);
+}
+
 Callback.addCallback("PostLoaded", function () {
-    Recipes.addShapeless({id: ItemID.dustElectrum, count: 2}, [{id: ItemID.dustGold, data: 0}, {id: ItemID.dustSilver, data: 0}]);
-    Recipes.addShapeless({id: ItemID.dustInvar, count: 3}, [{id: ItemID.dustIron, data: 0}, {id: ItemID.dustIron, data: 0}, {id: ItemID.dustNickel, data: 0}]);
-    Recipes.addShapeless({id: ItemID.dustBronze, count: 4}, [{id: ItemID.dustCopper, data: 0}, {id: ItemID.dustCopper, data: 0}, {id: ItemID.dustCopper, data: 0}, {id: ItemID.dustTin, data: 0}]);
-    Recipes.addShapeless({id: ItemID.dustConstantan, count: 2}, [{id: ItemID.dustCopper, data: 0}, {id: ItemID.dustNickel, data: 0}]);
+    Recipes.addShapeless({id: ItemID.dustElectrum, count: 2}, [{id: ItemID.dustGold, data: 0}, {
+        id: ItemID.dustSilver,
+        data: 0
+    }]);
+    Recipes.addShapeless({id: ItemID.dustInvar, count: 3}, [{id: ItemID.dustIron, data: 0}, {
+        id: ItemID.dustIron,
+        data: 0
+    }, {id: ItemID.dustNickel, data: 0}]);
+    Recipes.addShapeless({id: ItemID.dustBronze, count: 4}, [{id: ItemID.dustCopper, data: 0}, {
+        id: ItemID.dustCopper,
+        data: 0
+    }, {id: ItemID.dustCopper, data: 0}, {id: ItemID.dustTin, data: 0}]);
+    Recipes.addShapeless({id: ItemID.dustConstantan, count: 2}, [{
+        id: ItemID.dustCopper,
+        data: 0
+    }, {id: ItemID.dustNickel, data: 0}]);
 });
