@@ -32,7 +32,7 @@ class MachineRegistry {
                 x: i % IN_ROW * SLOT_SIZE,
                 y: Math.floor(i / IN_ROW) * SLOT_SIZE,
                 size: SLOT_SIZE,
-                index: i + 9
+                index: i
             };
         }
     }
