@@ -17,7 +17,7 @@ const crucibleUI = MachineUI({
         "speedScale": {type: "scale", x: 466, y: 205, direction: 1, bitmap: "bars.machine.flame_full", scale: 4.5},
 
         "slotSource": {type: "slot", x: 461, y: 122, size: 70},
-        "fluidScale": {type: "scale", x: 667, y: 94, direction: 1, bitmap: "bars.fluid_0", scale: 4},
+        "fluidScale": {type: "scale", x: 666, y: 94, direction: 1, bitmap: "bars.fluid_0", scale: 4},
         //@formatter:on
     }
 });
