@@ -19,6 +19,12 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
             y: 0
         }
     });
+    let dummyContent = {
+        drawing: [
+            {type: "background", color: COLOR_BG},
+            {type: "text", text: Translation.translate("Coming soon..."), x: 500, y: 60, font: FONT_GREY_CENTERED}
+        ]
+    };
 
     let tabIndex = 7;
     description.drawing = [...[{type: "background", color: COLOR_BG}], ...(description.drawing ?? [])];
@@ -122,7 +128,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
                 height: 60,
                 bitmap: "icons.augments"
             }
-        }, {});
+        }, dummyContent);
         tabIndex++;
     }
 
@@ -136,7 +142,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
                 height: 60,
                 bitmap: "icons.config"
             }
-        }, {});
+        }, dummyContent);
         tabIndex++;
     }
 
@@ -150,7 +156,7 @@ function MachineUI(description: IMachineUI): UI.TabbedWindow {
                 height: 60,
                 bitmap: "icons.redstone"
             }
-        }, {});
+        }, dummyContent);
     }
 
     if (!description.inventoryDisabled) {
