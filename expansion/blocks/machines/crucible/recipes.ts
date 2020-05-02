@@ -11,7 +11,7 @@ MagmaCrucibleRecipes.add({
     data: 0,
     fluid: "lava",
     fluidAmount: 1,
-    energy: 1000
+    energy: 300000
 });
 
 MagmaCrucibleRecipes.add({
