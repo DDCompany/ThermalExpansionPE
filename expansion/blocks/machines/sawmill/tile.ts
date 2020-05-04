@@ -1,5 +1,5 @@
-MachineRegistry.define(BlockID.thermalMachinePulverizer, StandardMachineTile({
-    manager: pulverizerManager,
+MachineRegistry.define(BlockID.thermalMachineSawmill, StandardMachineTile({
+    manager: sawmillManager,
 
     refreshModel: function () {
         let block = World.getBlock(this.x, this.y, this.z);
@@ -8,18 +8,18 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, StandardMachineTile({
                 ["thermal_machine", 0],
                 ["thermal_machine", 1],
                 ["thermal_machine", 2],
-                ["thermal_machine_pulverizer" + (this.data.progress > 0 ? "_active" : ""), 0],
+                ["thermal_machine_sawmill" + (this.data.progress > 0 ? "_active" : ""), 0],
                 ["thermal_machine", 2],
                 ["thermal_machine", 2]
             ]);
     },
 
     getGuiScreen: function () {
-        return pulverizerUI;
+        return sawmillUI;
     }
 }));
 
-Block.registerDropFunction(BlockID.thermalMachinePulverizer, function () {
+Block.registerDropFunction(BlockID.thermalMachineSawmill, function () {
     return [];
 });
-Item.registerNameOverrideFunction(BlockID.thermalMachinePulverizer, MachineRegistry.nameOverrideFunc);
+Item.registerNameOverrideFunction(BlockID.thermalMachineSawmill, MachineRegistry.nameOverrideFunc);

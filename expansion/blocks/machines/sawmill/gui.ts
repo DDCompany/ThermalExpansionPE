@@ -1,10 +1,10 @@
-const pulverizerUI = MachineUI({
-    tabIcon: "icons.machines.pulverizer",
+const sawmillUI = MachineUI({
+    tabIcon: "icons.machines.sawmill",
 
     drawing: [
-        {type: "text", text: "Pulverizer", x: 370, y: 70, font: FONT_GREY},
+        {type: "text", text: "Sawmill", x: 370, y: 70, font: FONT_GREY},
         {type: "bitmap", x: 550, y: 172, bitmap: "bars.machine.def_empty", scale: 4},
-        {type: "bitmap", x: 466, y: 205, bitmap: "bars.machine.pulverizer.speed_empty", scale: 4.5},
+        {type: "bitmap", x: 466, y: 205, bitmap: "bars.machine.sawmill.speed_empty", scale: 4.5},
         {type: "bitmap", x: 370, y: 100, bitmap: "bars.rf_empty", scale: 5}
     ],
 
@@ -17,7 +17,7 @@ const pulverizerUI = MachineUI({
             x: 466,
             y: 205,
             direction: 1,
-            bitmap: "bars.machine.pulverizer.speed_full",
+            bitmap: "bars.machine.sawmill.speed_full",
             scale: 4.5
         },
 

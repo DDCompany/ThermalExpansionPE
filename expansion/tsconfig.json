@@ -18,6 +18,7 @@
     "api/MachineUI.ts",
     "api/MachineTileEntity.ts",
     "api/BaseMachineTile.ts",
+    "api/StandardMachineTile.ts",
     "api/ModelHelper.js",
     "api/ContainerHelper.ts",
     "api/TextureBakery.ts",
@@ -25,6 +26,7 @@
     // #RECIPES
     "api/recipes/RecipesManager.ts",
     "api/recipes/PulverizerRecipes.ts",
+    "api/recipes/SawmillRecipes.ts",
     "api/recipes/MagmaCrucibleRecipes.ts",
     //
     // ITEMS
@@ -54,6 +56,11 @@
     "blocks/machines/crucible/gui.ts",
     "blocks/machines/crucible/tile.ts",
     "blocks/machines/crucible/recipes.ts",
+    // ##SAWMILL
+    "blocks/machines/sawmill/sawmill.ts",
+    "blocks/machines/sawmill/gui.ts",
+    "blocks/machines/sawmill/tile.ts",
+    "blocks/machines/sawmill/recipes.ts",
     // #INTEGRATION
     "integration/recipeViewer.ts"
   ]
