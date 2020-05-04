@@ -104,6 +104,11 @@ class StandardRecipesManager extends RecipesManager<IStandardRecipe> {
         input.data = input.data || 0;
         recipe.energy = recipe.energy || 1000;
 
+        let second = recipe.second;
+        if (second && !second.chance) {
+            second.chance = 1;
+        }
+
         this.recipes.push(recipe)
     }
 
