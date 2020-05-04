@@ -11,9 +11,9 @@ Item.addCreativeGroup("thermal_expansion_machines", Translation.translate("Machi
 ]);
 
 Callback.addCallback("PostLoaded", function () {
-    // Recipes.addShaped({id: BlockID.thermalMachinePulverizer, count: 1, data: 0}, [
-    //     " x ",
-    //     "b#b",
-    //     "cac"
-    // ], ['#', BlockID.frameMachine, -1, 'x', 33, -1, 'b', 318, -1, 'a', ItemID.coilReception, -1, 'c', ItemID.gearCopper, -1]);
+    Recipes.addShaped({id: BlockID.thermalEnergyCell, count: 1, data: 0}, [
+        "igi",
+        "glg",
+        "igi"
+    ], ['i', VanillaItemID.iron_ingot, -1, 'g', VanillaBlockID.glass, -1, 'l', ItemID.gearLead, -1]);
 });
