@@ -48,13 +48,13 @@ class MagmaCrucibleRecipes extends RecipesManager<IMagmaCrucibleRecipe> {
         this.recipes.push(recipe);
     }
 
-    getRecipe(id: number, data: number): IMagmaCrucibleRecipe | null {
+    getRecipe(id: number, data: number, count: number = 1): IMagmaCrucibleRecipe | null {
         if (!id)
             return null;
 
         const item = {id: id, data: data};
         return this.recipes.find((recipe) => {
-            return ContainerHelper.equals(item, {id: recipe.id, data: recipe.data})
+            return ContainerHelper.equals(item, {id: recipe.id, data: recipe.data});
         });
     }
 
@@ -62,7 +62,7 @@ class MagmaCrucibleRecipes extends RecipesManager<IMagmaCrucibleRecipe> {
         return [];
     }
 
-    getRecipesByInput(id: number, data: number = 0): IMagmaCrucibleRecipe[] {
+    getRecipesByInput(id: number, data: number = 0, count: number = 1): IMagmaCrucibleRecipe[] {
         if (!id)
             return [];
 

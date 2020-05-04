@@ -21,11 +21,11 @@ abstract class RecipesManager<T> {
 
     abstract add(recipe: T);
 
-    abstract getRecipe(id: number, data: number): T | null;
+    abstract getRecipe(id: number, data: number, count: number): T | null;
 
     abstract getRecipesByResult(id: number, data: number): T[];
 
-    abstract getRecipesByInput(id: number, data: number): T[];
+    abstract getRecipesByInput(id: number, data: number, count: number): T[];
 
     setShower(blockId: string, description: any) {
         if (!description.getList) {
@@ -35,7 +35,7 @@ abstract class RecipesManager<T> {
                         return this.makeForRecipeViewer(this.recipes);
                     }
 
-                    return this.makeForRecipeViewer(this.getRecipesByInput(id, data));
+                    return this.makeForRecipeViewer(this.getRecipesByInput(id, data, -1));
                 } else {
                     return this.makeForRecipeViewer(this.getRecipesByResult(id, data));
                 }
@@ -102,6 +102,7 @@ class StandardRecipesManager extends RecipesManager<IStandardRecipe> {
             return;
 
         input.data = input.data || 0;
+        input.count = input.count || 1;
         recipe.energy = recipe.energy || 1000;
 
         let second = recipe.second;
@@ -112,13 +113,14 @@ class StandardRecipesManager extends RecipesManager<IStandardRecipe> {
         this.recipes.push(recipe)
     }
 
-    getRecipe(id: number, data: number = 0): IStandardRecipe | null {
+    getRecipe(id: number, data: number = 0, count: number = 1): IStandardRecipe | null {
         if (!id)
             return null;
 
         const item = {id: id, data: data};
         return this.recipes.find((recipe) => {
             return ContainerHelper.equals(item, recipe.input)
+                && (count === -1 || count >= recipe.input.count);
         });
     }
 
@@ -133,13 +135,14 @@ class StandardRecipesManager extends RecipesManager<IStandardRecipe> {
         });
     }
 
-    getRecipesByInput(id: number, data: number = 0): IStandardRecipe[] {
+    getRecipesByInput(id: number, data: number = 0, count: number = 1): IStandardRecipe[] {
         if (!id)
             return [];
 
         let item = {id: id, data: data};
         return this.recipes.filter((recipe) => {
-            return ContainerHelper.equals(item, recipe.input);
+            return ContainerHelper.equals(item, recipe.input)
+                && (count === -1 || count >= recipe.input.count);
         });
     }
 
