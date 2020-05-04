@@ -10,6 +10,9 @@ Item.createItem("coilTransmission", "Transmission Coil", {name: "coil_transmissi
 IDRegistry.genItemID("coilConductance");
 Item.createItem("coilConductance", "Conductance Coil", {name: "coil_conductance", meta: 0}, {});
 
+IDRegistry.genItemID("bladeSaw");
+Item.createItem("bladeSaw", "Saw Blade", {name: "blade_saw", meta: 0}, {});
+
 Item.addCreativeGroup("coils", Translation.translate("Coils"), [
     ItemID.coilReception,
     ItemID.coilTransmission,
@@ -40,4 +43,10 @@ Callback.addCallback("PostLoaded", function () {
         " s ",
         "  f",
     ], ['f', 331, -1, 's', ItemID.ingotElectrum, -1]);
+
+    Recipes.addShaped({id: ItemID.bladeSaw, count: 1, data: 0}, [
+        "ii0",
+        "ici",
+        "0ii",
+    ], ['c', ItemID.ingotCopper, -1, 'i', VanillaItemID.iron_ingot, -1]);
 });
