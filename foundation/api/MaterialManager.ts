@@ -1,33 +1,30 @@
 ToolType.thermalSickle = {
     blockTypes: ["fibre", "plant", "cobweb"],
-};
+    destroyBlock: function (coords) {
+        if (Entity.getSneaking(Player.get())) {
+            return;
+        }
 
-Callback.addCallback("DestroyBlock", function (coords) {
-    if (!MaterialRegistry.isSickle(Player.getCarriedItem().id))
-        return;
+        let radius = 3;
+        let uses = 0;
 
-    if (Entity.getSneaking(Player.get()))
-        return;
-
-    let radius = 3;
-    let uses = 0;
-
-    for (let xx = coords.x - radius; xx <= coords.x + radius; xx++) {
-        for (let zz = coords.z - radius; zz <= coords.z + radius; zz++) {
-            let material = ToolAPI.getBlockMaterial(World.getBlockID(xx, coords.y, zz));
-            if (material && ToolType.thermalSickle.blockTypes.indexOf(material.name) > -1) {
-                World.destroyBlock(xx, coords.y, zz, true);
-                uses++;
+        for (let xx = coords.x - radius; xx <= coords.x + radius; xx++) {
+            for (let zz = coords.z - radius; zz <= coords.z + radius; zz++) {
+                let material = ToolAPI.getBlockMaterial(World.getBlockID(xx, coords.y, zz));
+                if (material && this.blockTypes.indexOf(material.name) > -1) {
+                    World.destroyBlock(xx, coords.y, zz, true);
+                    uses++;
+                }
             }
         }
-    }
 
-    ToolAPI.breakCarriedTool(uses);
-});
+        if (uses > 1) {
+            ToolAPI.breakCarriedTool(uses - 1);
+        }
+    }
+};
 
 class MaterialRegistry {
-    static sickles: number[] = [];
-
     static addArmorSet(name: string, armor: number[], durabilityModifier?: number, ingotName?: string) {
         let nameUp = name.charAt(0).toUpperCase() + name.substr(1);
 
@@ -125,7 +122,6 @@ class MaterialRegistry {
         IDRegistry.genItemID(name + "Sickle");
         Item.createItem(name + "Sickle", nameUp + " Sickle", {name: "sickle_" + name, meta: 0}, {stack: 1});
         ToolAPI.setTool(ItemID[name + "Sickle"], material, ToolType.thermalSickle);
-        this.sickles.push(ItemID[name + "Sickle"]);
         Item.addCreativeGroup("sickles", Translation.translate("Sickles"), [ItemID[name + "Sickle"]]);
 
         Callback.addCallback("PostLoaded", function () {
@@ -167,9 +163,5 @@ class MaterialRegistry {
                 "sf ",
             ], ['f', ingotId, -1, 's', 280, -1]);
         });
-    }
-
-    static isSickle(id: number) {
-        return this.sickles.indexOf(id) > -1;
     }
 }
