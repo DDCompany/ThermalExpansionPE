@@ -9,58 +9,121 @@ interface IMagmaCrucibleRecipe {
     energy?: number
 }
 
-class MagmaCrucibleRecipes {
-    static recipes: IMagmaCrucibleRecipe[] = [];
+class MagmaCrucibleRecipes extends RecipesManager<IMagmaCrucibleRecipe> {
+    constructor(uid: string, id: number) {
+        super(uid);
 
-    static add(recipe: IMagmaCrucibleRecipe) {
+        this.setShower(id, {
+            contents: {
+                icon: id,
+                drawing: [
+                    {type: "bitmap", x: 444, y: 162, bitmap: "bars.machine.fluid_full", scale: 6},
+                    {type: "bitmap", x: 335, y: 225, bitmap: "bars.machine.flame_full", scale: 6},
+                    {type: "bitmap", x: 204, y: 80, bitmap: "bars.rf_full", scale: 6},
+                    {type: "bitmap", x: 586, y: 35, bitmap: "bars.fluid_1", scale: 6}
+                ],
+                elements: {
+                    "scaleFluid": {type: "scale", x: 592, y: 41, bitmap: "bars.fluid_0", scale: 6, direction: 1},
+                    "textEnergy": {type: "text", x: 240, y: 342, font: FONT_RECIPE_VIEWER},
+                    "textFluidAmount": {type: "text", x: 586 + 9 * 6, y: 45 + 60 * 6, font: FONT_RECIPE_VIEWER},
+                    "input0": {type: "slot", x: 325, y: 112, size: 100}
+                }
+            },
+
+            onOpen: function (elements, data) {
+                let scaleFluid = elements.get("scaleFluid");
+
+                scaleFluid.onBindingUpdated("texture", LiquidRegistry.getLiquidUITexture(data.fluid, 16 * 6, 58 * 6));
+                scaleFluid.onBindingUpdated("value", data.fluidAmount / 10);
+
+                elements.get("textEnergy")
+                    .onBindingUpdated("text", `${data.energy} RF`);
+                elements.get("textFluidAmount")
+                    .onBindingUpdated("text", `${data.fluidAmount * 1000} mB`);
+            }
+        });
+    }
+
+    add(recipe: IMagmaCrucibleRecipe) {
         this.recipes.push(recipe);
     }
 
-    static get(id: number, data: number): IMagmaCrucibleRecipe | null {
+    getRecipe(id: number, data: number): IMagmaCrucibleRecipe | null {
         if (!id)
             return null;
 
-        for (let recipe of this.recipes) {
-            if (recipe.id === id && (recipe.data === -1 || recipe.data === data))
-                return recipe;
-        }
-        return null;
+        const item = {id: id, data: data};
+        return this.recipes.find((recipe) => {
+            return ContainerHelper.equals(item, {id: recipe.id, data: recipe.data})
+        });
+    }
+
+    getRecipesByResult(id: number, data: number = 0): IMagmaCrucibleRecipe[] {
+        return [];
+    }
+
+    getRecipesByInput(id: number, data: number = 0): IMagmaCrucibleRecipe[] {
+        if (!id)
+            return [];
+
+        let item = {id: id, data: data};
+        return this.recipes.filter((recipe) => {
+            return ContainerHelper.equals(item, {id: recipe.id, data: recipe.data});
+        });
+    }
+
+    makeForRecipeViewer(recipes: IMagmaCrucibleRecipe[]): IRecipeViewer[] {
+        return recipes.map((recipe) => {
+            return {
+                input: [{
+                    id: recipe.id,
+                    data: recipe.data || 0,
+                    count: 1
+                }],
+                output: [],
+                energy: recipe.energy,
+                fluid: recipe.fluid,
+                fluidAmount: recipe.fluidAmount
+            };
+        });
     }
 }
 
-RecipesManager.addShower("te:magma_crucible", RecipesManager.basicShower({
-    drawResult: function (window, elements, container, recipe, recipeId, xPos, yPos) {
-        elements["textEnergy" + recipeId] = {
-            type: "text",
-            text: recipe.energy + " RF",
-            x: xPos + 89,
-            y: yPos + 118,
-            font: FONT_GREY
-        };
+const crucibleManager = new MagmaCrucibleRecipes("te_crucible", BlockID.thermalMachineCrucible);
 
-        elements["textFluid" + recipeId] = {
-            type: "text",
-            text: LiquidRegistry.getLiquidName(recipe.fluid) + " (" + recipe.fluidAmount * 1000 + " mB)",
-            x: xPos + 196,
-            y: yPos + 75,
-        };
-
-        container.setSlot("_slotIn" + recipeId, recipe.id, recipe.count || 1, recipe.data || 0);
-    },
-
-    getProgressScaleBitmap: function () {
-        return "bars.machine.fluid_full";
-    },
-
-    getSpeedScaleBitmap: function () {
-        return "bars.machine.flame_full";
-    },
-
-    getRecipe: function (index) {
-        return MagmaCrucibleRecipes.recipes[index];
-    },
-
-    getPages: function () {
-        return Math.ceil(MagmaCrucibleRecipes.recipes.length / 6);
-    }
-}));
+// RecipesManager.addShower("te:magma_crucible", RecipesManager.basicShower({
+//     drawResult: function (window, elements, container, recipe, recipeId, xPos, yPos) {
+//         elements["textEnergy" + recipeId] = {
+//             type: "text",
+//             text: recipe.energy + " RF",
+//             x: xPos + 89,
+//             y: yPos + 118,
+//             font: FONT_GREY
+//         };
+//
+//         elements["textFluid" + recipeId] = {
+//             type: "text",
+//             text: LiquidRegistry.getLiquidName(recipe.fluid) + " (" + recipe.fluidAmount * 1000 + " mB)",
+//             x: xPos + 196,
+//             y: yPos + 75,
+//         };
+//
+//         container.setSlot("_slotIn" + recipeId, recipe.id, recipe.count || 1, recipe.data || 0);
+//     },
+//
+//     getProgressScaleBitmap: function () {
+//         return "bars.machine.fluid_full";
+//     },
+//
+//     getSpeedScaleBitmap: function () {
+//         return "bars.machine.flame_full";
+//     },
+//
+//     getRecipe: function (index) {
+//         return MagmaCrucibleRecipes.recipes[index];
+//     },
+//
+//     getPages: function () {
+//         return Math.ceil(MagmaCrucibleRecipes.recipes.length / 6);
+//     }
+// }));

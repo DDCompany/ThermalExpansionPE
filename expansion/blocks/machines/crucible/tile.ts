@@ -9,7 +9,7 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
             return false;
         }
 
-        let recipe = MagmaCrucibleRecipes.get(source.id, source.data);
+        let recipe = crucibleManager.getRecipe(source.id, source.data);
         if (recipe) {
             let fluid = this.liquidStorage.getLiquidStored();
             if (!fluid || (fluid === recipe.fluid && this.liquidStorage.getAmount(fluid) + recipe.fluidAmount <= 10)) {
@@ -24,7 +24,7 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
 
     finish(this: IMachineBase<IMachineBaseTile>) {
         let source = this.container.getSlot("slotSource");
-        let recipe = MagmaCrucibleRecipes.get(source.id, source.data);
+        let recipe = crucibleManager.getRecipe(source.id, source.data);
 
         this.liquidStorage.addLiquid(recipe.fluid, recipe.fluidAmount);
         source.count--;

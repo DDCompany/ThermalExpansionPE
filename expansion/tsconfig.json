@@ -23,7 +23,7 @@
     "api/TextureBakery.ts",
     "api/UIHelper.ts",
     // #RECIPES
-    "api/recipes/RecipesManager.js",
+    "api/recipes/RecipesManager.ts",
     "api/recipes/PulverizerRecipes.ts",
     "api/recipes/MagmaCrucibleRecipes.ts",
     //
@@ -53,6 +53,8 @@
     "blocks/machines/crucible/crucible.ts",
     "blocks/machines/crucible/gui.ts",
     "blocks/machines/crucible/tile.ts",
-    "blocks/machines/crucible/recipes.ts"
+    "blocks/machines/crucible/recipes.ts",
+    // #INTEGRATION
+    "integration/recipeViewer.ts"
   ]
 }

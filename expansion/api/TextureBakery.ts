@@ -3,7 +3,7 @@ class TextureBakery {
     static OVERLAY_CRUCIBLE: android.graphics.Bitmap = FileTools.ReadImage(__dir__ + "/overlays/crucible.png");
 
     static bakeAll() {
-        let crucibleRecipes = MagmaCrucibleRecipes.recipes;
+        let crucibleRecipes = crucibleManager.getRecipes();
         for (let recipe of crucibleRecipes) {
             this.bakeForMagmaCrucible(recipe.fluid);
         }

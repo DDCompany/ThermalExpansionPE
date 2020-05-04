@@ -12,3 +12,7 @@ declare namespace ToolAPI {
 declare namespace EnergyTileRegistry {
     function addEnergyTypeForId(g: any, f: any): void;
 }
+
+interface Array<T> {
+    find(predicate: (value: T, index: number, obj: Array<T>) => boolean, thisArg?: any): T | undefined;
+}

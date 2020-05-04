@@ -1,3 +1,5 @@
+///<reference path="RecipesManager.ts"/>
+
 interface IPulverizerRecipe {
     input: IItem,
     result: IItem,
@@ -5,10 +7,38 @@ interface IPulverizerRecipe {
     energy?: number
 }
 
-class PulverizerRecipes {
-    static recipes: IPulverizerRecipe[] = [];
+class PulverizerRecipes extends RecipesManager<IPulverizerRecipe> {
+    constructor(uid: string, id: number) {
+        super(uid);
 
-    static add(recipe: IPulverizerRecipe) {
+        this.setShower(id, {
+            contents: {
+                icon: id,
+                drawing: [
+                    {type: "bitmap", x: 444, y: 162, bitmap: "bars.machine.def_full", scale: 6},
+                    {type: "bitmap", x: 335, y: 225, bitmap: "bars.machine.pulverizer.speed_full", scale: 6},
+                    {type: "bitmap", x: 204, y: 80, bitmap: "bars.rf_full", scale: 6}
+                ],
+                elements: {
+                    "textChance": {type: "text", x: 745, y: 268, font: FONT_RECIPE_VIEWER},
+                    "textEnergy": {type: "text", x: 240, y: 342, font: FONT_RECIPE_VIEWER},
+                    "input0": {type: "slot", x: 325, y: 112, size: 100},
+                    "output0": {type: "slot", x: 585, y: 158, size: 100},
+                    "output1": {type: "slot", x: 695, y: 158, size: 100}
+                }
+            },
+
+            onOpen: function (elements, data) {
+                elements.get("textChance")
+                    .onBindingUpdated("text", data.secondChance ? `${data.secondChance * 100}%` : "");
+
+                elements.get("textEnergy")
+                    .onBindingUpdated("text", `${data.energy} RF`);
+            }
+        });
+    }
+
+    add(recipe: IPulverizerRecipe) {
         if (!recipe)
             return;
 
@@ -18,78 +48,69 @@ class PulverizerRecipes {
 
         input.data = input.data || 0;
 
-        this.recipes.push(recipe);
+        this.recipes.push(recipe)
     }
 
-    static getResult(id: number, data: number): IPulverizerRecipe | null {
+    getRecipe(id: number, data: number = 0): IPulverizerRecipe | null {
         if (!id)
             return null;
 
-        for (let recipe of this.recipes) {
-            let input = recipe.input;
-            if (input.id === id && (input.data === -1 || input.data === data))
-                return recipe;
-        }
-        return null;
+        const item = {id: id, data: data};
+        return this.recipes.find((recipe) => {
+            return ContainerHelper.equals(item, recipe.input)
+        });
+    }
+
+    getRecipesByResult(id: number, data: number = 0): IPulverizerRecipe[] {
+        if (!id)
+            return [];
+
+        let item = {id: id, data: data};
+        return this.recipes.filter((recipe) => {
+            return ContainerHelper.equals(item, recipe.result)
+                || recipe.second && ContainerHelper.equals(item, recipe.second);
+        });
+    }
+
+    getRecipesByInput(id: number, data: number = 0): IPulverizerRecipe[] {
+        if (!id)
+            return [];
+
+        let item = {id: id, data: data};
+        return this.recipes.filter((recipe) => {
+            return ContainerHelper.equals(item, recipe.input);
+        });
+    }
+
+    makeForRecipeViewer(recipes: IPulverizerRecipe[]): IRecipeViewer[] {
+        return recipes.map((recipe) => {
+            const input = recipe.input;
+            const result = recipe.result;
+            const second = recipe.second;
+
+            return {
+                input: [{
+                    id: input.id,
+                    data: input.data || 0,
+                    count: input.count || 1
+                }],
+                output: [
+                    {
+                        id: result.id,
+                        data: result.data || 0,
+                        count: result.count || 1
+                    },
+                    {
+                        id: second?.id ?? 0,
+                        data: second?.data ?? 0,
+                        count: second?.count ?? 1
+                    }
+                ],
+                secondChance: second?.chance ?? 0,
+                energy: recipe.energy
+            };
+        });
     }
 }
 
-RecipesManager.addShower("te:pulverizer", RecipesManager.basicShower({
-    drawResult: function (window, elements, container, recipe, recipeId, xPos, yPos) {
-        elements["textEnergy" + recipeId] = {
-            type: "text",
-            text: recipe.energy + " RF",
-            x: xPos + 89,
-            y: yPos + 118,
-            font: FONT_GREY
-        };
-
-        elements["_slotOut" + recipeId] = {
-            type: "slot",
-            x: xPos + 196,
-            y: yPos + 46,
-            size: 70,
-            visual: true
-        };
-
-        elements["_slotSpecial" + recipeId] = {
-            type: "slot",
-            x: xPos + 279,
-            y: yPos + 46,
-            size: 70,
-            visual: true
-        };
-
-        let second = recipe.second || {id: 0, data: 0, count: 1, chance: 0};
-        if (second.chance) {
-            elements["textChance" + recipeId] = {
-                type: "text",
-                text: second.chance * 100 + "%",
-                x: xPos + 354,
-                y: yPos + 60,
-                font: FONT_GREY
-            };
-
-            container.setSlot("_slotSpecial" + recipeId, second.id, second.count || 1, second.data || 0);
-        }
-
-        container.setSlot("_slotIn" + recipeId, recipe.input.id, recipe.input.count || 1, recipe.input.data || 0);
-        container.setSlot("_slotOut" + recipeId, recipe.result.id, recipe.result.count || 1, recipe.result.data || 0);
-    },
-
-    getProgressScaleBitmap: function () {
-        return "bars.machine.def_empty";
-    },
-
-    getSpeedScaleBitmap: function () {
-        return "bars.machine.pulverizer.speed_full";
-    },
-
-    getRecipe: function (index) {
-        return PulverizerRecipes.recipes[index];
-    },
-
-    getPages: function () {
-        return Math.ceil(PulverizerRecipes.recipes.length / 6);
-    }
-}));
+const pulverizerManager = new PulverizerRecipes("te_pulverizer", BlockID.thermalMachinePulverizer);

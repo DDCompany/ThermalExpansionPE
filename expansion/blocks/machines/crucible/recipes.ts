@@ -1,4 +1,4 @@
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 4,
     data: 0,
     fluid: "lava",
@@ -6,7 +6,7 @@ MagmaCrucibleRecipes.add({
     energy: 300000
 });
 
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 1,
     data: 0,
     fluid: "lava",
@@ -14,7 +14,7 @@ MagmaCrucibleRecipes.add({
     energy: 300000
 });
 
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 1,
     data: 5,
     fluid: "lava",
@@ -22,7 +22,7 @@ MagmaCrucibleRecipes.add({
     energy: 300000
 });
 
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 1,
     data: 6,
     fluid: "lava",
@@ -30,7 +30,7 @@ MagmaCrucibleRecipes.add({
     energy: 300000
 });
 
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 49,
     data: 0,
     fluid: "lava",
@@ -38,7 +38,7 @@ MagmaCrucibleRecipes.add({
     energy: 300000
 });
 
-MagmaCrucibleRecipes.add({
+crucibleManager.add({
     id: 87,
     data: 0,
     fluid: "lava",

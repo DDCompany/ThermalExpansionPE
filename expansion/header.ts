@@ -33,8 +33,11 @@ const POWER_SCALING = [100, 150, 200, 250, 300, 300];
 const TIERS_NAME = ["Basic", "Hardened", "Reinforced", "Signalum", "Resonant", "Creative"];
 const FONT_GREY = {size: 25, color: COLOR_GREY};
 const FONT_GREY_CENTERED = {size: 25, color: COLOR_GREY, align: 1};
+const FONT_RECIPE_VIEWER = {size: 35, align: 1};
 // @ts-ignore
 const RF_WIRE_GROUP = ICRender.getGroup("rf-wire");
+
+const showers: { [key: string]: any } = {};
 
 // @ts-ignore
 const soundClick = new Sound("click.ogg");

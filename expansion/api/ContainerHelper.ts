@@ -17,4 +17,14 @@ class ContainerHelper {
         slot.count += item.count || 1;
         return true;
     }
+
+    static equals(item1, item2) {
+        if (!item1 && !item2)
+            return true;
+
+        if (!item1 || !item2)
+            return false;
+
+        return item1.id === item2.id && (item1.data === item2.data || item1.data === -1 || item2.data === -1);
+    }
 }

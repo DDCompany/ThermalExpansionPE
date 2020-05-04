@@ -5,7 +5,7 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, BaseMachineTile({
             return false;
         }
 
-        let recipe = PulverizerRecipes.getResult(source.id, source.data);
+        let recipe = pulverizerManager.getRecipe(source.id, source.data);
         if (recipe && ContainerHelper.canPutInSlot(recipe.result, this.container.getSlot("slotResult"))) {
             let second = recipe.second;
             if (second && !ContainerHelper.canPutInSlot(second, this.container.getSlot("slotSecond"))) {
@@ -22,7 +22,7 @@ MachineRegistry.define(BlockID.thermalMachinePulverizer, BaseMachineTile({
 
     finish(this: IMachineBase<IMachineBaseTile>) {
         let source = this.container.getSlot("slotSource");
-        let recipe = PulverizerRecipes.getResult(source.id, source.data);
+        let recipe = pulverizerManager.getRecipe(source.id, source.data);
 
         ContainerHelper.putInSlot(recipe.result, this.container.getSlot("slotResult"));
         source.count--;
