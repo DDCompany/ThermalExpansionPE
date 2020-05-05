@@ -22,8 +22,8 @@ const pulverizerUI = MachineUI({
         },
 
         "slotSource": {type: "slot", x: 461, y: 122, size: 70},
-        "slotResult": {type: "slot", x: 657, y: 168, size: 70},
-        "slotSecond": {type: "slot", x: 737, y: 168, size: 70}
+        "slotResult": {type: "slot", x: 657, y: 168, size: 70, isValid: FALSE_PREDICATE},
+        "slotSecond": {type: "slot", x: 737, y: 168, size: 70, isValid: FALSE_PREDICATE}
         //@formatter:on
     }
 });

@@ -16,6 +16,7 @@ IMPORT("EnergyNet");
 IMPORT("SoundAPI");
 IMPORT("BackpackAPI");
 
+const FALSE_PREDICATE = () => false;
 const MinecraftColor = Native.Color;
 const Color = android.graphics.Color;
 const Canvas = android.graphics.Canvas;

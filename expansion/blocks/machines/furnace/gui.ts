@@ -14,6 +14,6 @@ const furnaceUI = MachineUI({
         "speedScale": {type: "scale", x: 466, y: 205, direction: 1, bitmap: "bars.machine.furnace.speed_full", scale: 4.5},
 
         "slotSource": {type: "slot", x: 461, y: 122, size: 70},
-        "slotResult": {type: "slot", x: 657, y: 168, size: 70}
+        "slotResult": {type: "slot", x: 657, y: 168, size: 70, isValid: FALSE_PREDICATE}
     }
 });
