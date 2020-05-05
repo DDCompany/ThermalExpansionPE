@@ -1,7 +1,8 @@
 interface IMachineBaseData extends IMachineData {
     progress: number,
     progressMax: number,
-    basePower: number
+    basePower: number,
+    inputAmount: number
 }
 
 interface IMachineBaseTile<T extends IMachineBaseData> extends IMachineTile<T> {
@@ -23,6 +24,7 @@ function BaseMachineTile<T extends IMachineBaseData>(prototype: IMachineBaseTile
     defaultValues.basePower = 20;
     defaultValues.progress = 0;
     defaultValues.progressMax = 0;
+    defaultValues.inputAmount = 0;
 
     if (!prototype.tick) {
         prototype.tick = function (this: IMachineBaseTile<T>) {
@@ -32,6 +34,7 @@ function BaseMachineTile<T extends IMachineBaseData>(prototype: IMachineBaseTile
                     if (!this.start()) {
                         this.data.progress = 0;
                         this.data.progressMax = 0;
+                        this.data.inputAmount = 0;
                         this.power = 0;
                         this.refreshModel();
                     }
@@ -62,9 +65,11 @@ function BaseMachineTile<T extends IMachineBaseData>(prototype: IMachineBaseTile
     if (!prototype.isActive) {
         prototype.isActive = function (this: IMachineBaseTile<T>) {
             if (this.data.progress) {
-                if (!this.container.getSlot("slotSource").id) {
+                let source = this.container.getSlot("slotSource");
+                if (!source.id || source.count < this.data.inputAmount) {
                     this.data.progress = 0;
                     this.data.progressMax = 0;
+                    this.data.inputAmount = 0;
                     this.power = 0;
                     this.refreshModel();
                     return false;

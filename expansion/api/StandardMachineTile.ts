@@ -4,7 +4,7 @@ interface IMachineStandard extends IMachineBaseTile<IMachineBaseData> {
 
 function StandardMachineTile(description: IMachineStandard) {
     if (!description.start) {
-        description.start = function (this: IMachineBaseTile<IMachineBaseData>): boolean {
+        description.start = function (this: IMachineStandard): boolean {
             let source = this.container.getSlot("slotSource");
             if (!source.id) {
                 return false;
@@ -19,6 +19,7 @@ function StandardMachineTile(description: IMachineStandard) {
 
                 this.data.progress = 1;
                 this.data.progressMax = recipe.energy;
+                this.data.inputAmount = recipe.input.count;
                 return true;
             }
 
@@ -27,7 +28,7 @@ function StandardMachineTile(description: IMachineStandard) {
     }
 
     if (!description.finish) {
-        description.finish = function (this: IMachineBaseTile<IMachineBaseData>) {
+        description.finish = function (this: IMachineStandard) {
             let source = this.container.getSlot("slotSource");
             let recipe = this.manager.getRecipe(source.id, source.data, source.count);
 
