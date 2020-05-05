@@ -3,7 +3,7 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
         this.liquidStorage.setLimit(null, 10);
     },
 
-    start(this: IMachineBase<IMachineBaseTile>): boolean {
+    start(this: IMachineBaseTile<IMachineBaseData>): boolean {
         let source = this.container.getSlot("slotSource");
         if (!source.id) {
             return false;
@@ -22,7 +22,7 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
         return false;
     },
 
-    finish(this: IMachineBase<IMachineBaseTile>) {
+    finish(this: IMachineBaseTile<IMachineBaseData>) {
         let source = this.container.getSlot("slotSource");
         let recipe = crucibleManager.getRecipe(source.id, source.data, source.count);
 
@@ -31,7 +31,7 @@ MachineRegistry.define(BlockID.thermalMachineCrucible, BaseMachineTile({
         this.container.validateSlot("slotSource");
     },
 
-    postTick(this: IMachineBase<IMachineBaseTile>) {
+    postTick(this: IMachineBaseTile<IMachineBaseData>) {
         this.liquidStorage.updateUiScale("fluidScale", this.liquidStorage.getLiquidStored());
     },
 

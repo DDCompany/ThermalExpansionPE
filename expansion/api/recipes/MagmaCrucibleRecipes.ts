@@ -72,7 +72,7 @@ class MagmaCrucibleRecipes extends RecipesManager<IMagmaCrucibleRecipe> {
         });
     }
 
-    makeForRecipeViewer(recipes: IMagmaCrucibleRecipe[]): IRecipeViewer[] {
+    makeForRecipeViewer(recipes: IMagmaCrucibleRecipe[]): IViewerRecipe[] {
         return recipes.map((recipe) => {
             return {
                 input: [{

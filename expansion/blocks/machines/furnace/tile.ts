@@ -1,5 +1,5 @@
 MachineRegistry.define(BlockID.thermalMachineFurnace, BaseMachineTile({
-    start(this: IMachineBase<IMachineBaseTile>): boolean {
+    start(this: IMachineBaseTile<IMachineBaseData>): boolean {
         let source = this.container.getSlot("slotSource");
         if (!source.id) {
             return false;
@@ -15,7 +15,7 @@ MachineRegistry.define(BlockID.thermalMachineFurnace, BaseMachineTile({
         return false;
     },
 
-    finish(this: IMachineBase<IMachineBaseTile>) {
+    finish(this: IMachineBaseTile<IMachineBaseData>) {
         let source = this.container.getSlot("slotSource");
         let result = Recipes.getFurnaceRecipeResult(source.id, source.data, "iron");
         if (ContainerHelper.putInSlot(result, this.container.getSlot("slotResult"))) {

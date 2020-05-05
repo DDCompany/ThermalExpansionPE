@@ -1,11 +1,11 @@
-interface IMachineTile {
+interface IMachineData {
     tier?: Tier,
     energy?: number,
 
     [key: string]: any
 }
 
-interface IMachineTileEntity<T> {
+interface IMachineTile<T> {
     defaultValues?: T
     data?: T
 
@@ -20,7 +20,7 @@ interface IMachineTileEntity<T> {
     [key: string]: any
 }
 
-function MachineTileEntity<T extends IMachineTile>(prototype: IMachineTileEntity<T>, isNoPowerMachine: boolean = false): IMachineTileEntity<T> {
+function MachineTileEntity<T extends IMachineData>(prototype: IMachineTile<T>, isNoPowerMachine: boolean = false): IMachineTile<T> {
     // @ts-ignore
     prototype.defaultValues = prototype.defaultValues ?? {};
     prototype.defaultValues.tier = 0;

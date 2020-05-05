@@ -1,3 +1,5 @@
+///<reference path="StandardRecipesManager.ts"/>
+
 const pulverizerManager = new StandardRecipesManager(
     "te_pulverizer",
     "thermalMachinePulverizer",

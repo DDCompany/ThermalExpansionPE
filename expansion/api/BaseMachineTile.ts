@@ -1,10 +1,10 @@
-interface IMachineBaseTile extends IMachineTile {
+interface IMachineBaseData extends IMachineData {
     progress: number,
     progressMax: number,
     basePower: number
 }
 
-interface IMachineBase<T extends IMachineBaseTile> extends IMachineTileEntity<T> {
+interface IMachineBaseTile<T extends IMachineBaseData> extends IMachineTile<T> {
     power?: number;
 
     start?(): boolean;
@@ -16,7 +16,7 @@ interface IMachineBase<T extends IMachineBaseTile> extends IMachineTileEntity<T>
     postTick?();
 }
 
-function BaseMachineTile<T extends IMachineBaseTile>(prototype: IMachineBase<T>): IMachineBase<T> {
+function BaseMachineTile<T extends IMachineBaseData>(prototype: IMachineBaseTile<T>): IMachineBaseTile<T> {
     prototype = MachineTileEntity<T>(prototype);
 
     let defaultValues = prototype.defaultValues;
@@ -25,7 +25,7 @@ function BaseMachineTile<T extends IMachineBaseTile>(prototype: IMachineBase<T>)
     defaultValues.progressMax = 0;
 
     if (!prototype.tick) {
-        prototype.tick = function (this: IMachineBase<T>) {
+        prototype.tick = function (this: IMachineBaseTile<T>) {
             if (this.isActive()) {
                 if (this.data.progress >= this.data.progressMax) {
                     this.finish();
@@ -60,7 +60,7 @@ function BaseMachineTile<T extends IMachineBaseTile>(prototype: IMachineBase<T>)
     }
 
     if (!prototype.isActive) {
-        prototype.isActive = function (this: IMachineBase<T>) {
+        prototype.isActive = function (this: IMachineBaseTile<T>) {
             if (this.data.progress) {
                 if (!this.container.getSlot("slotSource").id) {
                     this.data.progress = 0;

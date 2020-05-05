@@ -1,10 +1,10 @@
-interface IMachineStandard extends IMachineBase<IMachineBaseTile> {
+interface IMachineStandard extends IMachineBaseTile<IMachineBaseData> {
     manager: StandardRecipesManager
 }
 
 function StandardMachineTile(description: IMachineStandard) {
     if (!description.start) {
-        description.start = function (this: IMachineBase<IMachineBaseTile>): boolean {
+        description.start = function (this: IMachineBaseTile<IMachineBaseData>): boolean {
             let source = this.container.getSlot("slotSource");
             if (!source.id) {
                 return false;
@@ -27,7 +27,7 @@ function StandardMachineTile(description: IMachineStandard) {
     }
 
     if (!description.finish) {
-        description.finish = function (this: IMachineBase<IMachineBaseTile>) {
+        description.finish = function (this: IMachineBaseTile<IMachineBaseData>) {
             let source = this.container.getSlot("slotSource");
             let recipe = this.manager.getRecipe(source.id, source.data, source.count);
 

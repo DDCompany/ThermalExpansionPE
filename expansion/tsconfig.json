@@ -25,6 +25,7 @@
     "api/UIHelper.ts",
     // #RECIPES
     "api/recipes/RecipesManager.ts",
+    "api/recipes/StandardRecipesManager.ts",
     "api/recipes/PulverizerRecipes.ts",
     "api/recipes/SawmillRecipes.ts",
     "api/recipes/MagmaCrucibleRecipes.ts",

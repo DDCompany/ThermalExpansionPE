@@ -1,4 +1,4 @@
-interface ICellTile extends IMachineTile {
+interface ICellTile extends IMachineData {
     transferIn: number,
     transferOut: number,
     heartIndex: number
